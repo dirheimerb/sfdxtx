@@ -20,8 +20,6 @@ declare module 'lightning/uiListApi' {
     /**
      * Gets the records and metadata for a list view.
      *
-     * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_get_list_ui
-     *
      * @param objectApiName API name of the list view's object (must be specified along with listViewApiName).
      * @param listViewApiName API name of the list view (must be specified with objectApiName).
      * @param listViewId ID of the list view (may be specified without objectApiName or listViewApiName).
@@ -621,10 +619,7 @@ declare module 'lightning/analyticsWaveApi' {
     }
 
     /**
-     * Base representation for fields in Tableau CRM.
-     *
-     * https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_resources_appendix.htm#AbstractFieldRepresentation
-     *
+     * 
      * Keys:
      *    (none)
      */
@@ -646,8 +641,6 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * An advanced property Name and Value.
      *
-     * https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_resources_appendix.htm#AdvancedPropertyValueReprensentation
-     *
      * Keys:
      *    (none)
      */
@@ -659,7 +652,6 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Asset reference representation.
      *
-     * https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_resources_appendix.htm#AssetReferenceRepresentation
      *
      * Keys:
      *    (none)
@@ -668,9 +660,6 @@ declare module 'lightning/analyticsWaveApi' {
     export interface AssetReferenceRepresentation extends BaseAssetReferenceRepresentation {}
 
     /**
-     * Base Tableau CRM Asset input Representation
-     *
-     * https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_resources_appendix.htm#BaseAssetInputRepresentation
      *
      * Keys:
      *    (none)

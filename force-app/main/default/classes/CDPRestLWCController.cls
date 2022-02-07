@@ -2,15 +2,28 @@
  * @description       :
  * @author            : BDirheimer
  * @group             :
- * @last modified on  : 02-06-2022
+ * @last modified on  : 02-07-2022
  * @last modified by  : BDirheimer
  **/
 
 public with sharing class CDPRestLWCController {
-  @AuraEnabled
-  public static List<Contact> getRecordId(Id contactId, String newValue) {
+  @AuraEnabled(Cacheable=true)
+  public static List<Contact> getAllContactFields() {
     return [
-      SELECT Id
+      SELECT 
+        Id,
+        Email, 
+        Secondary_Email__c,
+        Phone, 
+        MobilePhone, 
+        firstName, 
+        lastName, 
+        MailingStreet, 
+        OtherStreet, 
+        MailingCity, 
+        MailingState,
+        MailingPostalCode,
+        MaillingCountry
       FROM Contact
       WHERE Id = :contactId
       WITH SECURITY_ENFORCED
@@ -18,7 +31,7 @@ public with sharing class CDPRestLWCController {
     ];
   }
   @AuraEnabled(Cacheable=true)
-  public static List<Contact> getEmailAddress(Id contactId, String newValue) {
+  public static List<Contact> getAllContactFields() {
     return [
       SELECT Id, Email
       FROM Contact
@@ -63,7 +76,7 @@ public with sharing class CDPRestLWCController {
   @AuraEnabled(Cacheable=true)
   public static List<Contact> getContactName(Id contactId, String newValue) {
     return [
-      SELECT Id, firstName, lastName
+      SELECT Id, firstName, lastName,firstName, lastName
       FROM Contact
       WHERE Id = :contactId
       WITH SECURITY_ENFORCED
@@ -73,7 +86,7 @@ public with sharing class CDPRestLWCController {
   @AuraEnabled(Cacheable=true)
   public static List<Lead> getLeadEmailAddress(Id leadId, String newValue) {
     return [
-      SELECT Id, Email
+      SELECT Id, Email,
       FROM Lead
       WHERE Id = :leadId
       WITH SECURITY_ENFORCED
