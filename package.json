@@ -1,0 +1,58 @@
+{
+  "name": "sfdxtx",
+  "version": "1.0.0",
+  "description": "Salesforce dx with typescript support to build lwcs",
+  "main": "index.js",
+  "scripts": {
+    "sf-build": "./scripts/sf-build.js",
+    "sf-ci-docs": "./scripts/sf-ci-docs.js",
+    "sf-clean": "./scripts/sf-clean.js",
+    "sf-compile": "./scripts/sf-compile.js",
+    "sf-docs": "./scripts/sf-docs.js",
+    "sf-format": "./scripts/sf-format.js",
+    "sf-install": "./scripts/sf-install.js",
+    "sf-lint": "./scripts/sf-lint.js",
+    "sf-prepack": "./scripts/sf-prepack.js",
+    "format": "prettier --write \"{files,test,utils,bin}/**/*.+(js|json)\"",
+    "lint": "eslint \"{files,test,utils,bin}/**/*.js\"",
+    "lint:fix": "yarn sf-ci-docs",
+    "clean": "./scripts/sf-clean.js",
+    "clean-all": "./scripts/sf-clean.js all",
+    "lodash": "./scripts/build-lodash.sh",
+    "postcompile": "shx cp -r src/nodash/support.d.ts lib/nodash",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dirheimerb/sfdxtx.git"
+  },
+  "author": "Bradley Dirheimer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dirheimerb/sfdxtx/issues"
+  },
+  "homepage": "https://github.com/dirheimerb/sfdxtx#readme",
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.26.10",
+    "@salesforce/dev-config": "^3.0.0",
+    "@salesforce/dev-scripts": "^2.0.0",
+    "@salesforce/kit": "^1.5.32",
+    "@salesforce/prettier-config": "^0.0.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "chalk": "^5.0.0",
+    "eslint": "^8.8.0",
+    "eslint-config-salesforce": "^0.1.6",
+    "eslint-config-salesforce-typescript": "^0.2.8",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lodash": "^4.17.21",
+    "lodash-cli": "^4.17.5",
+    "mocha": "^9.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.5.1",
+    "ts-sinon": "^2.0.2",
+    "ts-types": "^0.0.9",
+    "typedoc": "^0.22.11",
+    "typescript": "^4.5.5"
+  }
+}
