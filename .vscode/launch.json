@@ -10,6 +10,14 @@
       "request": "attach",
       "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node"
+    },
+    {
+      "name": "Launch Apex Replay Debugger",
+      "type": "apex-replay",
+      "request": "launch",
+      "logFile": "${command:AskForLogFileName}",
+      "stopOnEntry": true,
+      "trace": true
     }
   ]
 }
