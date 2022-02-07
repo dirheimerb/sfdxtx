@@ -1,0 +1,175 @@
+{
+    "decorators": [
+        {
+            "type": "api",
+            "targets": [
+                {
+                    "type": "property",
+                    "name": "recordId",
+                    "value": {
+                        "type": "unresolved"
+                    }
+                },
+                {
+                    "type": "property",
+                    "name": "isEditModalWindow",
+                    "value": {
+                        "type": "boolean",
+                        "value": false
+                    }
+                },
+                {
+                    "type": "property",
+                    "name": "isEditMode",
+                    "value": {
+                        "type": "boolean",
+                        "value": false
+                    }
+                }
+            ]
+        },
+        {
+            "type": "wire",
+            "targets": [
+                {
+                    "name": "setCurrentPageReference",
+                    "adapter": {
+                        "name": "CurrentPageReference",
+                        "reference": "lightning/navigation"
+                    },
+                    "type": "method"
+                },
+                {
+                    "name": "recordInfo",
+                    "adapter": {
+                        "name": "getRecordUi",
+                        "reference": "lightning/uiRecordApi"
+                    },
+                    "type": "method",
+                    "static": {
+                        "layoutTypes": {
+                            "type": "string",
+                            "value": "Full"
+                        },
+                        "modes": {
+                            "type": "string",
+                            "value": "View"
+                        }
+                    },
+                    "params": {
+                        "recordIds": "recordId"
+                    }
+                },
+                {
+                    "name": "contactInfo",
+                    "adapter": {
+                        "name": "getObjectInfo",
+                        "reference": "lightning/uiObjectInfoApi"
+                    },
+                    "type": "property",
+                    "static": {
+                        "objectApiName": {
+                            "value": "@salesforce/schema/Contact",
+                            "type": "module"
+                        }
+                    },
+                    "params": {}
+                },
+                {
+                    "name": "countryList",
+                    "adapter": {
+                        "name": "getPicklistValues",
+                        "reference": "lightning/uiObjectInfoApi"
+                    },
+                    "type": "method",
+                    "static": {
+                        "fieldApiName": {
+                            "value": "@salesforce/schema/Contact.MailingCountryCode",
+                            "type": "module"
+                        }
+                    },
+                    "params": {
+                        "recordTypeId": "recordTypeId"
+                    }
+                },
+                {
+                    "name": "stateList",
+                    "adapter": {
+                        "name": "getPicklistValues",
+                        "reference": "lightning/uiObjectInfoApi"
+                    },
+                    "type": "method",
+                    "static": {
+                        "fieldApiName": {
+                            "value": "@salesforce/schema/Contact.MailingStateCode",
+                            "type": "module"
+                        }
+                    },
+                    "params": {
+                        "recordTypeId": "recordTypeId"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "track",
+            "targets": [
+                {
+                    "name": "layoutSections",
+                    "type": "property"
+                },
+                {
+                    "name": "sectionLabel",
+                    "type": "property"
+                },
+                {
+                    "name": "buttonVisible",
+                    "type": "property"
+                },
+                {
+                    "name": "isNameLabel",
+                    "type": "property"
+                },
+                {
+                    "name": "isSpinner",
+                    "type": "property"
+                },
+                {
+                    "name": "isErrorPopup",
+                    "type": "property"
+                },
+                {
+                    "name": "errorMessages",
+                    "type": "property"
+                },
+                {
+                    "name": "warningMessages",
+                    "type": "property"
+                },
+                {
+                    "name": "isViewDuplicatesModal",
+                    "type": "property"
+                },
+                {
+                    "name": "showDQMOdal",
+                    "type": "property"
+                },
+                {
+                    "name": "dqFieldsToValidate",
+                    "type": "property"
+                }
+            ]
+        }
+    ],
+    "exports": [
+        {
+            "type": "ExportDefaultDeclaration"
+        },
+        {
+            "updatedAt": "2022-02-07T10:15:10.801Z"
+        }
+    ],
+    "_allAttributes": null,
+    "_properties": null,
+    "_methods": null
+}

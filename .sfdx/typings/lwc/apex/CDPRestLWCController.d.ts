@@ -1,8 +1,8 @@
-declare module "@salesforce/apex/CDPRestLWCController.getRecordId" {
-  export default function getRecordId(param: {contactId: any, newValue: any}): Promise<any>;
+declare module "@salesforce/apex/CDPRestLWCController.getAllContactFields" {
+  export default function getAllContactFields(): Promise<any>;
 }
-declare module "@salesforce/apex/CDPRestLWCController.getEmailAddress" {
-  export default function getEmailAddress(param: {contactId: any, newValue: any}): Promise<any>;
+declare module "@salesforce/apex/CDPRestLWCController.getAllContactFields" {
+  export default function getAllContactFields(): Promise<any>;
 }
 declare module "@salesforce/apex/CDPRestLWCController.getSecondEmailAddress" {
   export default function getSecondEmailAddress(param: {contactId: any, newValue: any}): Promise<any>;

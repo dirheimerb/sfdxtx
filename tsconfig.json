@@ -1,5 +1,9 @@
 {
+  "extends": "@salesforce/dev-config/tsconfig-strict",
   "compilerOptions": {
+    "outDir": "lib",
+    "include": ["./force-app/**/*.ts"],
+    "compilerOptions": {
     "module": "commonjs",
     "target": "es2019",
     "lib": ["es2019"],
@@ -8,5 +12,6 @@
     "moduleResolution": "node",
     "alwaysStrict": true,
     "noUnusedLocals": true
+    }
   }
 }
