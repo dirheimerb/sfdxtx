@@ -422,23 +422,22 @@ public with sharing class DisplayGlobalProfileController {
       }
 
       try {
-            // Added on 12 Jan 2022 for skip Duplicate Rule ---SFSC - 5598----- 
-            Database.DMLOptions dml = new Database.DMLOptions();
-            dml.DuplicateRuleHeader.allowSave = true;
-            dml.DuplicateRuleHeader.runAsCurrentUser = true;
-            Database.SaveResult sr = Database.update(contactRec, dml); 
-            if(sr.isSuccess()) {
-            	response = SUCCESS_STATUS;
-            }else {
-                String errorString = '';
-                for(Database.Error error: sr.getErrors()) {
-                    errorString += error.getMessage();
-                }
-                response = 'Error - ' + errorString.unescapeHtml4();
-            }
-          	System.debug('sr---'+sr.isSuccess());
-            //update contactRec;
-            
+        // Added on 12 Jan 2022 for skip Duplicate Rule ---SFSC - 5598-----
+        Database.DMLOptions dml = new Database.DMLOptions();
+        dml.DuplicateRuleHeader.allowSave = true;
+        dml.DuplicateRuleHeader.runAsCurrentUser = true;
+        Database.SaveResult sr = Database.update(contactRec, dml);
+        if (sr.isSuccess()) {
+          response = SUCCESS_STATUS;
+        } else {
+          String errorString = '';
+          for (Database.Error error : sr.getErrors()) {
+            errorString += error.getMessage();
+          }
+          response = 'Error - ' + errorString.unescapeHtml4();
+        }
+        System.debug('sr---' + sr.isSuccess());
+        //update contactRec;
 
         // Added on 08 Sep, 2021
         Logger.info(
@@ -488,12 +487,12 @@ public with sharing class DisplayGlobalProfileController {
         leadRec.PostalCode = adoptDetailsWrapper.adoptedAddressValues.postalCode;
       }
       try {
-          // Added on 12 Jan 2022 for skip Duplicate Rule ---SFSC - 5598----- 
-          Database.DMLOptions dml = new Database.DMLOptions();
-          dml.DuplicateRuleHeader.allowSave = true;
-          dml.DuplicateRuleHeader.runAsCurrentUser = true;
-          Database.SaveResult sr = Database.update(leadRec, dml);
-          response = SUCCESS_STATUS;
+        // Added on 12 Jan 2022 for skip Duplicate Rule ---SFSC - 5598-----
+        Database.DMLOptions dml = new Database.DMLOptions();
+        dml.DuplicateRuleHeader.allowSave = true;
+        dml.DuplicateRuleHeader.runAsCurrentUser = true;
+        Database.SaveResult sr = Database.update(leadRec, dml);
+        response = SUCCESS_STATUS;
         // Added on 08 Sep, 2021
         Logger.info(
           'Adopt Lead updated successfully. LEAD_RECORD_ID: ' + leadRec.Id

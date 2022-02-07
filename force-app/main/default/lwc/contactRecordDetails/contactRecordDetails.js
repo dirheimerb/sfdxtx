@@ -1,19 +1,16 @@
-import { LightningElement, api, wire, track } from 'lwc';
+import { LightningElement, api, wire, track } from "lwc";
 
-import CONTACT_OBJECT from '@salesforce/schema/Contact';
-import {
-  getObjectInfo,
-  getPicklistValues
-} from 'lightning/uiObjectInfoApi';
-import { getRecordUi, updateRecord } from 'lightning/uiRecordApi';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import MAILING_COUNTRY_FIELD from '@salesforce/schema/Contact.MailingCountryCode';
-import MAILING_STATE_FIELD from '@salesforce/schema/Contact.MailingStateCode';
-import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';
-const DEFAULT_PICKLIST_VALUE = { label: '--None--', value: 'none' };
+import CONTACT_OBJECT from "@salesforce/schema/Contact";
+import { getObjectInfo, getPicklistValues } from "lightning/uiObjectInfoApi";
+import { getRecordUi, updateRecord } from "lightning/uiRecordApi";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import MAILING_COUNTRY_FIELD from "@salesforce/schema/Contact.MailingCountryCode";
+import MAILING_STATE_FIELD from "@salesforce/schema/Contact.MailingStateCode";
+import { NavigationMixin, CurrentPageReference } from "lightning/navigation";
+const DEFAULT_PICKLIST_VALUE = { label: "--None--", value: "none" };
 
-import updateDuplicateContact from '@salesforce/apex/C360DMContactCreateController.updateDuplicateContact';
-import EmailBouncedDate from '@salesforce/schema/Contact.EmailBouncedDate';
+import updateDuplicateContact from "@salesforce/apex/C360DMContactCreateController.updateDuplicateContact";
+import EmailBouncedDate from "@salesforce/schema/Contact.EmailBouncedDate";
 
 /*//SFSC - 6173 Detailed description of values used on Contact record details form
 
@@ -45,7 +42,7 @@ export default class ContactRecordDetails extends NavigationMixin(
   isAddressChanged = false;
   mapMarkers;
   allMailingStates;
-  @track sectionLabel = 'Show';
+  @track sectionLabel = "Show";
   @track buttonVisible = false;
   @track isNameLabel = false;
   @track isSpinner = false; // Added on 28/7/2021
@@ -60,24 +57,24 @@ export default class ContactRecordDetails extends NavigationMixin(
   inValidData;
   dependentFieldsList = [];
   LABEL = {
-    DATA_VALID_MESSAGE: 'Contact Updated and Data Validated',
-    SUCCESS: 'Success',
-    DATA_INVALID_VALID_MESSAGE: 'Contact Updated and Data Invalid',
-    WARNING: 'Warning',
-    NAME: 'Name',
-    ADDRESS_INFORMATION: 'Address Information',
-    SYSTEM_INFORMATION: 'System Information',
-    CREATED_BY: 'Created By',
-    LAST_MODIFIED_BY: 'Last Modified By',
-    CONTACT_RECORD_TYPE: 'Contact Record Type',
-    MAILING_ADDRESS: 'Mailing Address',
-    Email: 'Email',
-    SecondaryEmail: 'SecondaryEmail',
-    Phone: 'Phone',
-    Mobile: 'Mobile',
-    Address: 'Address',
-    Read_timed_out: 'Read timed out',
-    Landline: 'LandLine'
+    DATA_VALID_MESSAGE: "Contact Updated and Data Validated",
+    SUCCESS: "Success",
+    DATA_INVALID_VALID_MESSAGE: "Contact Updated and Data Invalid",
+    WARNING: "Warning",
+    NAME: "Name",
+    ADDRESS_INFORMATION: "Address Information",
+    SYSTEM_INFORMATION: "System Information",
+    CREATED_BY: "Created By",
+    LAST_MODIFIED_BY: "Last Modified By",
+    CONTACT_RECORD_TYPE: "Contact Record Type",
+    MAILING_ADDRESS: "Mailing Address",
+    Email: "Email",
+    SecondaryEmail: "SecondaryEmail",
+    Phone: "Phone",
+    Mobile: "Mobile",
+    Address: "Address",
+    Read_timed_out: "Read timed out",
+    Landline: "LandLine",
   };
 
   /* for Error and Warning custom Popup - Added on 28/7/2021  */
@@ -104,12 +101,11 @@ export default class ContactRecordDetails extends NavigationMixin(
     this.contextOfPageReference = state.inContextOfRef;
   }
 
-
   //Testing
   @wire(getRecordUi, {
-    recordIds: '$recordId',
-    layoutTypes: 'Full',
-    modes: 'View'
+    recordIds: "$recordId",
+    layoutTypes: "Full",
+    modes: "View",
   })
   recordInfo({ data }) {
     if (data) {
@@ -124,11 +120,11 @@ export default class ContactRecordDetails extends NavigationMixin(
       this.updatedAddressDetails.Job_Function__c =
         this.contactRecordData.Job_Function__c != null
           ? this.contactRecordData.Job_Function__c.value
-          : '';
+          : "";
       this.updatedAddressDetails.Physician_Independence__c =
         this.contactRecordData.Physician_Independence__c != null
           ? this.contactRecordData.Physician_Independence__c.value
-          : '';
+          : "";
       this.objectInfoFields = Object.entries(data.objectInfos.Contact.fields);
       this.setActiveSections();
       for (var i = 0; i < this.layoutSections.length; i++) {
@@ -148,7 +144,7 @@ export default class ContactRecordDetails extends NavigationMixin(
         }
       }
 
-      console.log('**SECTIONS', this.layoutSections);
+      console.log("**SECTIONS", this.layoutSections);
       var temp = [];
       var index = 0;
       for (var i = 0; i < this.layoutSections.length; i++) {
@@ -175,12 +171,12 @@ export default class ContactRecordDetails extends NavigationMixin(
           r.layoutItems.forEach((i) => {
             i.isNameField = i.label == this.LABEL.NAME;
             i.isMailingAddressField = i.label == this.LABEL.MAILING_ADDRESS;
-            i.jobFunctionField = i.label == 'Job Function';
-            i.physicianIndependenceField = i.label == 'Physician Independence';
+            i.jobFunctionField = i.label == "Job Function";
+            i.physicianIndependenceField = i.label == "Physician Independence";
 
             //Added on 25 Aug 2021 Hide Contact Origin Field on New/Edit Page Layout
             //https://salesforce.stackexchange.com/questions/123755/how-do-i-hide-field-on-edit-new-record-page-and-still-display-them-in-the-view-p
-            i.isContactOriginField = i.label == 'Contact Origin';
+            i.isContactOriginField = i.label == "Contact Origin";
 
             if (s.heading == this.LABEL.SYSTEM_INFORMATION) {
               i.isSystemInformationSection = true;
@@ -194,11 +190,11 @@ export default class ContactRecordDetails extends NavigationMixin(
                 i.label != this.LABEL.CREATED_BY &&
                 i.label != this.LABEL.LAST_MODIFIED_BY &&
                 i.label != this.LABEL.CONTACT_RECORD_TYPE &&
-                i.label != ''
+                i.label != ""
               ) {
                 i.isOtherSystemInfoData = true;
               }
-            } else if (s.heading == 'Data Quality') {
+            } else if (s.heading == "Data Quality") {
               i.editableForUpdate = false;
             } else {
               i.isSystemInformationSection = false;
@@ -210,10 +206,10 @@ export default class ContactRecordDetails extends NavigationMixin(
               this.fieldApiName = apiName;
               if (dependentList.includes(p.apiName)) {
                 i.isControllingField = true;
-                i.controllingFields = '';
+                i.controllingFields = "";
                 dependentMap.forEach((t) => {
                   if (t.key == p.apiName) {
-                    i.controllingFields += t.value + ',';
+                    i.controllingFields += t.value + ",";
                   }
                 });
                 i.controllingFields = i.controllingFields.slice(0, -1);
@@ -224,7 +220,7 @@ export default class ContactRecordDetails extends NavigationMixin(
                   if (l.apiName != null)
                     if (l.calculated == true) {
                       p.isFormulaField = true;
-                    } else if (i.label == 'Contact Owner') {
+                    } else if (i.label == "Contact Owner") {
                       i.isFormulaField = false;
                     }
                 });
@@ -232,20 +228,19 @@ export default class ContactRecordDetails extends NavigationMixin(
             });
             //Kalyani compact added- starts
             setTimeout(() => {
-
               var isCompactLayout =
-                this.template.querySelectorAll('.slds-form-element_horizontal')
+                this.template.querySelectorAll(".slds-form-element_horizontal")
                   .length > 0;
               if (isCompactLayout) {
                 this.updateCompactViewCSS();
-                console.log('***LOADED');
+                console.log("***LOADED");
                 if (i.label == this.LABEL.NAME) {
                   i.isCompactView = true;
                 }
                 if (i.label == this.LABEL.MAILING_ADDRESS) {
                   i.isCompactView = true;
 
-                  console.log('in mailing');
+                  console.log("in mailing");
                 }
               }
             }, 2500);
@@ -256,7 +251,7 @@ export default class ContactRecordDetails extends NavigationMixin(
       });
 
       this.layoutSections = temp;
-      console.log('**SECTIONS', this.layoutSections);
+      console.log("**SECTIONS", this.layoutSections);
       this.mapMarkers = [
         {
           location: {
@@ -264,13 +259,13 @@ export default class ContactRecordDetails extends NavigationMixin(
             Country: this.contactRecordData.MailingCountryCode.value,
             PostalCode: this.contactRecordData.MailingPostalCode.value,
             State: this.contactRecordData.MailingStateCode.value,
-            Street: this.contactRecordData.MailingStreet.value
+            Street: this.contactRecordData.MailingStreet.value,
           },
-          title: 'Title',
-          description: 'Description'
-        }
+          title: "Title",
+          description: "Description",
+        },
       ];
-      console.log('mapMarkers---' + this.mapMarkers[0].location.City);
+      console.log("mapMarkers---" + this.mapMarkers[0].location.City);
     } else {
     }
   }
@@ -279,14 +274,14 @@ export default class ContactRecordDetails extends NavigationMixin(
   contactInfo;
 
   updateCompactViewCSS() {
-    var elements = this.template.querySelectorAll('.slds-p-top_large');
+    var elements = this.template.querySelectorAll(".slds-p-top_large");
     elements.forEach((e) => {
-      if (e.classList.value.indexOf('compactview-top-padding') === -1)
-        e.classList.add('compactview-top-padding');
+      if (e.classList.value.indexOf("compactview-top-padding") === -1)
+        e.classList.add("compactview-top-padding");
     });
-    const style = document.createElement('style');
-    style.innerText = '.slds-map {min-width: 0px !important;}';
-    this.template.querySelector('lightning-map').appendChild(style);
+    const style = document.createElement("style");
+    style.innerText = ".slds-map {min-width: 0px !important;}";
+    this.template.querySelector("lightning-map").appendChild(style);
   }
 
   setActiveSections() {
@@ -296,8 +291,8 @@ export default class ContactRecordDetails extends NavigationMixin(
   }
 
   @wire(getPicklistValues, {
-    recordTypeId: '$recordTypeId',
-    fieldApiName: MAILING_COUNTRY_FIELD
+    recordTypeId: "$recordTypeId",
+    fieldApiName: MAILING_COUNTRY_FIELD,
   })
   countryList({ error, data }) {
     if (data) {
@@ -306,8 +301,8 @@ export default class ContactRecordDetails extends NavigationMixin(
   }
 
   @wire(getPicklistValues, {
-    recordTypeId: '$recordTypeId',
-    fieldApiName: MAILING_STATE_FIELD
+    recordTypeId: "$recordTypeId",
+    fieldApiName: MAILING_STATE_FIELD,
   })
   stateList({ error, data }) {
     if (data) {
@@ -315,9 +310,7 @@ export default class ContactRecordDetails extends NavigationMixin(
     }
   }
 
-
   handleJobFunctionChange(event) {
-
     let key =
       this.allPhysicianIndependence.controllerValues[event.target.value];
     let filteredPhysicianIndependence =
@@ -332,15 +325,15 @@ export default class ContactRecordDetails extends NavigationMixin(
   addressChanged(event) {
     this.isAddressChanged = true;
     this.updatedAddressDetails.MailingStreet =
-      event.target.street == null ? '' : event.target.street;
+      event.target.street == null ? "" : event.target.street;
     this.updatedAddressDetails.MailingCity =
-      event.target.city == null ? '' : event.target.city;
+      event.target.city == null ? "" : event.target.city;
     this.updatedAddressDetails.MailingPostalCode =
-      event.target.postalCode == null ? '' : event.target.postalCode;
+      event.target.postalCode == null ? "" : event.target.postalCode;
     this.updatedAddressDetails.MailingStateCode =
-      event.target.province == null ? '' : event.target.province;
+      event.target.province == null ? "" : event.target.province;
     this.updatedAddressDetails.MailingCountryCode =
-      event.target.country == null ? '' : event.target.country;
+      event.target.country == null ? "" : event.target.country;
     this.handleCountryChange(event.target.country);
   }
 
@@ -352,11 +345,10 @@ export default class ContactRecordDetails extends NavigationMixin(
     this.mailingStates = [...filteredStates];
   }
 
-
   callSaveAndNewButton() {
     this.isSpinner = true; //SFSC - 7070
     this.isSaveAndNewButton = true;
-    this.template.querySelector('.save-and-new-button').click();
+    this.template.querySelector(".save-and-new-button").click();
   }
 
   handleSubmit(event) {
@@ -382,14 +374,13 @@ export default class ContactRecordDetails extends NavigationMixin(
           this.contactRecordData.MailingCountryCode.value;
       }
 
-      console.log('fields', fields);
+      console.log("fields", fields);
 
       /* Added on 28/7/2021 */
-      if (this.whichButtonWasClicked == 'ContinueToSave') {
+      if (this.whichButtonWasClicked == "ContinueToSave") {
         this.updateAddress(); // SFSC-6173: 20-01 added to update address for duplicate record
         this.updateContact(this.updatedContactDetail); //SFSC - 6173 - changed "fields" to "this.updateContactDetail" - 19-01
       } else {
-
         //SFSC - 6173 - DQ Code Optimization starts
         this.updatedContactDetail = fields;
         this.updateAddress(); //SFSC-6173: 20-01 To add address details in updatedContactDetail
@@ -402,48 +393,48 @@ export default class ContactRecordDetails extends NavigationMixin(
         this.dqFieldsToValidate = [];
         if (
           email != null &&
-          email != '' &&
+          email != "" &&
           this.contactRecordData.Email.value != email
         ) {
-          this.dqFieldsToValidate.push('Email');
+          this.dqFieldsToValidate.push("Email");
           this.isUpdatedDQSystemRelatedFields = true; // SFC - 6173 Added on 18 Jan 2022
         }
 
         if (
           secondaryEmail != null &&
-          secondaryEmail != '' &&
+          secondaryEmail != "" &&
           secondaryEmail != this.contactRecordData.Secondary_Email__c.value
         ) {
-          this.dqFieldsToValidate.push('SecondaryEmail');
+          this.dqFieldsToValidate.push("SecondaryEmail");
           this.isUpdatedDQSystemRelatedFields = true; // SFSC - 6173 Added on 18 Jan 2022
         }
 
         if (
           phone != null &&
-          phone != '' &&
+          phone != "" &&
           phone != this.contactRecordData.Phone.value
         ) {
-          this.dqFieldsToValidate.push('Phone');
+          this.dqFieldsToValidate.push("Phone");
           this.isUpdatedDQSystemRelatedFields = true; // SFSC - 6173 Added on 18 Jan 2022
         }
 
         if (
           mobilePhone != null &&
-          mobilePhone != '' &&
+          mobilePhone != "" &&
           mobilePhone != this.contactRecordData.MobilePhone.value
         ) {
-          this.dqFieldsToValidate.push('MobilePhone');
+          this.dqFieldsToValidate.push("MobilePhone");
           this.isUpdatedDQSystemRelatedFields = true; // SFSC - 6173 Added on 18 Jan 2022
         }
 
         if (this.isAddressValidationRequired()) {
-          this.dqFieldsToValidate.push('Address');
+          this.dqFieldsToValidate.push("Address");
           this.isUpdatedDQSystemRelatedFields = true; //SFSC - 6173 -  Added on 18 Jan 2022
         }
 
         var modalLoading = setInterval(() => {
-          console.log('1');
-          var modal = this.template.querySelector('c-d-q-validation');
+          console.log("1");
+          var modal = this.template.querySelector("c-d-q-validation");
           if (modal != null) {
             clearInterval(modalLoading);
             modal.validateDQServices();
@@ -452,7 +443,7 @@ export default class ContactRecordDetails extends NavigationMixin(
         //SFSC - 6173 - DQ Code Optimization ends
       }
     } catch (error) {
-      console.log('ERROR: ', error);
+      console.log("ERROR: ", error);
     }
   }
 
@@ -497,37 +488,37 @@ export default class ContactRecordDetails extends NavigationMixin(
   }
 
   handleSuccess() {
-    if (this.inValidData != 'invalidData') {
-      console.log('OUTPUT_inValidData : ', this.inValidData);
+    if (this.inValidData != "invalidData") {
+      console.log("OUTPUT_inValidData : ", this.inValidData);
       // Added on 25 Aug 2021 - Show DQ message if there was a DQ callout
       if (!this.isUpdatedDQSystemRelatedFields) {
         // SFSC - 6173 Added on 18 Jan 2022
         const evt = new ShowToastEvent({
           title: this.LABEL.SUCCESS,
-          message: 'Contact has been updated successfully.',
-          variant: this.LABEL.SUCCESS
+          message: "Contact has been updated successfully.",
+          variant: this.LABEL.SUCCESS,
         });
         this.dispatchEvent(evt);
-      } else if (this.inValidData == 'DQ_CALLOUT') {
+      } else if (this.inValidData == "DQ_CALLOUT") {
         const evt = new ShowToastEvent({
           title: this.LABEL.SUCCESS,
           message: this.LABEL.DATA_VALID_MESSAGE,
-          variant: this.LABEL.SUCCESS
+          variant: this.LABEL.SUCCESS,
         });
         this.dispatchEvent(evt);
       } else {
         const showDataUpdatedEvt = new ShowToastEvent({
-          title: 'Success',
-          message: 'Contact Information Data Updated',
-          variant: 'success'
+          title: "Success",
+          message: "Contact Information Data Updated",
+          variant: "success",
         });
         this.dispatchEvent(showDataUpdatedEvt);
       }
-    } else if (this.inValidData == 'invalidData') {
+    } else if (this.inValidData == "invalidData") {
       const showInvalidDataToastMessageEvt = new ShowToastEvent({
         title: this.LABEL.WARNING,
         message: this.LABEL.DATA_INVALID_VALID_MESSAGE,
-        variant: this.LABEL.WARNING
+        variant: this.LABEL.WARNING,
       });
       this.dispatchEvent(showInvalidDataToastMessageEvt);
     }
@@ -541,14 +532,14 @@ export default class ContactRecordDetails extends NavigationMixin(
       this.closeParentModal();
       if (this.isSaveAndNewButton) {
         this[NavigationMixin.Navigate]({
-          type: 'standard__objectPage',
+          type: "standard__objectPage",
           attributes: {
-            objectApiName: 'Contact',
-            actionName: 'new'
+            objectApiName: "Contact",
+            actionName: "new",
           },
-          state: {            
-            inContextOfRef: this.contextOfPageReference // Added on 2 Feb 2022   - SFSC - 7070                 
-          }
+          state: {
+            inContextOfRef: this.contextOfPageReference, // Added on 2 Feb 2022   - SFSC - 7070
+          },
         });
       }
     } else {
@@ -559,7 +550,7 @@ export default class ContactRecordDetails extends NavigationMixin(
   }
 
   closeParentModal() {
-    const closeModalEvent = new CustomEvent('close');
+    const closeModalEvent = new CustomEvent("close");
     // Dispatches the event.
     this.dispatchEvent(closeModalEvent);
   }
@@ -575,7 +566,7 @@ export default class ContactRecordDetails extends NavigationMixin(
     }
     setTimeout(() => {
       var isCompactLayout =
-        this.template.querySelectorAll('.slds-form-element_horizontal').length >
+        this.template.querySelectorAll(".slds-form-element_horizontal").length >
         0;
       if (isCompactLayout) {
         this.updateCompactViewCSS();
@@ -586,7 +577,7 @@ export default class ContactRecordDetails extends NavigationMixin(
   editButton() {
     let key =
       this.allMailingStates.controllerValues[
-      this.contactRecordData.MailingCountryCode.value
+        this.contactRecordData.MailingCountryCode.value
       ];
     let filteredStates = this.allMailingStates.values.filter((opt) =>
       opt.validFor.includes(key)
@@ -598,12 +589,12 @@ export default class ContactRecordDetails extends NavigationMixin(
   navigateToCreatedUserRecord() {
     var createdDateId = this.contactData.CreatedById.value;
     this[NavigationMixin.GenerateUrl]({
-      type: 'standard__recordPage',
+      type: "standard__recordPage",
       attributes: {
-        objectApiName: 'User',
+        objectApiName: "User",
         recordId: createdDateId,
-        actionName: 'view'
-      }
+        actionName: "view",
+      },
     }).then((url) => {
       window.open(url);
     });
@@ -611,12 +602,12 @@ export default class ContactRecordDetails extends NavigationMixin(
   navigateToLastModifiedUserRecord() {
     var LastModifiedById = this.contactData.LastModifiedById.value;
     this[NavigationMixin.GenerateUrl]({
-      type: 'standard__recordPage',
+      type: "standard__recordPage",
       attributes: {
-        objectApiName: 'User',
+        objectApiName: "User",
         recordId: LastModifiedById,
-        actionName: 'view'
-      }
+        actionName: "view",
+      },
     }).then((url) => {
       window.open(url);
     });
@@ -626,23 +617,23 @@ export default class ContactRecordDetails extends NavigationMixin(
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
+    today = yyyy + "-" + mm + "-" + dd;
     return today;
   }
 
   saveData() {
     this.isSpinner = true;
     console.log(
-      'Save_Data : ',
+      "Save_Data : ",
       JSON.parse(JSON.stringify(this.updatedContactDetail))
     );
     this.template
-      .querySelector('lightning-record-edit-form')
+      .querySelector("lightning-record-edit-form")
       .submit(this.updatedContactDetail);
   }
 
   resetAll() {
-    this.inValidData = '';
+    this.inValidData = "";
     this.dqFieldsToValidate = [];
   }
 
@@ -658,37 +649,34 @@ export default class ContactRecordDetails extends NavigationMixin(
 
     duplicateContact.Id = this.recordId;
 
-
-
-
     updateDuplicateContact({ duplicateContact })
       .then((result) => {
-        console.log('Result', result);
+        console.log("Result", result);
         this.isSpinner = false;
         if (result.isSuccuss) {
           //show success message only if data is valid
-          if (this.inValidData != 'invalidData') {
+          if (this.inValidData != "invalidData") {
             // Added on 25 Aug 2021 - Show DQ message if there was a DQ callout
-            if (this.inValidData == 'DQ_CALLOUT') {
+            if (this.inValidData == "DQ_CALLOUT") {
               const evt = new ShowToastEvent({
                 title: this.LABEL.SUCCESS,
                 message: this.LABEL.DATA_VALID_MESSAGE,
-                variant: this.LABEL.SUCCESS
+                variant: this.LABEL.SUCCESS,
               });
               this.dispatchEvent(evt);
             } else {
               const showDataUpdatedEvt = new ShowToastEvent({
-                title: 'Success',
-                message: 'Contact Information Data Updated',
-                variant: 'success'
+                title: "Success",
+                message: "Contact Information Data Updated",
+                variant: "success",
               });
               this.dispatchEvent(showDataUpdatedEvt);
             }
-          } else if (this.inValidData == 'invalidData') {
+          } else if (this.inValidData == "invalidData") {
             const showInvalidDataToastMessageEvt = new ShowToastEvent({
               title: this.LABEL.WARNING,
               message: this.LABEL.DATA_INVALID_VALID_MESSAGE,
-              variant: this.LABEL.WARNING
+              variant: this.LABEL.WARNING,
             });
             this.dispatchEvent(showInvalidDataToastMessageEvt);
           }
@@ -697,14 +685,14 @@ export default class ContactRecordDetails extends NavigationMixin(
                             then update record and open new contact page therwise refresh the  current page*/
           if (this.isSaveAndNewButton) {
             this[NavigationMixin.Navigate]({
-              type: 'standard__objectPage',
+              type: "standard__objectPage",
               attributes: {
-                objectApiName: 'Contact',
-                actionName: 'new'
+                objectApiName: "Contact",
+                actionName: "new",
               },
-              state: {                
-                inContextOfRef: this.contextOfPageReference // Added on 2 Feb 2022   - SFSC - 7070                    
-              }
+              state: {
+                inContextOfRef: this.contextOfPageReference, // Added on 2 Feb 2022   - SFSC - 7070
+              },
             });
           } else {
             window.setTimeout(() => {
@@ -722,15 +710,15 @@ export default class ContactRecordDetails extends NavigationMixin(
         } else {
           this.dispatchEvent(
             new ShowToastEvent({
-              title: 'Error',
+              title: "Error",
               message: result.message,
-              variant: 'error'
+              variant: "error",
             })
           );
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }
 
@@ -738,15 +726,15 @@ export default class ContactRecordDetails extends NavigationMixin(
     this.isSpinner = false;
     this.showModal_Invalid = false;
 
-    console.log('Error: ', JSON.parse(JSON.stringify(event.detail)));
+    console.log("Error: ", JSON.parse(JSON.stringify(event.detail)));
 
     let formErrorDetails = JSON.parse(JSON.stringify(event.detail));
     this.isErrorPopup = true;
     this.whichButtonWasClicked = null;
     let errors = [];
     let warnings = { message: null, data: null };
-    if (formErrorDetails.hasOwnProperty('output')) {
-      if (formErrorDetails.output.hasOwnProperty('fieldErrors')) {
+    if (formErrorDetails.hasOwnProperty("output")) {
+      if (formErrorDetails.output.hasOwnProperty("fieldErrors")) {
         Object.entries(formErrorDetails.output.fieldErrors).forEach(
           ([key, value]) => {
             value.forEach((obj) => {
@@ -756,11 +744,11 @@ export default class ContactRecordDetails extends NavigationMixin(
         );
       }
       if (
-        formErrorDetails.output.hasOwnProperty('errors') &&
+        formErrorDetails.output.hasOwnProperty("errors") &&
         formErrorDetails.output.errors.length
       ) {
         formErrorDetails.output.errors.forEach((fielderror) => {
-          if (fielderror.errorCode === 'DUPLICATES_DETECTED') {
+          if (fielderror.errorCode === "DUPLICATES_DETECTED") {
             warnings.data = fielderror.duplicateRecordError.matchResults;
           }
         });
@@ -774,12 +762,11 @@ export default class ContactRecordDetails extends NavigationMixin(
       errors = [formErrorDetails.detail, ...errors];
       this.errorMessages = errors;
     }
-
   }
 
   handleContinueToSave() {
-    this.whichButtonWasClicked = 'ContinueToSave';
-    this.template.querySelector('.continue-save-button').click();
+    this.whichButtonWasClicked = "ContinueToSave";
+    this.template.querySelector(".continue-save-button").click();
   }
 
   handleViewDuplicatesModal() {
@@ -796,12 +783,12 @@ export default class ContactRecordDetails extends NavigationMixin(
 
   navigateToRecordViewPage(recordId) {
     this[NavigationMixin.Navigate]({
-      type: 'standard__recordPage',
+      type: "standard__recordPage",
       attributes: {
         recordId,
-        objectApiName: 'Contact',
-        actionName: 'view'
-      }
+        objectApiName: "Contact",
+        actionName: "view",
+      },
     });
   }
 
@@ -815,21 +802,21 @@ export default class ContactRecordDetails extends NavigationMixin(
   get popoverHeaderStyle() {
     return (
       (this.errorMessages.length
-        ? 'slds-popover slds-popover_error slds-nubbin_bottom-left'
-        : 'slds-popover slds-popover_warning  slds-nubbin_bottom-left') +
-      ' popover-custom-width'
+        ? "slds-popover slds-popover_error slds-nubbin_bottom-left"
+        : "slds-popover slds-popover_warning  slds-nubbin_bottom-left") +
+      " popover-custom-width"
     );
   }
   editRecordType() {
-    alert('record type edited');
+    alert("record type edited");
   }
 
   /* Added on 29/07/2021 */
 
   handleOnSubmit(whichButtonClicked) {
-    if (whichButtonClicked == 'Save') {
-      this.whichButtonWasClicked = 'Save';
-      this.template.querySelector('.save-button').click();
+    if (whichButtonClicked == "Save") {
+      this.whichButtonWasClicked = "Save";
+      this.template.querySelector(".save-button").click();
     }
   }
 
@@ -841,13 +828,13 @@ export default class ContactRecordDetails extends NavigationMixin(
 
     try {
       let allInputsAreFilled = true;
-      [...this.template.querySelectorAll('lightning-input-field')].forEach(
+      [...this.template.querySelectorAll("lightning-input-field")].forEach(
         (element) => {
           element.reportValidity();
           // Added on 17 Aug, 2020 -->  !element.reportValidity()
           if (
             (element.required &&
-              (element.value == null || element.value == '')) ||
+              (element.value == null || element.value == "")) ||
             !element.reportValidity()
           ) {
             if (
@@ -856,7 +843,7 @@ export default class ContactRecordDetails extends NavigationMixin(
               this.contactInfo.data.fields.hasOwnProperty(element.fieldName) &&
               this.contactInfo.data.fields[
                 element.fieldName
-              ].dataType.toLowerCase() != 'boolean'
+              ].dataType.toLowerCase() != "boolean"
             ) {
               allInputsAreFilled = false;
               let fieldLabel =
@@ -867,41 +854,41 @@ export default class ContactRecordDetails extends NavigationMixin(
         }
       );
       if (allInputsAreFilled) {
-        console.log('All form entries look valid. Ready to submit!');
+        console.log("All form entries look valid. Ready to submit!");
 
         this.isSpinner = true;
         this.errorMessages = [];
 
         this.handleOnSubmit(event.target.name);
       } else {
-        console.log('Please update the invalid form entries and try again.');
-        console.log('errors : ', errors);
+        console.log("Please update the invalid form entries and try again.");
+        console.log("errors : ", errors);
         this.errorMessages = errors;
         this.isErrorPopup = true;
       }
     } catch (error) {
-      console.log('OUTPUT : ', error);
+      console.log("OUTPUT : ", error);
     }
   }
 
   formatDate(date) {
     let d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = '' + d.getFullYear();
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = "" + d.getFullYear();
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
 
-    return [year, month, day].join('-');
+    return [year, month, day].join("-");
   }
 
   isEmptyOrNull(value) {
-    return value == null || value == '';
+    return value == null || value == "";
   }
 
   getEmptyStringForNullValue(value) {
-    return value == null ? '' : value;
+    return value == null ? "" : value;
   }
 
   //SFSC - 6173 DQ Code Optimization starts
@@ -909,13 +896,13 @@ export default class ContactRecordDetails extends NavigationMixin(
     this.updatedContactDetail = event.detail;
     this.inValidData = event.detail.inValidData;
     this.saveData();
-    console.log('****** event in parent contact details ' + event.detail);
+    console.log("****** event in parent contact details " + event.detail);
   }
 
   closeDQPopupModal(event) {
     this.showDQMOdal = event.detail;
     this.isSpinner = false;
-    console.log('****** event in parent flag details ' + event.detail);
+    console.log("****** event in parent flag details " + event.detail);
   }
   //Added on 20-01 to map the address fields to updatedContactDetail
   updateAddress() {

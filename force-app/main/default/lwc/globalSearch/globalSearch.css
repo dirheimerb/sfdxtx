@@ -1,26 +1,26 @@
 .modal-container {
-    width: 100%;
-    max-width: 1000px;
-    min-width: 480px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 480px;
 }
 
 .wrapword {
-    white-space: -moz-pre-wrap !important; /*Mozilla, since 1999*/
-    white-space: -webkit-pre-wrap; /*Chrome and Safari */
-    white-space: -pre-wrap; /*Opera 4-6*/
-    white-space: -o-pre-wrap; /*Opera 7*/
-    white-space: pre-wrap; /* css-3 */
-    word-wrap: break-word; /*Internet Explorer 5.5+ */
-    word-break: break-word;
-    white-space: normal;
+  white-space: -moz-pre-wrap !important; /*Mozilla, since 1999*/
+  white-space: -webkit-pre-wrap; /*Chrome and Safari */
+  white-space: -pre-wrap; /*Opera 4-6*/
+  white-space: -o-pre-wrap; /*Opera 7*/
+  white-space: pre-wrap; /* css-3 */
+  word-wrap: break-word; /*Internet Explorer 5.5+ */
+  word-break: break-word;
+  white-space: normal;
 }
 .search-border {
-    --sds-c-input-color-border: #0176d3;
-    --sds-c-input-radius-border: 0.5rem;
+  --sds-c-input-color-border: #0176d3;
+  --sds-c-input-radius-border: 0.5rem;
 }
 .hidden {
-    display: none;
+  display: none;
 }
 .visible {
-    display: block;
+  display: block;
 }

@@ -6,8 +6,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require('../dev-scripts-main/utils/shelljs');
+const shell = require("../dev-scripts-main/utils/shelljs");
 
-shell.exec('yarn clean');
-shell.exec('yarn compile');
-shell.exec('yarn lint');
+shell.exec("yarn clean");
+shell.exec("yarn compile");
+shell.exec("yarn lint");

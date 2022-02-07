@@ -1,6 +1,6 @@
-import { LightningElement, wire, api } from 'lwc';
-import { getRecord } from 'lightning/uiRecordApi';
-import { NavigationMixin } from 'lightning/navigation';
+import { LightningElement, wire, api } from "lwc";
+import { getRecord } from "lightning/uiRecordApi";
+import { NavigationMixin } from "lightning/navigation";
 
 export default class ContactEditForm extends NavigationMixin(LightningElement) {
   showModal = true;
@@ -13,22 +13,22 @@ export default class ContactEditForm extends NavigationMixin(LightningElement) {
   closeModal() {
     this.showModal = false;
     this[NavigationMixin.Navigate]({
-      type: 'standard__recordPage',
+      type: "standard__recordPage",
       attributes: {
         recordId: this.recordId,
-        objectApiName: 'Contact',
-        actionName: 'view'
-      }
+        objectApiName: "Contact",
+        actionName: "view",
+      },
     });
     //window.history.back();
   }
 
   @wire(getRecord, {
-    recordId: '$recordId',
-    fields: ['Contact.Name']
+    recordId: "$recordId",
+    fields: ["Contact.Name"],
   })
   getUserRecord({ data, error }) {
-    console.log('data ' + data);
+    console.log("data " + data);
     if (data) {
       this.contactName = data.fields.Name.value;
     }

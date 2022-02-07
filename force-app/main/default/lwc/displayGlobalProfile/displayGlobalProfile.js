@@ -8,10 +8,10 @@
  * Ver   Date         Author       Modification
  * 1.0   09-14-2021   BDirheimer   Initial Version
  **/
-import { LightningElement, api } from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import adoptContactDetails from '@salesforce/apex/DisplayGlobalProfileController.adoptContactDetails';
-import displayGlobalProfile from '@salesforce/apex/DisplayGlobalProfileController.displayGlobalProfile';
+import { LightningElement, api } from "lwc";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import adoptContactDetails from "@salesforce/apex/DisplayGlobalProfileController.adoptContactDetails";
+import displayGlobalProfile from "@salesforce/apex/DisplayGlobalProfileController.displayGlobalProfile";
 
 export default class DisplayGlobalProfile extends LightningElement {
   // = {"globalPartyId": "XYZ","firstName": "Arjita","lastName": "Arjita","IsLastUpdatedIn24Hours": true,"EmailContactPoints": [{"contactPointValue": "atest@test.com","ContactPointType": "Email","dataSourceName": "SAP, Siebel"},{"contactPointValue": "atest22@test.com","ContactPointType": "Email","dataSourceName": "Market Cloud, SAP"}],"PhoneContactPoints": [{"contactPointValue": "+9911223344","ContactPointType": "Home","dataSourceName": "SAP"}, {"contactPointValue": "+9911223884","ContactPointType": "Mobile","dataSourceName": "Market Cloud, SAP"}],"PartyIdentificationContactPoints" : [{"contactPointValue": "GovtNumber1223","ContactPointType": "Physician Registration Number","dataSourceName": "Market Cloud"}, {"contactPointValue": "HealthNumber999","ContactPointType": "Physician Registration Number","dataSourceName": "Siebel"}],"AddressContactPoints" : [{"addressLine1": "32,Street","cityName": "Pune","postalCode": "302022","stateProvinceCode": "Maharashtra","countryName": "India","DataSourceValue": "SAP"},{"addressLine1": "221B,Baker Street","cityName": "London","postalCode": "EC1A","countryName": "United Kingdom","DataSourceValue": "SalesCloud, Market Cloud"}]};
@@ -21,24 +21,24 @@ export default class DisplayGlobalProfile extends LightningElement {
   isAdoptButtonDisabled = true;
   isError = false;
 
-  errorMessage = '';
+  errorMessage = "";
   @api recordId;
   @api objectApiName;
   CONSTANT = {
-    ERROR_STATUS: 'Error',
-    ERROR_MESSAGE_1: 'No Record Available for this ',
-    ERROR_MESSAGE_2: ' in Customer 360 Global Profile Hub.',
-    SUCCESS_STATUS: 'Success',
-    RECORD_UPDATED: 'Record Updated',
-    RECORD_NOT_UPDATED: 'Record Not Updated',
-    GLOBAL_PARTY_ID_LABEL: 'Global Party ID',
-    FULL_NAME_LABEL: 'Full Name',
-    EMAIL_LABEL: 'Email',
-    PHONE_LABEL: 'Phone',
-    MOBILE_LABEL: 'Mobile',
-    MAILING_LABEL: 'Mailing',
+    ERROR_STATUS: "Error",
+    ERROR_MESSAGE_1: "No Record Available for this ",
+    ERROR_MESSAGE_2: " in Customer 360 Global Profile Hub.",
+    SUCCESS_STATUS: "Success",
+    RECORD_UPDATED: "Record Updated",
+    RECORD_NOT_UPDATED: "Record Not Updated",
+    GLOBAL_PARTY_ID_LABEL: "Global Party ID",
+    FULL_NAME_LABEL: "Full Name",
+    EMAIL_LABEL: "Email",
+    PHONE_LABEL: "Phone",
+    MOBILE_LABEL: "Mobile",
+    MAILING_LABEL: "Mailing",
     SYNCADDRESS_FIELD: false,
-    CONTACT_POINT_VALUE: 'ContactPointValue'
+    CONTACT_POINT_VALUE: "ContactPointValue",
   };
 
   connectedCallback() {
@@ -51,7 +51,7 @@ export default class DisplayGlobalProfile extends LightningElement {
         this.errorMessage = result.errorMessage;
       } else {
         this.globalProfileDetailWrapper = result;
-        console.log('RES:: ', JSON.parse(JSON.stringify(result)));
+        console.log("RES:: ", JSON.parse(JSON.stringify(result)));
         if (this.globalProfileDetailWrapper.globalPartyId == undefined) {
           this.isRecordAvailable = false;
           this.isError = true;
@@ -108,16 +108,16 @@ export default class DisplayGlobalProfile extends LightningElement {
   }
 
   adoptContactDetails() {
-    var adoptedEmailValue = '';
-    var adoptedPhoneValue = '';
-    var adoptedMobileValue = '';
-    var adoptedAddressValue = '';
+    var adoptedEmailValue = "";
+    var adoptedPhoneValue = "";
+    var adoptedMobileValue = "";
+    var adoptedAddressValue = "";
     if (this.selectedEmailIndex != undefined) {
       adoptedEmailValue = {
         ContactPointValue:
           this.globalProfileDetailWrapper.EmailContactPoints[
             this.selectedEmailIndex
-          ].contactPointValue
+          ].contactPointValue,
       };
     }
     if (this.selectedPhoneIndex != undefined) {
@@ -129,7 +129,7 @@ export default class DisplayGlobalProfile extends LightningElement {
         ContactPointType:
           this.globalProfileDetailWrapper.PhoneContactPoints[
             this.selectedPhoneIndex
-          ].contactPointType
+          ].contactPointType,
       };
     }
     if (this.selectedMobileIndex != undefined) {
@@ -141,7 +141,7 @@ export default class DisplayGlobalProfile extends LightningElement {
         ContactPointType:
           this.globalProfileDetailWrapper.MobileContactPoints[
             this.selectedMobileIndex
-          ].contactPointType
+          ].contactPointType,
       };
     }
     if (this.selectedAddressIndex != undefined) {
@@ -166,33 +166,33 @@ export default class DisplayGlobalProfile extends LightningElement {
         postalCode:
           this.globalProfileDetailWrapper.AddressContactPoints[
             this.selectedAddressIndex
-          ].postalCode
+          ].postalCode,
       };
     }
     var adoptedValuesJSON = {
       recordID: this.recordId,
       sObjectName: this.objectApiName,
-      adoptedEmailValues: adoptedEmailValue == '' ? null : adoptedEmailValue,
-      adoptedPhoneValues: adoptedPhoneValue == '' ? null : adoptedPhoneValue,
-      adoptedMobileValues: adoptedMobileValue == '' ? null : adoptedMobileValue,
+      adoptedEmailValues: adoptedEmailValue == "" ? null : adoptedEmailValue,
+      adoptedPhoneValues: adoptedPhoneValue == "" ? null : adoptedPhoneValue,
+      adoptedMobileValues: adoptedMobileValue == "" ? null : adoptedMobileValue,
       adoptedAddressValues:
-        adoptedAddressValue == '' ? null : adoptedAddressValue
+        adoptedAddressValue == "" ? null : adoptedAddressValue,
     };
     adoptContactDetails({
-      adoptDetailsJSON: JSON.stringify(adoptedValuesJSON)
+      adoptDetailsJSON: JSON.stringify(adoptedValuesJSON),
     }).then((result) => {
       if (result == this.CONSTANT.SUCCESS_STATUS) {
         const evt = new ShowToastEvent({
           title: this.CONSTANT.SUCCESS_STATUS,
           message: this.CONSTANT.RECORD_UPDATED,
-          variant: this.CONSTANT.SUCCESS_STATUS
+          variant: this.CONSTANT.SUCCESS_STATUS,
         });
         this.dispatchEvent(evt);
       } else {
         const evt = new ShowToastEvent({
           title: this.CONSTANT.ERROR_STATUS,
-          message: this.CONSTANT.RECORD_NOT_UPDATED + ' - ' + result,
-          variant: this.CONSTANT.ERROR_STATUS
+          message: this.CONSTANT.RECORD_NOT_UPDATED + " - " + result,
+          variant: this.CONSTANT.ERROR_STATUS,
         });
         this.dispatchEvent(evt);
       }

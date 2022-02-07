@@ -8,90 +8,90 @@
 <template>
   <!--<lightning-button label="Edit" variant="Neutral" onclick={callButton}></lightning-button>-->
   <lightning-spinner
-    if:true={isSpinner}
+    if:true="{isSpinner}"
     alternative-text="Loading..."
     variant="brand"
   ></lightning-spinner>
   <div>
-    <template if:false={isEditMode}>
+    <template if:false="{isEditMode}">
       <lightning-accordion
         allow-multiple-sections-open
-        active-section-name={activeSections}
+        active-section-name="{activeSections}"
       >
-        <template for:each={layoutSections} for:item="sectionName">
-          <template if:true={sectionName.useHeading}>
+        <template for:each="{layoutSections}" for:item="sectionName">
+          <template if:true="{sectionName.useHeading}">
             <lightning-accordion-section
-              name={sectionName.id}
-              label={sectionName.heading}
-              key={section}
+              name="{sectionName.id}"
+              label="{sectionName.heading}"
+              key="{section}"
               class="accordion-section-title accordion-border"
             >
               <lightning-record-view-form
-                record-id={recordId}
+                record-id="{recordId}"
                 object-api-name="Contact"
               >
                 <div class="slds-grid slds-wrap">
                   <template
-                    for:each={sectionName.layoutRows}
+                    for:each="{sectionName.layoutRows}"
                     for:item="layoutRow"
                   >
-                    <div key={layoutRow} class="slds-col slds-size_1-of-1">
-                      <div key={layoutItem} class="slds-grid slds-wrap">
+                    <div key="{layoutRow}" class="slds-col slds-size_1-of-1">
+                      <div key="{layoutItem}" class="slds-grid slds-wrap">
                         <template
-                          for:each={layoutRow.layoutItems}
+                          for:each="{layoutRow.layoutItems}"
                           for:item="layoutItem"
                         >
                           <div
-                            key={layoutItem}
+                            key="{layoutItem}"
                             class="slds-col slds-size_1-of-2"
-                            if:true={layoutItem.label}
+                            if:true="{layoutItem.label}"
                           >
                             <div
-                              key={layoutItem}
+                              key="{layoutItem}"
                               class="slds-grid slds-wrap slds-p-top_x-small"
                             >
                               <span
                                 class="slds-col slds-size_11-of-12 slds-border_bottom"
                               >
                                 <template
-                                  if:false={layoutItem.isMailingAddressField}
+                                  if:false="{layoutItem.isMailingAddressField}"
                                 >
                                   <template
-                                    if:false={layoutItem.isSystemInformationSection}
-                                    for:each={layoutItem.layoutComponents}
+                                    if:false="{layoutItem.isSystemInformationSection}"
+                                    for:each="{layoutItem.layoutComponents}"
                                     for:item="layoutComponent"
                                     for:index="index"
                                   >
                                     <!--SFSC - 5971 - Kalyani - Align Contact Description Field Label - starts-->
                                     <label
-                                      key={layoutCompoennt}
+                                      key="{layoutCompoennt}"
                                       class="slds-form-element__label"
                                       for="form-element-01"
                                       >{layoutItem.label}</label
                                     >
                                     <span
-                                      key={layoutCompoennt}
+                                      key="{layoutCompoennt}"
                                       class="slds-col slds-size_11-of-12"
                                     >
                                       <lightning-output-field
                                         variant="label-hidden"
                                         class="slds-m-bottom_none"
-                                        key={layoutCompoennt}
-                                        field-name={layoutComponent.apiName}
+                                        key="{layoutCompoennt}"
+                                        field-name="{layoutComponent.apiName}"
                                       ></lightning-output-field>
                                     </span>
                                     <!--SFSC - 5971 - Kalyani - Align Contact Description Field Label - ends-->
                                     <!--<lightning-output-field class="slds-m-bottom_none" key={layoutCompoennt} field-name={layoutComponent.apiName}></lightning-output-field>--><!--Kalyani - for contact description commented-->
                                   </template>
                                   <template
-                                    if:true={layoutItem.isSystemInformationSection}
+                                    if:true="{layoutItem.isSystemInformationSection}"
                                   >
                                     <div
-                                      key={layoutItem}
+                                      key="{layoutItem}"
                                       class="slds-grid slds-wrap slds-p-top_x-small"
                                     >
                                       <template
-                                        if:true={layoutItem.isCreatedBy}
+                                        if:true="{layoutItem.isCreatedBy}"
                                       >
                                         <label
                                           class="slds-form-element__label"
@@ -105,19 +105,19 @@
                                             class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"
                                           ></span>
                                           <a
-                                            onclick={navigateToCreatedUserRecord}
+                                            onclick="{navigateToCreatedUserRecord}"
                                             class="system-info-section"
                                             target="_blank"
                                           >
                                             {contactRecordData.CreatedBy.displayValue}</a
                                           >,
                                           <lightning-formatted-text
-                                            value={contactRecordData.CreatedDate.displayValue}
+                                            value="{contactRecordData.CreatedDate.displayValue}"
                                           ></lightning-formatted-text>
                                         </span>
                                       </template>
                                       <template
-                                        if:true={layoutItem.isLastModifiedBy}
+                                        if:true="{layoutItem.isLastModifiedBy}"
                                       >
                                         <label
                                           class="slds-form-element__label"
@@ -131,19 +131,19 @@
                                             class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"
                                           ></span>
                                           <a
-                                            onclick={navigateToLastModifiedUserRecord}
+                                            onclick="{navigateToLastModifiedUserRecord}"
                                             class="system-info-section"
                                             target="_blank"
                                           >
                                             {contactRecordData.LastModifiedBy.displayValue}</a
                                           >,
                                           <lightning-formatted-text
-                                            value={contactRecordData.LastModifiedDate.displayValue}
+                                            value="{contactRecordData.LastModifiedDate.displayValue}"
                                           ></lightning-formatted-text>
                                         </span>
                                       </template>
                                       <template
-                                        if:true={layoutItem.isRecordType}
+                                        if:true="{layoutItem.isRecordType}"
                                       >
                                         <label
                                           class="slds-form-element__label"
@@ -152,21 +152,21 @@
                                         >
                                         <lightning-formatted-text
                                           class="slds-col slds-size_11-of-12"
-                                          value={contactRecordData.RecordType.displayValue}
+                                          value="{contactRecordData.RecordType.displayValue}"
                                         ></lightning-formatted-text>
                                       </template>
                                       <template
-                                        for:each={layoutItem.layoutComponents}
+                                        for:each="{layoutItem.layoutComponents}"
                                         for:item="layoutComponent"
                                         for:index="index"
                                       >
                                         <template
-                                          if:true={layoutItem.isOtherSystemInfoData}
+                                          if:true="{layoutItem.isOtherSystemInfoData}"
                                         >
                                           <lightning-output-field
-                                            key={layoutComponent}
-                                            field-name={layoutComponent.apiName}
-                                            name={layoutComponent.apiName}
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
+                                            name="{layoutComponent.apiName}"
                                             class="slds-m-bottom_none"
                                           ></lightning-output-field>
                                         </template>
@@ -174,7 +174,9 @@
                                     </div>
                                   </template>
                                 </template>
-                                <div if:true={layoutItem.isMailingAddressField}>
+                                <div
+                                  if:true="{layoutItem.isMailingAddressField}"
+                                >
                                   <!--div key={layoutItem} class="slds-grid slds-wrap slds-p-top_xxx-small">
 																		<template if:true={layoutItem.isCompactView}>																	
 																			<br key={layoutItem}/>
@@ -192,43 +194,43 @@
 																						</div-->
 
                                   <div
-                                    key={layoutItem}
+                                    key="{layoutItem}"
                                     class="slds-grid slds-wrap slds-p-top_xxx-small"
                                   >
                                     <template
-                                      if:false={layoutItem.isCompactView}
+                                      if:false="{layoutItem.isCompactView}"
                                     >
                                       <label
-                                        key={layoutItem}
+                                        key="{layoutItem}"
                                         class="slds-form-element__label"
                                         for="form-element-01"
                                         >{layoutItem.label}</label
                                       >
-                                      <br key={layoutItem} />
+                                      <br key="{layoutItem}" />
                                       <!--SFSC - 7070 - changes - "val" to "value" Mailing country code was not displayed on contact record details page-->
                                       <lightning-formatted-address
                                         class="slds-col slds-size_11-of-12"
-                                        street={contactRecordData.MailingStreet.value}
-                                        city={contactRecordData.MailingCity.value}
-                                        country={contactRecordData.MailingCountryCode.value}
-                                        province={contactRecordData.MailingStateCode.value}
-                                        postal-code={contactRecordData.MailingPostalCode.value}
+                                        street="{contactRecordData.MailingStreet.value}"
+                                        city="{contactRecordData.MailingCity.value}"
+                                        country="{contactRecordData.MailingCountryCode.value}"
+                                        province="{contactRecordData.MailingStateCode.value}"
+                                        postal-code="{contactRecordData.MailingPostalCode.value}"
                                       ></lightning-formatted-address>
                                       <lightning-map
-                                        map-markers={mapMarkers}
-                                        markers-tile={markersTitle}
+                                        map-markers="{mapMarkers}"
+                                        markers-tile="{markersTitle}"
                                         show-fotter
-                                        center={center}
-                                        listview={listView}
+                                        center="{center}"
+                                        listview="{listView}"
                                         class="slds-border_bottom"
                                       ></lightning-map>
                                     </template>
                                     <template
-                                      if:true={layoutItem.isCompactView}
+                                      if:true="{layoutItem.isCompactView}"
                                     >
-                                      <br key={layoutItem} />
+                                      <br key="{layoutItem}" />
                                       <label
-                                        key={layoutItem}
+                                        key="{layoutItem}"
                                         class="slds-form-element__label slds-size_4-of-12"
                                         for="form-element-01"
                                         >{layoutItem.label}</label
@@ -236,22 +238,22 @@
                                       <!--SFSC - 7070 - changes - "val" to "value" Mailing country code was not displayed on contact record details page-->
                                       <lightning-formatted-address
                                         class="slds-col slds-size_6-of-12"
-                                        street={contactRecordData.MailingStreet.value}
-                                        city={contactRecordData.MailingCity.value}
-                                        country={contactRecordData.MailingCountryCode.value}
-                                        province={contactRecordData.MailingStateCode.value}
-                                        postal-code={contactRecordData.MailingPostalCode.value}
+                                        street="{contactRecordData.MailingStreet.value}"
+                                        city="{contactRecordData.MailingCity.value}"
+                                        country="{contactRecordData.MailingCountryCode.value}"
+                                        province="{contactRecordData.MailingStateCode.value}"
+                                        postal-code="{contactRecordData.MailingPostalCode.value}"
                                       ></lightning-formatted-address>
-                                      <br key={layoutItem} />
+                                      <br key="{layoutItem}" />
                                       <div
                                         class="slds-col slds-size_4-of-12"
                                       ></div>
                                       <lightning-map
-                                        map-markers={mapMarkers}
-                                        markers-tile={markersTitle}
+                                        map-markers="{mapMarkers}"
+                                        markers-tile="{markersTitle}"
                                         show-fotter
-                                        center={center}
-                                        listview={listView}
+                                        center="{center}"
+                                        listview="{listView}"
                                         zoom-level="4"
                                         class="slds-border_bottom slds-col slds-size_6-of-12"
                                       ></lightning-map>
@@ -260,13 +262,13 @@
                                 </div>
                               </span>
                               <a
-                                key={layoutComponent}
-                                if:true={layoutItem.editableForUpdate}
+                                key="{layoutComponent}"
+                                if:true="{layoutItem.editableForUpdate}"
                                 class="slds-col slds-size_1-of-12 slds-p-top_large"
                               >
                                 <lightning-icon
                                   class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
-                                  onclick={editButton}
+                                  onclick="{editButton}"
                                   icon-name="action:edit"
                                   size="x-small"
                                 ></lightning-icon>
@@ -288,101 +290,105 @@
               </lightning-record-view-form>
             </lightning-accordion-section>
           </template>
-          <template if:false={sectionName.useHeading}>
+          <template if:false="{sectionName.useHeading}">
             <lightning-record-view-form
-              key={sectionName.id}
-              record-id={recordId}
+              key="{sectionName.id}"
+              record-id="{recordId}"
               object-api-name="Contact"
             >
               <div class="slds-grid slds-wrap detail-page-padding">
                 <template
-                  for:each={sectionName.layoutRows}
+                  for:each="{sectionName.layoutRows}"
                   for:item="layoutRow"
                 >
-                  <div key={layoutRow} class="slds-col slds-size_1-of-1">
-                    <div key={layoutItem} class="slds-grid slds-wrap">
+                  <div key="{layoutRow}" class="slds-col slds-size_1-of-1">
+                    <div key="{layoutItem}" class="slds-grid slds-wrap">
                       <template
-                        for:each={layoutRow.layoutItems}
+                        for:each="{layoutRow.layoutItems}"
                         for:item="layoutItem"
                       >
                         <div
-                          key={layoutItem}
+                          key="{layoutItem}"
                           class="slds-col slds-size_1-of-2"
-                          if:true={layoutItem.label}
+                          if:true="{layoutItem.label}"
                         >
                           <div
-                            key={layoutItem}
+                            key="{layoutItem}"
                             class="slds-grid slds-wrap slds-p-top_x-small"
                           >
                             <span
                               class="slds-col slds-size_11-of-12 slds-border_bottom"
                             >
                               <!--There shouldn't be a space in slds-->
-                              <template if:true={layoutItem.isNameField}>
+                              <template if:true="{layoutItem.isNameField}">
                                 <div
-                                  key={layoutItem}
+                                  key="{layoutItem}"
                                   class="slds-m-bottom_none slds-form-element slds-form-element_stacked"
                                 >
                                   <!--Updated div class to use SLDS Form Classes-->
                                   <!--Kalyani - comapct view added - starts-->
-                                  <template if:false={layoutItem.isCompactView}>
+                                  <template
+                                    if:false="{layoutItem.isCompactView}"
+                                  >
                                     <label
-                                      key={layoutItem}
+                                      key="{layoutItem}"
                                       class="slds-form-element__label"
                                       for="form-element-01"
                                       >{layoutItem.label}</label
                                     >
-                                    <br key={layoutItem} />
+                                    <br key="{layoutItem}" />
                                     <lightning-formatted-name
                                       class="slds-m-bottom_none slds-form-element slds-form-element_stacked"
-                                      first-name={contactRecordData.FirstName.value}
-                                      middle-name={contactRecordData.MiddleName.value}
-                                      last-name={contactRecordData.LastName.value}
-                                      suffix={contactRecordData.Suffix.value}
-                                      salutation={contactRecordData.Salutation.value}
+                                      first-name="{contactRecordData.FirstName.value}"
+                                      middle-name="{contactRecordData.MiddleName.value}"
+                                      last-name="{contactRecordData.LastName.value}"
+                                      suffix="{contactRecordData.Suffix.value}"
+                                      salutation="{contactRecordData.Salutation.value}"
                                     ></lightning-formatted-name>
                                   </template>
-                                  <template if:true={layoutItem.isCompactView}>
-                                    <br key={layoutItem} />
+                                  <template
+                                    if:true="{layoutItem.isCompactView}"
+                                  >
+                                    <br key="{layoutItem}" />
                                     <label
-                                      key={layoutItem}
+                                      key="{layoutItem}"
                                       class="slds-form-element__label slds-size_4-of-12"
                                       for="form-element-01"
                                       >{layoutItem.label}</label
                                     >
                                     <lightning-formatted-name
                                       class="slds-col slds-size_4-of-12"
-                                      first-name={contactRecordData.FirstName.value}
-                                      middle-name={contactRecordData.MiddleName.value}
-                                      last-name={contactRecordData.LastName.value}
-                                      suffix={contactRecordData.Suffix.value}
-                                      salutation={contactRecordData.Salutation.value}
+                                      first-name="{contactRecordData.FirstName.value}"
+                                      middle-name="{contactRecordData.MiddleName.value}"
+                                      last-name="{contactRecordData.LastName.value}"
+                                      suffix="{contactRecordData.Suffix.value}"
+                                      salutation="{contactRecordData.Salutation.value}"
                                     ></lightning-formatted-name>
                                   </template>
                                   <!--Kalyani - comapct view added - ends-->
                                 </div>
                               </template>
                               <template
-                                for:each={layoutItem.layoutComponents}
+                                for:each="{layoutItem.layoutComponents}"
                                 for:item="layoutComponent"
                                 for:index="index"
-                                if:false={layoutItem.isNameField}
+                                if:false="{layoutItem.isNameField}"
                               >
                                 <lightning-output-field
                                   class="slds-m-bottom_none"
-                                  key={layoutCompoennt}
-                                  field-name={layoutComponent.apiName}
+                                  key="{layoutCompoennt}"
+                                  field-name="{layoutComponent.apiName}"
                                 ></lightning-output-field>
                               </template>
                             </span>
                             <a
-                              key={layoutComponent}
-                              if:true={layoutItem.editableForUpdate}
+                              key="{layoutComponent}"
+                              if:true="{layoutItem.editableForUpdate}"
                               class="slds-col slds-size_1-of-12 slds-p-top_large"
                             >
                               <lightning-icon
                                 class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
-                                onclick={editButton}
+                                onclick="{editButton}"
                                 icon-name="action:edit"
                                 size="x-small"
                               ></lightning-icon>
@@ -400,59 +406,62 @@
       </lightning-accordion>
     </template>
     <!--SFSC 7116 31-01-2022 Added key press event to prevent record submission on "Enter" key press-->
-    <span onkeypress={handleKeyPress}>
-      <template if:true={isEditMode}>
+    <span onkeypress="{handleKeyPress}">
+      <template if:true="{isEditMode}">
         <div class="slds-card slds-is-relative">
           <lightning-record-edit-form
-            record-id={recordId}
+            record-id="{recordId}"
             object-api-name="Contact"
-            onsubmit={handleSubmit}
-            onsuccess={handleSuccess}
-            onerror={handleError}
+            onsubmit="{handleSubmit}"
+            onsuccess="{handleSuccess}"
+            onerror="{handleError}"
           >
             <lightning-accordion
               allow-multiple-sections-open
-              active-section-name={activeSections}
+              active-section-name="{activeSections}"
             >
-              <template for:each={layoutSections} for:item="sectionName">
-                <template if:true={sectionName.useHeading}>
+              <template for:each="{layoutSections}" for:item="sectionName">
+                <template if:true="{sectionName.useHeading}">
                   <lightning-accordion-section
                     class="accordion-section-title accordion-border"
-                    name={sectionName.id}
-                    label={sectionName.heading}
-                    key={section}
+                    name="{sectionName.id}"
+                    label="{sectionName.heading}"
+                    key="{section}"
                   >
                     <div class="slds-grid slds-wrap">
                       <template
-                        for:each={sectionName.layoutRows}
+                        for:each="{sectionName.layoutRows}"
                         for:item="layoutRow"
                       >
-                        <div key={layoutRow} class="slds-col slds-size_1-of-1">
-                          <div key={layoutItem} class="slds-grid slds-wrap">
+                        <div
+                          key="{layoutRow}"
+                          class="slds-col slds-size_1-of-1"
+                        >
+                          <div key="{layoutItem}" class="slds-grid slds-wrap">
                             <template
-                              for:each={layoutRow.layoutItems}
+                              for:each="{layoutRow.layoutItems}"
                               for:item="layoutItem"
                             >
                               <div
-                                key={layoutItem}
+                                key="{layoutItem}"
                                 class="slds-col slds-size_1-of-2"
-                                if:true={layoutItem.label}
+                                if:true="{layoutItem.label}"
                               >
                                 <div
-                                  key={layoutItem}
+                                  key="{layoutItem}"
                                   class="slds-grid slds-wrap slds-p-top_x-small"
                                 >
                                   <span class="slds-col slds-size_11-of-12">
                                     <!--There shouldn't be a space in slds-->
                                     <template
-                                      if:true={layoutItem.isSystemInformationSection}
+                                      if:true="{layoutItem.isSystemInformationSection}"
                                     >
                                       <div
-                                        key={layoutItem}
+                                        key="{layoutItem}"
                                         class="slds-grid slds-wrap slds-col slds-size_1-of-1 slds-p-top_x-small"
                                       >
                                         <template
-                                          if:true={layoutItem.isCreatedBy}
+                                          if:true="{layoutItem.isCreatedBy}"
                                         >
                                           <label
                                             class="slds-form-element__label slds-col slds-size_1-of-1"
@@ -467,12 +476,12 @@
                                               {contactRecordData.CreatedBy.displayValue}</span
                                             >,
                                             <lightning-formatted-text
-                                              value={contactRecordData.CreatedDate.displayValue}
+                                              value="{contactRecordData.CreatedDate.displayValue}"
                                             ></lightning-formatted-text>
                                           </span>
                                         </template>
                                         <template
-                                          if:true={layoutItem.isLastModifiedBy}
+                                          if:true="{layoutItem.isLastModifiedBy}"
                                         >
                                           <label
                                             class="slds-form-element__label slds-col slds-size_1-of-1"
@@ -487,12 +496,12 @@
                                               {contactRecordData.LastModifiedBy.displayValue}</span
                                             >,
                                             <lightning-formatted-text
-                                              value={contactRecordData.LastModifiedDate.displayValue}
+                                              value="{contactRecordData.LastModifiedDate.displayValue}"
                                             ></lightning-formatted-text>
                                           </span>
                                         </template>
                                         <template
-                                          if:true={layoutItem.isRecordType}
+                                          if:true="{layoutItem.isRecordType}"
                                         >
                                           <label
                                             class="slds-form-element__label slds-col slds-size_1-of-1"
@@ -500,71 +509,70 @@
                                             >{layoutItem.label}</label
                                           >
                                           <lightning-formatted-text
-                                            value={contactRecordData.RecordType.displayValue}
+                                            value="{contactRecordData.RecordType.displayValue}"
                                           ></lightning-formatted-text>
                                         </template>
                                         <template
-                                          for:each={layoutItem.layoutComponents}
+                                          for:each="{layoutItem.layoutComponents}"
                                           for:item="layoutComponent"
                                           for:index="index"
                                         >
                                           <template
-                                            if:true={layoutItem.isOtherSystemInfoData}
+                                            if:true="{layoutItem.isOtherSystemInfoData}"
                                           >
                                             <lightning-input-field
-                                              key={layoutComponent}
-                                              field-name={layoutComponent.apiName}
-                                              name={layoutComponent.apiName}
-
+                                              key="{layoutComponent}"
+                                              field-name="{layoutComponent.apiName}"
+                                              name="{layoutComponent.apiName}"
                                             ></lightning-input-field>
                                           </template>
                                         </template>
                                       </div>
                                     </template>
                                     <template
-                                      if:false={layoutItem.isSystemInformationSection}
+                                      if:false="{layoutItem.isSystemInformationSection}"
                                     >
                                       <template
-                                        for:each={layoutItem.layoutComponents}
+                                        for:each="{layoutItem.layoutComponents}"
                                         for:item="layoutComponent"
                                         for:index="index"
-                                        if:false={layoutItem.isMailingAddressField}
+                                        if:false="{layoutItem.isMailingAddressField}"
                                       >
                                         <template
-                                          if:true={layoutItem.editableForUpdate}
+                                          if:true="{layoutItem.editableForUpdate}"
                                         >
-                                          <template if:true={layoutItem.required}>
+                                          <template
+                                            if:true="{layoutItem.required}"
+                                          >
                                             <lightning-input-field
-                                              key={layoutComponent}
-                                              field-name={layoutComponent.apiName}
-                                              name={layoutComponent.apiName}
+                                              key="{layoutComponent}"
+                                              field-name="{layoutComponent.apiName}"
+                                              name="{layoutComponent.apiName}"
                                               required
-
                                             ></lightning-input-field>
                                           </template>
                                           <template
-                                            if:false={layoutItem.required}
+                                            if:false="{layoutItem.required}"
                                           >
                                             <lightning-input-field
-                                              key={layoutComponent}
-                                              field-name={layoutComponent.apiName}
-                                              name={layoutComponent.apiName}
-
+                                              key="{layoutComponent}"
+                                              field-name="{layoutComponent.apiName}"
+                                              name="{layoutComponent.apiName}"
                                             ></lightning-input-field>
                                           </template>
                                         </template>
                                         <template
-                                          if:false={layoutItem.editableForUpdate}
+                                          if:false="{layoutItem.editableForUpdate}"
                                         >
                                           <lightning-output-field
-                                            key={layoutComponent}
-                                            field-name={layoutComponent.apiName}
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
                                           ></lightning-output-field>
                                         </template>
                                       </template>
                                       <template
-                                        key={layoutItem}
-                                        if:true={layoutItem.isMailingAddressField}
+                                        key="{layoutItem}"
+                                        if:true="{layoutItem.isMailingAddressField}"
                                       >
                                         <lightning-input-address
                                           address-label="Mailing Address"
@@ -573,15 +581,15 @@
                                           country-label="Mailing Country"
                                           province-label="Mailing State/Province"
                                           postal-code-label="Mailing Zip/Postal Code"
-                                          street={contactRecordData.MailingStreet.value}
-                                          city={contactRecordData.MailingCity.value}
-                                          country={contactRecordData.MailingCountryCode.value}
-                                          province={contactRecordData.MailingStateCode.value}
-                                          postal-code={contactRecordData.MailingPostalCode.value}
+                                          street="{contactRecordData.MailingStreet.value}"
+                                          city="{contactRecordData.MailingCity.value}"
+                                          country="{contactRecordData.MailingCountryCode.value}"
+                                          province="{contactRecordData.MailingStateCode.value}"
+                                          postal-code="{contactRecordData.MailingPostalCode.value}"
                                           field-level-help="Select Mailing Address"
-                                          country-options={mailingCountries}
-                                          province-options={mailingStates}
-                                          onchange={addressChanged}
+                                          country-options="{mailingCountries}"
+                                          province-options="{mailingStates}"
+                                          onchange="{addressChanged}"
                                           show-address-lookup
                                         ></lightning-input-address>
                                       </template>
@@ -596,74 +604,78 @@
                     </div>
                   </lightning-accordion-section>
                 </template>
-                <template if:false={sectionName.useHeading}>
+                <template if:false="{sectionName.useHeading}">
                   <div
-                    key={sectionName.layoutRows}
+                    key="{sectionName.layoutRows}"
                     class="slds-grid slds-wrap detail-page-padding"
                   >
                     <template
-                      for:each={sectionName.layoutRows}
+                      for:each="{sectionName.layoutRows}"
                       for:item="layoutRow"
                     >
-                      <div key={layoutRow} class="slds-col slds-size_1-of-1">
-                        <div key={layoutItem} class="slds-grid slds-wrap">
+                      <div key="{layoutRow}" class="slds-col slds-size_1-of-1">
+                        <div key="{layoutItem}" class="slds-grid slds-wrap">
                           <template
-                            for:each={layoutRow.layoutItems}
+                            for:each="{layoutRow.layoutItems}"
                             for:item="layoutItem"
                           >
                             <div
-                              key={layoutItem}
+                              key="{layoutItem}"
                               class="slds-col slds-size_1-of-2"
-                              if:true={layoutItem.label}
+                              if:true="{layoutItem.label}"
                             >
                               <div
-                                key={layoutItem}
+                                key="{layoutItem}"
                                 class="slds-grid slds-wrap slds-p-top_x-small"
                               >
                                 <span class="slds-col slds-size_11-of-12">
                                   <!--There shouldn't be a space in slds-->
                                   <template
-                                    for:each={layoutItem.layoutComponents}
+                                    for:each="{layoutItem.layoutComponents}"
                                     for:item="layoutComponent"
                                   >
                                     <template
-                                      if:true={layoutItem.editableForUpdate}
+                                      if:true="{layoutItem.editableForUpdate}"
                                     >
-                                      <template if:false={layoutItem.isNameField}>
-                                        <template if:true={layoutItem.required}>
+                                      <template
+                                        if:false="{layoutItem.isNameField}"
+                                      >
+                                        <template
+                                          if:true="{layoutItem.required}"
+                                        >
                                           <lightning-input-field
-                                            key={layoutComponent}
-                                            field-name={layoutComponent.apiName}
-                                            name={layoutComponent.apiName}
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
+                                            name="{layoutComponent.apiName}"
                                             required
-
                                           ></lightning-input-field>
                                         </template>
-                                        <template if:false={layoutItem.required}>
-                                          
+                                        <template
+                                          if:false="{layoutItem.required}"
+                                        >
                                           <lightning-input-field
-                                            key={layoutComponent}
-                                            field-name={layoutComponent.apiName}
-                                            name={layoutComponent.apiName}
-
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
+                                            name="{layoutComponent.apiName}"
                                           ></lightning-input-field>
                                         </template>
                                       </template>
-                                      <template if:true={layoutItem.isNameField}>
+                                      <template
+                                        if:true="{layoutItem.isNameField}"
+                                      >
                                         <lightning-input-field
-                                          key={layoutComponent}
-                                          field-name={layoutComponent.apiName}
-                                          name={layoutComponent.apiName}
-
+                                          key="{layoutComponent}"
+                                          field-name="{layoutComponent.apiName}"
+                                          name="{layoutComponent.apiName}"
                                         ></lightning-input-field>
                                       </template>
                                     </template>
                                     <template
-                                      if:false={layoutItem.editableForUpdate}
+                                      if:false="{layoutItem.editableForUpdate}"
                                     >
                                       <lightning-output-field
-                                        key={layoutComponent}
-                                        field-name={layoutComponent.apiName}
+                                        key="{layoutComponent}"
+                                        field-name="{layoutComponent.apiName}"
                                       ></lightning-output-field>
                                     </template>
                                   </template>
@@ -684,13 +696,13 @@
                 <div class="custom-popover-section">
                   <div class="custom-popover">
                     <section
-                      if:true={isErrorPopup}
-                      class={popoverHeaderStyle}
+                      if:true="{isErrorPopup}"
+                      class="{popoverHeaderStyle}"
                       role="dialog"
                     >
                       <button
                         type="button"
-                        onclick={handleVisibilityOfErrorPopup}
+                        onclick="{handleVisibilityOfErrorPopup}"
                         class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse"
                         title="Close dialog"
                       >
@@ -706,7 +718,7 @@
                         >
                           <div class="slds-media__figure">
                             <span
-                              if:true={checkVisibilityOfErrorIcon}
+                              if:true="{checkVisibilityOfErrorIcon}"
                               class="slds-icon_container slds-icon-utility-error"
                             >
                               <svg class="slds-icon slds-icon_x-small">
@@ -719,7 +731,7 @@
                               class="slds-icon_container slds-icon-utility-warning"
                             >
                               <svg
-                                if:false={checkVisibilityOfErrorIcon}
+                                if:false="{checkVisibilityOfErrorIcon}"
                                 class="slds-icon slds-icon_x-small slds-icon-text-default"
                                 aria-hidden="true"
                               >
@@ -731,10 +743,10 @@
                           </div>
                           <div class="slds-media__body">
                             <h2 class="slds-truncate slds-text-heading_medium">
-                              <span if:true={checkVisibilityOfErrorIcon}
+                              <span if:true="{checkVisibilityOfErrorIcon}"
                                 >We hit a snag.</span
                               >
-                              <span if:false={checkVisibilityOfErrorIcon}
+                              <span if:false="{checkVisibilityOfErrorIcon}"
                                 >Review warning</span
                               >
                             </h2>
@@ -742,20 +754,21 @@
                         </div>
                       </header>
                       <div class="slds-popover__body">
-                        <template if:true={checkVisibilityOfErrorIcon}>
+                        <template if:true="{checkVisibilityOfErrorIcon}">
                           <b>Review the errors on this page.</b>
                           <ul class="slds-list_dotted">
-                            <template for:each={errorMessages} for:item="err">
-                              <li key={err}>{err}</li>
+                            <template for:each="{errorMessages}" for:item="err">
+                              <li key="{err}">{err}</li>
                             </template>
                           </ul>
                         </template>
-                        <template if:false={checkVisibilityOfErrorIcon}>
-                          This record looks like an existing record. Make sure to
-                          check any potential duplicate records before saving.
+                        <template if:false="{checkVisibilityOfErrorIcon}">
+                          This record looks like an existing record. Make sure
+                          to check any potential duplicate records before
+                          saving.
 
                           <p
-                            onclick={handleViewDuplicatesModal}
+                            onclick="{handleViewDuplicatesModal}"
                             class="view-duplicates"
                           >
                             View Duplicates
@@ -763,14 +776,14 @@
                         </template>
                       </div>
                       <footer
-                        if:false={checkVisibilityOfErrorIcon}
+                        if:false="{checkVisibilityOfErrorIcon}"
                         class="slds-popover__footer"
                       >
                         <div
                           class="slds-grid slds-grid_vertical-align-center slds-grid_align-end"
                         >
                           <button
-                            onclick={handleContinueToSave}
+                            onclick="{handleContinueToSave}"
                             class="slds-button slds-button_neutral"
                           >
                             Continue to Save
@@ -780,16 +793,16 @@
                     </section>
                   </div>
                   <lightning-icon
-                    if:true={checkVisibilityOfErrorIcon}
-                    onclick={handleVisibilityOfErrorPopup}
+                    if:true="{checkVisibilityOfErrorIcon}"
+                    onclick="{handleVisibilityOfErrorPopup}"
                     icon-name="utility:error"
                     alternative-text="Error!"
                     variant="error"
                     class="custom-icon"
                   ></lightning-icon>
                   <lightning-icon
-                    if:true={checkVisibilityOfWarningIcon}
-                    onclick={handleVisibilityOfErrorPopup}
+                    if:true="{checkVisibilityOfWarningIcon}"
+                    onclick="{handleVisibilityOfErrorPopup}"
                     icon-name="utility:warning"
                     alternative-text="Error!"
                     variant="warning"
@@ -828,22 +841,22 @@
                     variant="neutral"
                     name="Cancel"
                     label="Cancel"
-                    onclick={cancelEdit}
+                    onclick="{cancelEdit}"
                     class="slds-var-m-horizontal_xx-small"
                   ></lightning-button>
                   <lightning-button
                     variant="neutral"
                     name="SaveAndNew"
                     label="Save & New"
-                    if:true={isEditModalWindow}
-                    onclick={callSaveAndNewButton}
+                    if:true="{isEditModalWindow}"
+                    onclick="{callSaveAndNewButton}"
                     class="slds-m-horizontal_xx-small"
                   >
                   </lightning-button>
                   <lightning-button
                     variant="brand"
                     name="Save"
-                    onclick={validateFields}
+                    onclick="{validateFields}"
                     label="Save"
                     class="slds-m-horizontal_xx-small"
                   ></lightning-button>
@@ -855,19 +868,19 @@
       </template>
     </span>
     <!-- START: DQ System Notification Popup -->
-    <template if:true={showDQMOdal}>
+    <template if:true="{showDQMOdal}">
       <c-d-q-validation
-        contact-detail-data={updatedContactDetail}
-        onclosedqmodalpopup={closeDQPopupModal}
-        oncontactdataupdated={dqValidationCompleted}
-        dq-field-to-validates={dqFieldsToValidate}
-        record-id={recordId}
+        contact-detail-data="{updatedContactDetail}"
+        onclosedqmodalpopup="{closeDQPopupModal}"
+        oncontactdataupdated="{dqValidationCompleted}"
+        dq-field-to-validates="{dqFieldsToValidate}"
+        record-id="{recordId}"
       >
       </c-d-q-validation>
     </template>
     <!-- END: DQ System Notification Popup-->
     <!-- START: View Duplicates Modal -->
-    <div if:true={isViewDuplicatesModal} class="view-duplicates-modal">
+    <div if:true="{isViewDuplicatesModal}" class="view-duplicates-modal">
       <section
         role="dialog"
         class="slds-modal slds-modal_large slds-fade-in-open"
@@ -876,7 +889,7 @@
           <header class="slds-modal__header">
             <span class="slds-modal__close">
               <lightning-icon
-                onclick={handleViewDuplicatesModal}
+                onclick="{handleViewDuplicatesModal}"
                 icon-name="utility:close"
                 variant="inverse"
                 alternative-text="close"
@@ -891,29 +904,32 @@
               The record you're about to create looks like a duplicate. Open an
               existing record instead?
             </p>
-            <template if:true={checkVisibilityOfWarningIcon}>
+            <template if:true="{checkVisibilityOfWarningIcon}">
               <div class="main-container">
                 <lightning-tabset>
                   <template
-                    if:true={warningMessages.data}
-                    for:each={warningMessages.data}
+                    if:true="{warningMessages.data}"
+                    for:each="{warningMessages.data}"
                     for:item="obj"
                   >
                     <lightning-tab
-                      key={obj.apiName}
-                      label={obj.objectLabelPlural}
+                      key="{obj.apiName}"
+                      label="{obj.objectLabelPlural}"
                     >
                       <lightning-layout multiple-rows>
-                        <template for:each={obj.matchRecordIds} for:item="rec">
+                        <template
+                          for:each="{obj.matchRecordIds}"
+                          for:item="rec"
+                        >
                           <lightning-layout-item
-                            key={rec}
+                            key="{rec}"
                             size="6"
                             padding="around-small"
                           >
                             <div class="dup-custom-box">
                               <lightning-record-view-form
-                                record-id={rec}
-                                object-api-name={obj.apiName}
+                                record-id="{rec}"
+                                object-api-name="{obj.apiName}"
                                 density="compact"
                               >
                                 <article class="slds-tile slds-media">
@@ -1073,7 +1089,9 @@
                               </lightning-record-view-form>
                             </div>
                             <div class="dup-custom-box open-this-contact">
-                              <a data-id={rec} onclick={handleViewRecordDatail}
+                              <a
+                                data-id="{rec}"
+                                onclick="{handleViewRecordDatail}"
                                 >Open This Contact</a
                               >
                             </div>

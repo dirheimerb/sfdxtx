@@ -1,12 +1,12 @@
-import { LightningElement, track, api, wire } from 'lwc';
-import searchGlobalData from '@salesforce/apex/GlobalSearchBeforeCreateController.searchGlobalData';
-import { NavigationMixin } from 'lightning/navigation';
-import CONTACT_OBJECT from '@salesforce/schema/Contact';
-import LEAD_OBJECT from '@salesforce/schema/Lead';
-import { getObjectInfo } from 'lightning/uiObjectInfoApi';
+import { LightningElement, track, api, wire } from "lwc";
+import searchGlobalData from "@salesforce/apex/GlobalSearchBeforeCreateController.searchGlobalData";
+import { NavigationMixin } from "lightning/navigation";
+import CONTACT_OBJECT from "@salesforce/schema/Contact";
+import LEAD_OBJECT from "@salesforce/schema/Lead";
+import { getObjectInfo } from "lightning/uiObjectInfoApi";
 
-import { encodeDefaultFieldValues } from 'lightning/pageReferenceUtils';
-import TickerSymbol from '@salesforce/schema/Account.TickerSymbol';
+import { encodeDefaultFieldValues } from "lightning/pageReferenceUtils";
+import TickerSymbol from "@salesforce/schema/Account.TickerSymbol";
 
 export default class GlobalSearch extends NavigationMixin(LightningElement) {
   @wire(getObjectInfo, { objectApiName: CONTACT_OBJECT })
@@ -17,8 +17,8 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
 
   bShowModal = false;
   isSearchButton = true; //to disable search button
-  @track searchKey = '';
-  searchPrefix = '';
+  @track searchKey = "";
+  searchPrefix = "";
   globalProfiles = [];
   @track globalProfileCurrentPage = [];
   displayGlobalProfileTable = false;
@@ -38,7 +38,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
   @api isSearchFromLead = false;
   @api isSearchFromContact = false;
   hasMultipleRecordTypeAccess = true;
-  @track selectedleadRecordTypeId = '';
+  @track selectedleadRecordTypeId = "";
   @track showLeadRecordTypeModal = false;
   //isRendered = false; //SFSC - 7070
 
@@ -57,7 +57,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
     MailingCity: null,
     MailingPostalCode: null,
     MailingCountry: null,
-    MailingState: null
+    MailingState: null,
   };
 
   resetAll() {
@@ -70,38 +70,42 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
     this.totalPage = 0;
     this.page = 1;
     this.displayGlobalProfileTable = false;
-  }  
-  
-  renderedCallback() {//SFSC - 7070 - changed from "connectedCallBack" to "rendered callback"
+  }
+
+  renderedCallback() {
+    //SFSC - 7070 - changed from "connectedCallBack" to "rendered callback"
 
     //SFSC - 7070 - - added to stop calling further method again and again starts
-    if (this.isRendered)
-      return;    
+    if (this.isRendered) return;
     this.globalProfiles = [];
     this.globalProfileCurrentPage = [];
-    this.searchKey = '';
+    this.searchKey = "";
     this.displayGlobalProfileTable = false;
-    window.setTimeout((self) => { // Changed on 2 Feb 2022 - SFSC - 7070
-      self.checkForMultipleRecordTypeAccess();
-    }, 1500, this);
+    window.setTimeout(
+      (self) => {
+        // Changed on 2 Feb 2022 - SFSC - 7070
+        self.checkForMultipleRecordTypeAccess();
+      },
+      1500,
+      this
+    );
   }
 
   checkForMultipleRecordTypeAccess() {
-
     let recordtypeinfo; //=  ((this.contactObjectInfo &&  this.contactObjectInfo.hasOwnProperty('data') && this.contactObjectInfo.data) ? this.contactObjectInfo.data.recordTypeInfos : null);
 
-    if (this.isSearchFromContact == 'true') {
+    if (this.isSearchFromContact == "true") {
       recordtypeinfo =
         this.contactObjectInfo &&
-          this.contactObjectInfo.hasOwnProperty('data') &&
-          this.contactObjectInfo.data
+        this.contactObjectInfo.hasOwnProperty("data") &&
+        this.contactObjectInfo.data
           ? this.contactObjectInfo.data.recordTypeInfos
           : null;
-    } else if (this.isSearchFromLead == 'true') {
+    } else if (this.isSearchFromLead == "true") {
       recordtypeinfo =
         this.leadObjectInfo &&
-          this.leadObjectInfo.hasOwnProperty('data') &&
-          this.leadObjectInfo.data
+        this.leadObjectInfo.hasOwnProperty("data") &&
+        this.leadObjectInfo.data
           ? this.leadObjectInfo.data.recordTypeInfos
           : null;
     }
@@ -114,7 +118,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
         .filter(
           (t) =>
             t.defaultRecordTypeMapping == true &&
-            t.name != 'Master' &&
+            t.name != "Master" &&
             t.available == true
         )
         .forEach((t) => sorted.push(t));
@@ -122,7 +126,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
         .filter(
           (t) =>
             t.defaultRecordTypeMapping == false &&
-            t.name != 'Master' &&
+            t.name != "Master" &&
             t.available == true
         )
         .forEach((t) => sorted.push(t));
@@ -130,11 +134,11 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
       sorted.forEach((t) => {
         if (
           t.defaultRecordTypeMapping == true &&
-          this.isSearchFromContact == 'true'
+          this.isSearchFromContact == "true"
         ) {
           this.contactData.selectedRecordTypeId = t.recordTypeId;
-        } else if (this.isSearchFromLead == 'true') {
-          console.log('inside lead');
+        } else if (this.isSearchFromLead == "true") {
+          console.log("inside lead");
           this.selectedleadRecordTypeId = t.recordTypeId;
         }
       });
@@ -199,7 +203,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
           this.displayGlobalProfileTable = false;
           this.isResult = true;
         }
-        if (exceptionMessage == 'Read timed out') {
+        if (exceptionMessage == "Read timed out") {
           this.isTimeOut = true;
           this.isResult = false;
         }
@@ -212,7 +216,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
         this.showSpinner = false;
       })
       .catch((error) => {
-        console.log('Exception');
+        console.log("Exception");
       });
   }
 
@@ -221,7 +225,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
       var currGlobalProfile = this.globalProfiles[i];
       currGlobalProfile.dataSources = this.splitAndNewLine(
         currGlobalProfile?.dataSources,
-        '~~'
+        "~~"
       );
       var addresses = currGlobalProfile.fullAddress;
       for (var j = 0; j < addresses?.length; j++) {
@@ -236,8 +240,8 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
           currAddress.postalCode,
           currAddress.countryName
         );
-        if (currAddress.concatenatedAddress == 'null.  ') {
-          currAddress.concatenatedAddress = '';
+        if (currAddress.concatenatedAddress == "null.  ") {
+          currAddress.concatenatedAddress = "";
         }
       }
     }
@@ -255,23 +259,23 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
     countryName
   ) {
     // system.debug('City name -> ' + cityName);
-    var fullAddress = '';
+    var fullAddress = "";
     fullAddress =
-      (addressLine1 != null ? addressLine1 + '. ' : '') +
-      (addressLine2 != null ? addressLine2 + '. ' : '') +
-      (cityName != null ? cityName + ', ' : '') +
-      (stateProvinceCode != null ? stateProvinceCode + ' ' : '') +
-      (stateProvinceName != null ? stateProvinceName + ' ' : '') +
-      (postalCode != null ? postalCode + ' ' : '') +
-      (countryName != null ? countryName : ' ');
+      (addressLine1 != null ? addressLine1 + ". " : "") +
+      (addressLine2 != null ? addressLine2 + ". " : "") +
+      (cityName != null ? cityName + ", " : "") +
+      (stateProvinceCode != null ? stateProvinceCode + " " : "") +
+      (stateProvinceName != null ? stateProvinceName + " " : "") +
+      (postalCode != null ? postalCode + " " : "") +
+      (countryName != null ? countryName : " ");
     //system.debug('full address name -> ' + fullAddress);
-    console.log('full address name -> ' + fullAddress);
+    console.log("full address name -> " + fullAddress);
     return fullAddress;
   }
 
   splitAndNewLine(val, seperator) {
     if (val) return val.split(seperator);
-    else return '';
+    else return "";
   }
 
   //clicking on previous button this method will be called
@@ -327,11 +331,11 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
       this.globalProfiles[globalprofileindex].partyIdentifications;
 
     //Autofill latest phone numbers
-    var latestHomePhoneNumber = '',
-      latestMobilePhoneNumber = '',
-      latestExtensionNumber = '';
+    var latestHomePhoneNumber = "",
+      latestMobilePhoneNumber = "",
+      latestExtensionNumber = "";
     for (var i = 0; i < phoneNumbersData.length; i++) {
-      if (phoneNumbersData[i].contactType.toLowerCase() == 'home') {
+      if (phoneNumbersData[i].contactType.toLowerCase() == "home") {
         latestHomePhoneNumber = phoneNumbersData[i].telephoneNumber;
         latestExtensionNumber = phoneNumbersData[i].extensionNumber;
         break;
@@ -339,7 +343,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
     }
 
     for (var i = 0; i < phoneNumbersData.length; i++) {
-      if (phoneNumbersData[i].contactType.toLowerCase() == 'mobile') {
+      if (phoneNumbersData[i].contactType.toLowerCase() == "mobile") {
         latestMobilePhoneNumber = phoneNumbersData[i].telephoneNumber;
         break;
       }
@@ -417,9 +421,9 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
   }
 
   navigateToRecordCreationPage() {
-    if (this.isSearchFromContact == 'true') {
+    if (this.isSearchFromContact == "true") {
       this.navigateNewContactCreation();
-    } else if (this.isSearchFromLead == 'true') {
+    } else if (this.isSearchFromLead == "true") {
       this.navigateToLeadCreation();
     }
   }
@@ -439,24 +443,24 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
   }
   navigateToLeadCreation() {
     this.showLeadRecordTypeModal = true;
-    console.log('*** selected record type id ' + this.selectedLeadRecordTypeId);
+    console.log("*** selected record type id " + this.selectedLeadRecordTypeId);
     if (this.hasMultipleRecordTypeAccess) {
       //this.showContactCreateModal = false;
-      console.log('inisde lead record type modal');
+      console.log("inisde lead record type modal");
       this.showLeadRecordTypeModal = true;
     } else {
       this.showLeadRecordTypeModal = false;
       this[NavigationMixin.Navigate]({
-        type: 'standard__objectPage',
+        type: "standard__objectPage",
         attributes: {
-          objectApiName: 'Lead',
-          actionName: 'new'
+          objectApiName: "Lead",
+          actionName: "new",
         },
         state: {
-          nooverride: '1',
-          recordTypeId: this.selectedLeadRecordTypeId
+          nooverride: "1",
+          recordTypeId: this.selectedLeadRecordTypeId,
           //useRecordTypeCheck: "1",
-        }
+        },
       });
     }
   }
@@ -468,31 +472,31 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
 
     if (
       datasourceObjectNames.length > 0 &&
-      datasourceObjectNames.includes('Contact')
+      datasourceObjectNames.includes("Contact")
     ) {
       //for(var i=0;i<dataSourceRecordIds.length ;i++){
       this[NavigationMixin.GenerateUrl]({
-        type: 'standard__recordPage',
+        type: "standard__recordPage",
         attributes: {
-          objectApiName: 'Contact',
+          objectApiName: "Contact",
           recordId: recordid,
-          actionName: 'view'
-        }
+          actionName: "view",
+        },
       }).then((url) => {
         window.open(url);
       });
       // }
     } else if (
       datasourceObjectNames.length > 0 &&
-      datasourceObjectNames.includes('Lead')
+      datasourceObjectNames.includes("Lead")
     ) {
       this[NavigationMixin.GenerateUrl]({
-        type: 'standard__recordPage',
+        type: "standard__recordPage",
         attributes: {
-          objectApiName: 'Lead',
+          objectApiName: "Lead",
           recordId: recordid,
-          actionName: 'view'
-        }
+          actionName: "view",
+        },
       }).then((url) => {
         window.open(url);
       });
@@ -501,7 +505,7 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
 
   trimTrailingChar(val) {
     if (val) return val.substring(0, val.length - 1);
-    else return '';
+    else return "";
   }
   /* javaScipt functions end */
 
@@ -516,10 +520,10 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
 
   closeModal() {
     //to pass record type name to global search component and also close record type modal
-    if (this.isSearchFromContact == 'true') {
-      this.raiseEvent('closecontactglobalsearchmodal', '');
-    } else if (this.isSearchFromLead == 'true') {
-      this.raiseEvent('closeleadglobalsearchmodal', '');
+    if (this.isSearchFromContact == "true") {
+      this.raiseEvent("closecontactglobalsearchmodal", "");
+    } else if (this.isSearchFromLead == "true") {
+      this.raiseEvent("closeleadglobalsearchmodal", "");
     }
   }
 
@@ -534,15 +538,13 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
 
     // show create contact step
 
-    if (this.isSearchFromContact == 'true') {
+    if (this.isSearchFromContact == "true") {
       this.showRecordTypeModal = false;
       this.showContactCreateModal = true;
-    } else if (this.isSearchFromLead == 'true') {
+    } else if (this.isSearchFromLead == "true") {
       this.showLeadRecordTypeModal = true;
       this.showContactCreateModal = false;
     }
-
-
   }
 
   closeRecordTypeModal(event) {
@@ -571,28 +573,28 @@ export default class GlobalSearch extends NavigationMixin(LightningElement) {
     var contactEventData = event.detail;
     this.contactData = event.detail;
 
-    this.showRecordTypeModal = false; //SFSC - 7070 - 01-02-7070 - Added when user click on cancel button of contact create page, record type page should not open    
-    this.isRendered = true //SFSC - 7070 - set flag is Rendered as true
-    //window.history.go(-1);//SFSC - 7070     
+    this.showRecordTypeModal = false; //SFSC - 7070 - 01-02-7070 - Added when user click on cancel button of contact create page, record type page should not open
+    this.isRendered = true; //SFSC - 7070 - set flag is Rendered as true
+    //window.history.go(-1);//SFSC - 7070
     //eval("$A.get('e.force:refreshView').fire();") //SFSC - 7070
     //SFSC - 7070 - commenting starts - 01-02-2020 - removed when user click on cancel button of contact create page, record type page should not open
     /*if (this.hasMultipleRecordTypeAccess) {
         this.showRecordTypeModal = true;
     }*/
-    //SFSC - 7070 - commenting ends - 01-02-2020    
+    //SFSC - 7070 - commenting ends - 01-02-2020
   }
   raiseEvent(name, args) {
     const customEvent = new CustomEvent(name, {
-      detail: args
+      detail: args,
     });
 
     this.dispatchEvent(customEvent);
-  }  
+  }
 
   // Added on 2 Feb 2022 - SFSC - 7070 - starts
   handleManualRendered() {
     this.isRendered = false;
-    eval("$A.get('e.force:refreshView').fire();")
+    eval("$A.get('e.force:refreshView').fire();");
   }
   // Added on 2 Feb 2022 - SFSC - 7070 - ends
 }

@@ -5,17 +5,17 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const { writeFileSync } = require('fs');
-const { basename, join } = require('path');
+const { writeFileSync } = require("fs");
+const { basename, join } = require("path");
 
-const log = require('./log');
-const orderMap = require('./order-map');
+const log = require("./log");
+const orderMap = require("./order-map");
 
 class PackageJson {
-  constructor(packageRoot = require('./package-path')) {
+  constructor(packageRoot = require("./package-path")) {
     this.path = packageRoot;
     this.name = basename(packageRoot);
-    this.pjsonPath = join(packageRoot, 'package.json');
+    this.pjsonPath = join(packageRoot, "package.json");
     this.contents = require(this.pjsonPath);
     this.originalContents = this.stringify();
     this.actions = [];
@@ -28,7 +28,7 @@ class PackageJson {
     if (this.contents.devDependencies) {
       this.contents.devDependencies = orderMap(this.contents.devDependencies);
     }
-    return JSON.stringify(this.contents, null, 2) + '\n';
+    return JSON.stringify(this.contents, null, 2) + "\n";
   }
 
   write() {
@@ -46,7 +46,7 @@ class PackageJson {
 
   get(name, defaultValue = {}) {
     if (!name) {
-      throw new Error('property name is required');
+      throw new Error("property name is required");
     }
     if (!this.contents[name]) {
       this.contents[name] = defaultValue;

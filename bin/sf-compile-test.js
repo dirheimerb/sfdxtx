@@ -6,7 +6,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require('../utils/shelljs');
+const shell = require("../utils/shelljs");
 
 // Simple one line command. If it needs to be customized, override script in sfdevrc file.
 shell.exec(`tsc -p ./test --pretty`);

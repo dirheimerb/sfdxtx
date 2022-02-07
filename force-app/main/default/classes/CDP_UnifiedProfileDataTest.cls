@@ -1,59 +1,59 @@
 @isTest
 public class CDP_UnifiedProfileDataTest {
-    @testSetup
-    static void setup() {
-        //Create common test accounts
-        List<Account> testAccounts = new List<Account>();
-        Account account = new Account();
-        account.Name = 'Infosys';
-        testAccounts.add(account);
-        
-        insert testAccounts;
-        
-        // Create common test contacts
-        List<Contact> testContacts = new List<Contact>();
-        Contact contact = new Contact();
-        contact.FirstName = 'Oliver';
-        contact.LastName = 'Miller';
-        contact.Email = 'oliver1@gmail.com';
-        contact.Secondary_Email__c = 'oliver1@gmail.com';
-        contact.Phone = '+493355684338';
-        contact.MobilePhone = '+49876543211';
-        contact.MailingCity = 'Dearborn';
-        contact.MailingStreet = 'Tully Poot.';
-        contact.MailingState = 'Florida';
-        contact.MailingPostalCode = '124567';
-        contact.MailingCountry = ' United States Of America ';
-        contact.Job_Function__c = 'Accounting';
-        contact.GlobalPartyId = 'CRE-creiad000007kn4-gpid-a1243d87-f425-4249-8315-efe1455529d8';
-        contact.AccountId = testAccounts[0].Id;
-        contact.Contact_Origin__c = 'Contact Tab';
-        testContacts.add(contact);
-        
-        insert testContacts;
-        system.debug('** testContacts ' + testContacts[0].id);
-        
-        //Create common test accounts
-        List<Lead> testLeads = new List<Lead>();
-        Lead lead = new Lead();
-        lead.FirstName = 'Menard';
-        lead.LastName = 'Drewe';
-        lead.Email = 'mdrewe57@geocities.jp';
-        lead.Phone = '+493355684338';
-        lead.MobilePhone = '+89567895432';
-        lead.City = 'Dearborn';
-        lead.Street = 'Tully Poot.';
-        lead.State = 'Florida';
-        lead.PostalCode = '124567';
-        lead.Country = ' United States Of America ';
-        lead.Job_Function__c = 'Accounting';
-        lead.Company = 'Infosys';
-        lead.GlobalPartyId = 'CRE-creiad000007kn4-gpid-a1243d87-f425-4249-8315-efe1455529d8';
-        testLeads.add(lead);
-        
-        insert testLeads;
-    }
-   /* public static testMethod void getGlobalProfileForEmail() {
+  @testSetup
+  static void setup() {
+    //Create common test accounts
+    List<Account> testAccounts = new List<Account>();
+    Account account = new Account();
+    account.Name = 'Infosys';
+    testAccounts.add(account);
+
+    insert testAccounts;
+
+    // Create common test contacts
+    List<Contact> testContacts = new List<Contact>();
+    Contact contact = new Contact();
+    contact.FirstName = 'Oliver';
+    contact.LastName = 'Miller';
+    contact.Email = 'oliver1@gmail.com';
+    contact.Secondary_Email__c = 'oliver1@gmail.com';
+    contact.Phone = '+493355684338';
+    contact.MobilePhone = '+49876543211';
+    contact.MailingCity = 'Dearborn';
+    contact.MailingStreet = 'Tully Poot.';
+    contact.MailingState = 'Florida';
+    contact.MailingPostalCode = '124567';
+    contact.MailingCountry = ' United States Of America ';
+    contact.Job_Function__c = 'Accounting';
+    contact.GlobalPartyId = 'CRE-creiad000007kn4-gpid-a1243d87-f425-4249-8315-efe1455529d8';
+    contact.AccountId = testAccounts[0].Id;
+    contact.Contact_Origin__c = 'Contact Tab';
+    testContacts.add(contact);
+
+    insert testContacts;
+    system.debug('** testContacts ' + testContacts[0].id);
+
+    //Create common test accounts
+    List<Lead> testLeads = new List<Lead>();
+    Lead lead = new Lead();
+    lead.FirstName = 'Menard';
+    lead.LastName = 'Drewe';
+    lead.Email = 'mdrewe57@geocities.jp';
+    lead.Phone = '+493355684338';
+    lead.MobilePhone = '+89567895432';
+    lead.City = 'Dearborn';
+    lead.Street = 'Tully Poot.';
+    lead.State = 'Florida';
+    lead.PostalCode = '124567';
+    lead.Country = ' United States Of America ';
+    lead.Job_Function__c = 'Accounting';
+    lead.Company = 'Infosys';
+    lead.GlobalPartyId = 'CRE-creiad000007kn4-gpid-a1243d87-f425-4249-8315-efe1455529d8';
+    testLeads.add(lead);
+
+    insert testLeads;
+  }
+  /* public static testMethod void getGlobalProfileForEmail() {
         Test.startTest();
         // Setting up the mock response
         Test.setMock(HTTPCalloutMock.class, new CDP_UnifiedProfileDataMock());
@@ -86,13 +86,12 @@ public class CDP_UnifiedProfileDataTest {
             CDP_UnifiedProfileData.getCDPResponse('3055584428','Phone');
         Test.stopTest();
     }*/
-    public static testMethod void getGlobalProfileSort() {
-        Test.startTest();
-        // Setting up the mock response
-        //Test.setMock(HTTPCalloutMock.class, new CDP_UnifiedProfileDataMock());
-		CDP_UnifiedProfileData.testdata = '{"startTime":"2022-02-04T05:19:09.511801Z","rowCount":"15","queryId":"185535e8-2d59-47e6-b56a-62165581ab7b","endTime":"2022-02-04T05:19:25.563597Z","done":"true","data":[{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"ADDRESS","ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"ADDRESS","ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"EMAIL", "ContactPoint":"m12@m12german.d"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PARTYID", "ContactPoint":"Physician Registration Number,9878967567"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"SECONDARY EMAIL", "ContactPoint":"m12@m12german.d"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"ADDRESS", "ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"EMAIL","ContactPoint":"zzmohd@eastman.com"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"INDIVIDUAL","ContactPoint":"^,Zulkifli Mohd Yeng"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"MOBILE PHONE","ContactPoint":"6017 872 7776"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PARTYID","ContactPoint":"Physician Registration Number,7878786784"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PARTYID","ContactPoint":"Physician Registration Number,7878786784"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PHONE","ContactPoint":"6095856270"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"ADDRESS","ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"EMAIL","ContactPoint":"zzmohd@eastman.com"},{"SourceRecord":"SFMC,storage_direct_20211222-024817_a95f2034-7eb8-48f7-9e86-87220d64a9e3,118f1222-db8a-11eb-92d4-0ee0102191c1","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"EMAIL","ContactPoint":"zzmohd@eastman.com"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"INDIVIDUAL","ContactPoint":"Zulkifli Mohd,Yeng"},{"SourceRecord":"SFMC,storage_direct_20211222-024817_a95f2034-7eb8-48f7-9e86-87220d64a9e3,118f1222-db8a-11eb-92d4-0ee0102191c1","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"INDIVIDUAL","ContactPoint":"Zulkifli Mohd,Yeng"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"MOBILE PHONE","ContactPoint":"6017 8727776"},{"SourceRecord":"SFMC,storage_direct_20211222-024817_a95f2034-7eb8-48f7-9e86-87220d64a9e3,118f1222-db8a-11eb-92d4-0ee0102191c1","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"MOBILE PHONE","ContactPoint":"6017 8727776"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"PARTYID","ContactPoint":"Physician Registration Number,"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"PHONE","ContactPoint":"609 5856270"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j0000017mZLDAA2","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"a19d76c4-1570-3843-be87-dcd0ecfecebb","ContactPointType":"SECONDARY EMAIL","ContactPoint":"m12@m12german.d"}]}';
-            CDP_UnifiedProfileData.getCDPResponse('3055584428','Phone');
-        Test.stopTest();
-    }
-    
+  public static testMethod void getGlobalProfileSort() {
+    Test.startTest();
+    // Setting up the mock response
+    //Test.setMock(HTTPCalloutMock.class, new CDP_UnifiedProfileDataMock());
+    CDP_UnifiedProfileData.testdata = '{"startTime":"2022-02-04T05:19:09.511801Z","rowCount":"15","queryId":"185535e8-2d59-47e6-b56a-62165581ab7b","endTime":"2022-02-04T05:19:25.563597Z","done":"true","data":[{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"ADDRESS","ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"ADDRESS","ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"EMAIL", "ContactPoint":"m12@m12german.d"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PARTYID", "ContactPoint":"Physician Registration Number,9878967567"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"SECONDARY EMAIL", "ContactPoint":"m12@m12german.d"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000", "Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"ADDRESS", "ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"EMAIL","ContactPoint":"zzmohd@eastman.com"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"INDIVIDUAL","ContactPoint":"^,Zulkifli Mohd Yeng"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"MOBILE PHONE","ContactPoint":"6017 872 7776"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PARTYID","ContactPoint":"Physician Registration Number,7878786784"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-15 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PARTYID","ContactPoint":"Physician Registration Number,7878786784"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,0033Z00002NGUPaQAP","OccuranceCnt":"1","LastModifiedDate":"2021-09-16 23:50:05.000","Id":"38ded765-5cff-3182-a24c-9e37991c5dac","ContactPointType":"PHONE","ContactPoint":"6095856270"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"ADDRESS","ContactPoint":"7100 W 20th Ave Ste 110~Hialeah~FL~33016~US"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"EMAIL","ContactPoint":"zzmohd@eastman.com"},{"SourceRecord":"SFMC,storage_direct_20211222-024817_a95f2034-7eb8-48f7-9e86-87220d64a9e3,118f1222-db8a-11eb-92d4-0ee0102191c1","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"EMAIL","ContactPoint":"zzmohd@eastman.com"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"INDIVIDUAL","ContactPoint":"Zulkifli Mohd,Yeng"},{"SourceRecord":"SFMC,storage_direct_20211222-024817_a95f2034-7eb8-48f7-9e86-87220d64a9e3,118f1222-db8a-11eb-92d4-0ee0102191c1","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"INDIVIDUAL","ContactPoint":"Zulkifli Mohd,Yeng"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"MOBILE PHONE","ContactPoint":"6017 8727776"},{"SourceRecord":"SFMC,storage_direct_20211222-024817_a95f2034-7eb8-48f7-9e86-87220d64a9e3,118f1222-db8a-11eb-92d4-0ee0102191c1","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"MOBILE PHONE","ContactPoint":"6017 8727776"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"PARTYID","ContactPoint":"Physician Registration Number,"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j000001UlbYJAAZ","OccuranceCnt":"1","LastModifiedDate":"2021-10-12 23:37:49.000","Id":"aef714c4-1078-3509-97bc-ee3c298ce628","ContactPointType":"PHONE","ContactPoint":"609 5856270"},{"SourceRecord":"Salesforce_00D760000008aLq,Contact,003j0000017mZLDAA2","OccuranceCnt":"1","LastModifiedDate":"2021-10-29 14:14:26.000","Id":"a19d76c4-1570-3843-be87-dcd0ecfecebb","ContactPointType":"SECONDARY EMAIL","ContactPoint":"m12@m12german.d"}]}';
+    CDP_UnifiedProfileData.getCDPResponse('3055584428', 'Phone');
+    Test.stopTest();
+  }
 }

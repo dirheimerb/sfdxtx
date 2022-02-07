@@ -6,14 +6,16 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const { basename, join } = require('path');
-const shell = require('../dev-scripts-main/utils/shelljs');
-const loadRootPath = require('../dev-scripts-main/utils/load-root-path');
-const packageRoot = require('../dev-scripts-main/utils/package-path');
-const { isMultiPackageProject } = require('../dev-scripts-main/utils/project-type');
+const { basename, join } = require("path");
+const shell = require("../dev-scripts-main/utils/shelljs");
+const loadRootPath = require("../dev-scripts-main/utils/load-root-path");
+const packageRoot = require("../dev-scripts-main/utils/package-path");
+const {
+  isMultiPackageProject,
+} = require("../dev-scripts-main/utils/project-type");
 
 // eslint-disable-next-line import/order
-let options = require('@salesforce/dev-config/typedoc');
+let options = require("@salesforce/dev-config/typedoc");
 
 try {
   const definedOptions = require(`${packageRoot}/typedoc`);
@@ -22,21 +24,21 @@ try {
   /* do nothing */
 }
 
-let outDir = 'docs';
+let outDir = "docs";
 
 if (isMultiPackageProject(packageRoot)) {
   try {
-    const lernaPath = loadRootPath('lerna.json');
+    const lernaPath = loadRootPath("lerna.json");
     outDir = join(lernaPath, outDir, basename(packageRoot));
     // clean docs _after_ resolving outDir in multi-package projects
-    shell.rm('-rf', `${outDir}/*`);
+    shell.rm("-rf", `${outDir}/*`);
   } catch (e) {
     /* do nothing */
   }
 } else {
   // clean docs _before_ resolving tmp outDir in multi-package projects
-  shell.rm('-rf', `${outDir}/*`);
-  outDir = join(packageRoot, outDir, 'tmp');
+  shell.rm("-rf", `${outDir}/*`);
+  outDir = join(packageRoot, outDir, "tmp");
 }
 
 let command = `yarn typedoc --out ${outDir}`;
@@ -45,7 +47,7 @@ let command = `yarn typedoc --out ${outDir}`;
 // defaults and overrides and put them on the command
 for (const key of Object.keys(options)) {
   const val = options[key];
-  if (typeof val === 'boolean') {
+  if (typeof val === "boolean") {
     if (val) {
       command += ` --${key}`;
     }
@@ -60,5 +62,5 @@ shell.exec(command, {
 
 if (!isMultiPackageProject(packageRoot)) {
   shell.mv(`${outDir}/*`, `${outDir}/..`);
-  shell.rm('-rf', `${outDir}`);
+  shell.rm("-rf", `${outDir}`);
 }

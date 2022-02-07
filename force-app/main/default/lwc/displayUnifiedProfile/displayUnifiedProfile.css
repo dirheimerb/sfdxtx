@@ -2,15 +2,14 @@
  * Created by bdirh on 12/27/2021.
  */
 
-
- .layout {
+.layout {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   width: calc(100% - 20px);
   background-color: #fafaf9;
   text-align: center;
-  font-family: 'Salesforce Sans', Arial, sans-serif;
+  font-family: "Salesforce Sans", Arial, sans-serif;
 }
 
 .layout-header {
@@ -21,7 +20,7 @@
   width: calc(100% - 20px);
   background-color: lightgray;
   text-align: center;
-  font-family: 'Salesforce Sans', Arial, sans-serif;
+  font-family: "Salesforce Sans", Arial, sans-serif;
 }
 
 h1 {
@@ -35,7 +34,7 @@ h1 {
   text-align: center;
 }
 
-input[type='radio'] {
+input[type="radio"] {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -56,7 +55,7 @@ input[type='radio'] {
   column-count: 3;
   background-color: white;
   width: 100%;
-  font-family: 'Salesforce Sans', Arial, Helvetica, sans-serif;
+  font-family: "Salesforce Sans", Arial, Helvetica, sans-serif;
 }
 
 .dd_label {

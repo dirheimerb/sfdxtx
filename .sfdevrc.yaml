@@ -74,4 +74,4 @@ properties:
       testsPath:
         description: The expression path for all tests
         type: string
-        default: '**/*.test.ts'
+        default: "**/*.test.ts"

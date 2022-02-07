@@ -1,622 +1,1186 @@
 <template>
-	<!--<lightning-button label="Edit" variant="Neutral" onclick={callButton}></lightning-button>-->
-	<lightning-spinner if:true={isSpinner} alternative-text="Loading..." variant="brand"></lightning-spinner>
-	<div>
-		<template if:false={isEditMode}>
-			<lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
-				<template for:each={layoutSections} for:item="sectionName">
-					<template if:true={sectionName.useHeading}>						
-						<lightning-accordion-section name={sectionName.id} label={sectionName.heading} key={section}
-							class="accordion-section-title accordion-border">
-							<lightning-record-view-form record-id={recordId} object-api-name="Contact">
-								<div class="slds-grid slds-wrap">
-									<template for:each={sectionName.layoutRows} for:item="layoutRow">
-										<div key={layoutRow} class="slds-col slds-size_1-of-1">
-											<div key={layoutItem} class="slds-grid slds-wrap">
-												<template for:each={layoutRow.layoutItems} for:item="layoutItem">
-													<div key={layoutItem} class="slds-col slds-size_1-of-2"
-														if:true={layoutItem.label}>
-														<div key={layoutItem}
-															class="slds-grid slds-wrap slds-p-top_x-small">
-															<span  class ="sld s-col slds-size_11-of-12 slds-border_bottom">
-																<template if:false={layoutItem.isMailingAddressField}>
-																	<template if:false={layoutItem.isSystemInformationSection} for:each={layoutItem.layoutComponents} for:item="layoutComponent" for:index="index">																		
-																		<label key={layoutCompoennt} class="slds-form-element__label" for="form-element-01">{layoutItem.label}</label><!--Kalyani - for contact description starts-->
-																		<span key={layoutCompoennt} class="slds-col slds-size_11-of-12 ">																			
-																			<lightning-output-field variant="label-hidden" class="slds-m-bottom_none" key={layoutCompoennt} field-name={layoutComponent.apiName}></lightning-output-field>																	
-																		</span>
-																	</template><!--Kalyani - for contact description ends-->
-																	<template if:true={layoutItem.isSystemInformationSection}>																		
-																		<div key={layoutItem} class="slds-grid slds-wrap slds-p-top_x-small">
-																			<template if:true={layoutItem.isCreatedBy}>
-																				<label class="slds-form-element__label" for="form-element-01">{layoutItem.label}</label>
-																				<span class="slds-col slds-size_11-of-12 ">
-                                                                                    <span class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"></span>
-																					<a onclick={navigateToCreatedUserRecord} class="system-info-section" target="_blank"> {contactRecordData.CreatedBy.displayValue}</a>, 
-																					<lightning-formatted-text value={contactRecordData.CreatedDate.displayValue}></lightning-formatted-text>
-																				</span>
-																			</template>
-																			<template if:true={layoutItem.isLastModifiedBy}>
-																				<label class="slds-form-element__label" for="form-element-01">{layoutItem.label}</label>
-																				<span class="slds-col slds-size_11-of-12 ">
-                                                                                    <span class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"></span>
-																					<a onclick={navigateToLastModifiedUserRecord} class="system-info-section" target="_blank"> {contactRecordData.LastModifiedBy.displayValue}</a>, 
-																					<lightning-formatted-text value={contactRecordData.LastModifiedDate.displayValue}></lightning-formatted-text>
-																				</span>
-																			</template>
-																			<template if:true={layoutItem.isRecordType}>
-																				<label class="slds-form-element__label" for="form-element-01">{layoutItem.label}</label>
-																				<lightning-formatted-text class="slds-col slds-size_11-of-12 "
-																				value={contactRecordData.RecordType.displayValue}></lightning-formatted-text>
-																			</template>
-																			<template  for:each={layoutItem.layoutComponents} for:item="layoutComponent" for:index="index">																																						
-																				
-																				<template if:true={layoutItem.isOtherSystemInfoData}>																																																															
-																					<lightning-output-field key={layoutComponent}
-																						field-name={layoutComponent.apiName}
-																						name={layoutComponent.apiName} class="slds-m-bottom_none"></lightning-output-field>																																										
-																			</template>
-																			</template>
-																		</div>
-																	</template>
-																</template>
-																<div if:true={layoutItem.isMailingAddressField}>
-																	<span class="slds-form-element__label" key={layoutItem}>{layoutItem.label}</span>
-																	<br/>
-																	<lightning-formatted-address street={contactRecordData.MailingStreet.value}
-																	city={contactRecordData.MailingCity.value}
-																	country={contactRecordData.MailingCountryCode.value}
-																	province={contactRecordData.MailingStateCode.value}
-																	postal-code={contactRecordData.MailingPostalCode.value}></lightning-formatted-address>
-																	<lightning-map map-markers={mapMarkers} markers-tile={markersTitle} show-fotter center={center}
-																	listview={listView} class="slds-border_bottom"></lightning-map>
-																</div>
-															</span>
-															<a key={layoutComponent} if:true={layoutItem.editableForUpdate}
-																class="slds-col slds-size_1-of-12 slds-p-top_large">
-																<lightning-icon
-																class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
-																onclick={editButton} icon-name="action:edit" size="x-small"></lightning-icon>
-															</a>
-															<!--a key={layoutComponent} if:false={layoutItem.editableForUpdate} class="slds-col slds-size_1-of-12 slds-p-top_large">
+  <!--<lightning-button label="Edit" variant="Neutral" onclick={callButton}></lightning-button>-->
+  <lightning-spinner
+    if:true="{isSpinner}"
+    alternative-text="Loading..."
+    variant="brand"
+  ></lightning-spinner>
+  <div>
+    <template if:false="{isEditMode}">
+      <lightning-accordion
+        allow-multiple-sections-open
+        active-section-name="{activeSections}"
+      >
+        <template for:each="{layoutSections}" for:item="sectionName">
+          <template if:true="{sectionName.useHeading}">
+            <lightning-accordion-section
+              name="{sectionName.id}"
+              label="{sectionName.heading}"
+              key="{section}"
+              class="accordion-section-title accordion-border"
+            >
+              <lightning-record-view-form
+                record-id="{recordId}"
+                object-api-name="Contact"
+              >
+                <div class="slds-grid slds-wrap">
+                  <template
+                    for:each="{sectionName.layoutRows}"
+                    for:item="layoutRow"
+                  >
+                    <div key="{layoutRow}" class="slds-col slds-size_1-of-1">
+                      <div key="{layoutItem}" class="slds-grid slds-wrap">
+                        <template
+                          for:each="{layoutRow.layoutItems}"
+                          for:item="layoutItem"
+                        >
+                          <div
+                            key="{layoutItem}"
+                            class="slds-col slds-size_1-of-2"
+                            if:true="{layoutItem.label}"
+                          >
+                            <div
+                              key="{layoutItem}"
+                              class="slds-grid slds-wrap slds-p-top_x-small"
+                            >
+                              <span
+                                class="sld s-col slds-size_11-of-12 slds-border_bottom"
+                              >
+                                <template
+                                  if:false="{layoutItem.isMailingAddressField}"
+                                >
+                                  <template
+                                    if:false="{layoutItem.isSystemInformationSection}"
+                                    for:each="{layoutItem.layoutComponents}"
+                                    for:item="layoutComponent"
+                                    for:index="index"
+                                  >
+                                    <label
+                                      key="{layoutCompoennt}"
+                                      class="slds-form-element__label"
+                                      for="form-element-01"
+                                      >{layoutItem.label}</label
+                                    ><!--Kalyani - for contact description starts-->
+                                    <span
+                                      key="{layoutCompoennt}"
+                                      class="slds-col slds-size_11-of-12"
+                                    >
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        class="slds-m-bottom_none"
+                                        key="{layoutCompoennt}"
+                                        field-name="{layoutComponent.apiName}"
+                                      ></lightning-output-field>
+                                    </span> </template
+                                  ><!--Kalyani - for contact description ends-->
+                                  <template
+                                    if:true="{layoutItem.isSystemInformationSection}"
+                                  >
+                                    <div
+                                      key="{layoutItem}"
+                                      class="slds-grid slds-wrap slds-p-top_x-small"
+                                    >
+                                      <template
+                                        if:true="{layoutItem.isCreatedBy}"
+                                      >
+                                        <label
+                                          class="slds-form-element__label"
+                                          for="form-element-01"
+                                          >{layoutItem.label}</label
+                                        >
+                                        <span
+                                          class="slds-col slds-size_11-of-12"
+                                        >
+                                          <span
+                                            class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"
+                                          ></span>
+                                          <a
+                                            onclick="{navigateToCreatedUserRecord}"
+                                            class="system-info-section"
+                                            target="_blank"
+                                          >
+                                            {contactRecordData.CreatedBy.displayValue}</a
+                                          >,
+                                          <lightning-formatted-text
+                                            value="{contactRecordData.CreatedDate.displayValue}"
+                                          ></lightning-formatted-text>
+                                        </span>
+                                      </template>
+                                      <template
+                                        if:true="{layoutItem.isLastModifiedBy}"
+                                      >
+                                        <label
+                                          class="slds-form-element__label"
+                                          for="form-element-01"
+                                          >{layoutItem.label}</label
+                                        >
+                                        <span
+                                          class="slds-col slds-size_11-of-12"
+                                        >
+                                          <span
+                                            class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"
+                                          ></span>
+                                          <a
+                                            onclick="{navigateToLastModifiedUserRecord}"
+                                            class="system-info-section"
+                                            target="_blank"
+                                          >
+                                            {contactRecordData.LastModifiedBy.displayValue}</a
+                                          >,
+                                          <lightning-formatted-text
+                                            value="{contactRecordData.LastModifiedDate.displayValue}"
+                                          ></lightning-formatted-text>
+                                        </span>
+                                      </template>
+                                      <template
+                                        if:true="{layoutItem.isRecordType}"
+                                      >
+                                        <label
+                                          class="slds-form-element__label"
+                                          for="form-element-01"
+                                          >{layoutItem.label}</label
+                                        >
+                                        <lightning-formatted-text
+                                          class="slds-col slds-size_11-of-12"
+                                          value="{contactRecordData.RecordType.displayValue}"
+                                        ></lightning-formatted-text>
+                                      </template>
+                                      <template
+                                        for:each="{layoutItem.layoutComponents}"
+                                        for:item="layoutComponent"
+                                        for:index="index"
+                                      >
+                                        <template
+                                          if:true="{layoutItem.isOtherSystemInfoData}"
+                                        >
+                                          <lightning-output-field
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
+                                            name="{layoutComponent.apiName}"
+                                            class="slds-m-bottom_none"
+                                          ></lightning-output-field>
+                                        </template>
+                                      </template>
+                                    </div>
+                                  </template>
+                                </template>
+                                <div
+                                  if:true="{layoutItem.isMailingAddressField}"
+                                >
+                                  <span
+                                    class="slds-form-element__label"
+                                    key="{layoutItem}"
+                                    >{layoutItem.label}</span
+                                  >
+                                  <br />
+                                  <lightning-formatted-address
+                                    street="{contactRecordData.MailingStreet.value}"
+                                    city="{contactRecordData.MailingCity.value}"
+                                    country="{contactRecordData.MailingCountryCode.value}"
+                                    province="{contactRecordData.MailingStateCode.value}"
+                                    postal-code="{contactRecordData.MailingPostalCode.value}"
+                                  ></lightning-formatted-address>
+                                  <lightning-map
+                                    map-markers="{mapMarkers}"
+                                    markers-tile="{markersTitle}"
+                                    show-fotter
+                                    center="{center}"
+                                    listview="{listView}"
+                                    class="slds-border_bottom"
+                                  ></lightning-map>
+                                </div>
+                              </span>
+                              <a
+                                key="{layoutComponent}"
+                                if:true="{layoutItem.editableForUpdate}"
+                                class="slds-col slds-size_1-of-12 slds-p-top_large"
+                              >
+                                <lightning-icon
+                                  class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
+                                  onclick="{editButton}"
+                                  icon-name="action:edit"
+                                  size="x-small"
+                                ></lightning-icon>
+                              </a>
+                              <!--a key={layoutComponent} if:false={layoutItem.editableForUpdate} class="slds-col slds-size_1-of-12 slds-p-top_large">
 																<template if:true={layoutItem.isRecordType}>					
 																	<lightning-icon
 																	class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
 																	onclick={editRecordType} icon-name="action:change_record_type" size="x-small"></lightning-icon>
 																</template>	
 															</a-->
-														</div>
-													</div>
-												</template>
-											</div>
-										</div>
-									</template>
-								</div>
-							</lightning-record-view-form>
-						</lightning-accordion-section>
-					</template>					
-					<template if:false={sectionName.useHeading}>						
-						<lightning-record-view-form key={sectionName.id} record-id={recordId} object-api-name="Contact">
-							<div class="slds-grid slds-wrap detail-page-padding">
-								<template for:each={sectionName.layoutRows} for:item="layoutRow">
-									<div key={layoutRow} class="slds-col slds-size_1-of-1">
-										<div key={layoutItem} class="slds-grid slds-wrap">
-											<template for:each={layoutRow.layoutItems} for:item="layoutItem">
-												<div key={layoutItem} class="slds-col slds-size_1-of-2" if:true={layoutItem.label}>
-													<div key={layoutItem} class="slds-grid slds-wrap slds-p-top_x-small">
-														<span  class ="sld s-col slds-size_11-of-12 slds-border_bottom">
-															<template if:true={layoutItem.isNameField}>	
-																													
-																<div key={layoutItem} class="slds-grid slds-wrap slds-p-top_xxx-small">
-																	<!--Kalyani - comapct view added - starts-->		
-																	<template if:false={layoutItem.isCompactView}>
-																		<label key={layoutItem} class="slds-form-element__label" for="form-element-01">{layoutItem.label}</label>
-																		<br key={layoutItem}/>
-																	 <lightning-formatted-name  class ="slds-col slds-size_11-of-12"
-                                                                        first-name={contactRecordData.FirstName.value}
-                                                                        middle-name={contactRecordData.MiddleName.value}
-                                                                        last-name={contactRecordData.LastName.value}
-                                                                        suffix={contactRecordData.Suffix.value}
-                                                                        salutation={contactRecordData.Salutation.value}></lightning-formatted-name>
-																	</template>
-																	<template if:true={layoutItem.isCompactView}>																	
-																		<br key={layoutItem}/>
-																		<label key={layoutItem} class="slds-form-element__label slds-size_4-of-12" for="form-element-01">{layoutItem.label}</label> <lightning-formatted-name  class ="slds-col slds-size_4-of-12"
-																			first-name={contactRecordData.FirstName.value}
-																			middle-name={contactRecordData.MiddleName.value}
-																			last-name={contactRecordData.LastName.value}
-																			suffix={contactRecordData.Suffix.value}
-																			salutation={contactRecordData.Salutation.value}></lightning-formatted-name>
-																	</template>
-																	<!--Kalyani - comapct view added - ends-->		
-																</div>
-															</template>
-															<template for:each={layoutItem.layoutComponents} for:item="layoutComponent" for:index="index" if:false={layoutItem.isNameField}>
-																<!--123Label layout component api name -- {layoutComponent.label}<br key={layoutComponent.label} />	
-																123Label layout item api name -- {layoutItem.label}	-->	
-																<lightning-output-field class="slds-m-bottom_none" key={layoutCompoennt} field-name={layoutComponent.apiName}></lightning-output-field>
-															</template>
-														</span>
-														<a key={layoutComponent} if:true={layoutItem.editableForUpdate}
-														    class="slds-col slds-size_1-of-12 slds-p-top_large">
-															<lightning-icon
-                                                                class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
-                                                                onclick={editButton} icon-name="action:edit" size="x-small"></lightning-icon>
-														</a>
-														<!--Kalyani added - starts-->
-														<template if:true={layoutItem.isContactOwner}>
-															<a key={layoutComponent} if:false={layoutItem.editableForUpdate}															
-																class="slds-col slds-size_1-of-12 slds-p-top_large">
-																<lightning-icon
-																	class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
-																	onclick={editButton} icon-name="action:change_owner" size="x-small"></lightning-icon>
-															</a>
-														</template>
-														<!--Kalyani added - ends-->
-													</div>
-												</div>
-											</template>
-										</div>
-									</div>
-								</template>
-							</div>
-						</lightning-record-view-form>
-					</template>
-				</template>
-			</lightning-accordion>
-		</template>
-		<template if:true={isEditMode}>
-			<div class="slds-card slds-is-relative">
-			<lightning-record-edit-form record-id={recordId} object-api-name="Contact" onsubmit={handleSubmit}
-		        onsuccess={handleSuccess} onerror={handleError}>
-				<lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
-					<template for:each={layoutSections} for:item="sectionName">
-						<template if:true={sectionName.useHeading}>
-							<lightning-accordion-section class="accordion-section-title accordion-border" name={sectionName.id}
-                        	label={sectionName.heading} key={section}>
-								<div class="slds-grid slds-wrap">
-									<template for:each={sectionName.layoutRows} for:item="layoutRow">
-										<div key={layoutRow} class="slds-col slds-size_1-of-1">
-											<div key={layoutItem} class="slds-grid slds-wrap">
-												<template for:each={layoutRow.layoutItems} for:item="layoutItem">
-													<div key={layoutItem} class="slds-col slds-size_1-of-2"
-                                                		if:true={layoutItem.label}>
-														<div key={layoutItem} class="slds-grid slds-wrap slds-p-top_x-small">
-                                                            <span class ="sld s-col slds-size_11-of-12">
-                                                                <template if:true={layoutItem.isSystemInformationSection}>                                                                    
-                                                                    <div key={layoutItem} class="slds-grid slds-wrap slds-col slds-size_1-of-1 slds-p-top_x-small">
-                                                                        <template if:true={layoutItem.isCreatedBy}>																			
-																			<label class="slds-form-element__label slds-col slds-size_1-of-1" for="form-element-01">{layoutItem.label}</label>																																							
-                                                                            <span>
-                                                                                <span class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"></span>
-                                                                                <span class="system-info-section"> {contactRecordData.CreatedBy.displayValue}</span>, 
-                                                                                <lightning-formatted-text value={contactRecordData.CreatedDate.displayValue}></lightning-formatted-text>
-                                                                            </span>
-                                                                        </template>
-                                                                        <template if:true={layoutItem.isLastModifiedBy}>																			
-																			<label class="slds-form-element__label slds-col slds-size_1-of-1" for="form-element-01">{layoutItem.label}</label>																				
-                                                                            <span>
-                                                                                <span class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"></span>
-                                                                                <span class="system-info-section"> {contactRecordData.LastModifiedBy.displayValue}</span>, 
-                                                                                <lightning-formatted-text value={contactRecordData.LastModifiedDate.displayValue}></lightning-formatted-text>
-                                                                            </span>
-                                                                        </template>
-                                                                        <template if:true={layoutItem.isRecordType}>																			
-																			<label class="slds-form-element__label slds-col slds-size_1-of-1" for="form-element-01">{layoutItem.label}</label>																				
-                                                                            <lightning-formatted-text value={contactRecordData.RecordType.displayValue}></lightning-formatted-text>
-                                                                        </template>
-																		<template  for:each={layoutItem.layoutComponents} for:item="layoutComponent" for:index="index">																																					
-																			<template if:true={layoutItem.isOtherSystemInfoData}>																																																													
-																				<lightning-input-field key={layoutComponent}
-																					field-name={layoutComponent.apiName}
-																					name={layoutComponent.apiName}  onchange={handleFieldChange}></lightning-input-field>																				
-																			</template>
-																		</template>
-                                                                    </div>
-                                                                </template>
-                                                                <template if:false={layoutItem.isSystemInformationSection}>
-                                                                    <template for:each={layoutItem.layoutComponents}
-                                                                        for:item="layoutComponent" for:index="index"
-                                                                        if:false={layoutItem.isMailingAddressField}>
-                                                                            <template if:true={layoutItem.editableForUpdate}>																				
-																				<template if:true={layoutItem.required}>																					
-																					<!--123Label layout component api name -- {layoutComponent.label}<br key={layoutComponent.label} />	
-																					123Label layout item api name -- {layoutItem.label}	-->																					
-																					<lightning-input-field key={layoutComponent}
-																					field-name={layoutComponent.apiName}
-																					name={layoutComponent.apiName} required onchange={handleFieldChange}></lightning-input-field>
-																				</template>   
-																				<template if:false={layoutItem.required}>
-																					<!--123Label layout component api name -- {layoutComponent.label}	<br key={layoutComponent.label} />
-																					123Label layout item api name -- {layoutItem.label}	-->																				
-																					<lightning-input-field key={layoutComponent}
-																					field-name={layoutComponent.apiName}
-																					name={layoutComponent.apiName} onchange={handleFieldChange}></lightning-input-field>
-																				</template>																				
-                                                                                <template if:true={layoutItem.isControllingField}>
-                                                                                    <span key={span} class="slds-m-top_xxx-small formula-field">This field is dependent on {layoutItem.controllingFields}</span>
-                                                                                </template> 
-                                                                            </template>																			
-                                                                            <template if:false={layoutItem.editableForUpdate}>
-                                                                                <lightning-output-field key={layoutComponent}
-                                                                                    field-name={layoutComponent.apiName}></lightning-output-field>	
-																					<template if:true={layoutComponent.isFormulaField}>
-																						<span key={layoutComponent} class="slds-m-top_xxx-small formula-field">This field is calculated upon save</span>
-																					</template>																				
-                                                                            </template>
-                                                                    </template>
-                                                                    <template key={layoutItem} if:true={layoutItem.isMailingAddressField}>
-                                                                        <lightning-input-address address-label="Mailing Address"
-                                                                            street-label="Mailing Street" city-label="Mailing City"
-                                                                            country-label="Mailing Country"
-                                                                            province-label="Mailing State/Province"
-                                                                            postal-code-label="Mailing Zip/Postal Code"
-                                                                            street={contactRecordData.MailingStreet.value}
-                                                                            city={contactRecordData.MailingCity.value}
-                                                                            country={contactRecordData.MailingCountryCode.value}
-                                                                            province={contactRecordData.MailingStateCode.value}
-                                                                            postal-code={contactRecordData.MailingPostalCode.value}
-                                                                            field-level-help="Select Mailing Address"
-                                                                            country-options={mailingCountries}
-                                                                            province-options={mailingStates} onchange={addressChanged}
-                                                                            show-address-lookup></lightning-input-address>
-                                                                    </template>
-                                                                </template>
-                                                            </span>
-														</div>
-													</div>
-												</template>
-											</div>
-										</div>
-									</template>
-								</div>
-							</lightning-accordion-section>
-						</template>
-						<template if:false={sectionName.useHeading}>
-							<div key={sectionName.layoutRows} class="slds-grid slds-wrap detail-page-padding">
-								<template for:each={sectionName.layoutRows} for:item="layoutRow">
-									<div key={layoutRow} class="slds-col slds-size_1-of-1">
-										<div key={layoutItem} class="slds-grid slds-wrap">
-											<template for:each={layoutRow.layoutItems} for:item="layoutItem">
-												<div key={layoutItem} class="slds-col slds-size_1-of-2" if:true={layoutItem.label}>
-													<div key={layoutItem} class="slds-grid slds-wrap slds-p-top_x-small">
-														<span  class ="sld s-col slds-size_11-of-12">
-															<template for:each={layoutItem.layoutComponents} for:item="layoutComponent">
-																<template if:true={layoutItem.editableForUpdate}>
-																	<template if:false={layoutItem.isNameField}>
-																		<template if:true={layoutItem.required}>																																					
-																			<lightning-input-field key={layoutComponent}
-																				field-name={layoutComponent.apiName}
-																				name={layoutComponent.apiName} required onchange={handleFieldChange}></lightning-input-field>
-																		</template>
-																		<template if:false={layoutItem.required}>																																					
-																			<!-- Added on 25 Aug 2021 Hide Contact Origin Field on New/Edit Page Layout -->
-																			<!-- <lightning-input-field if:false={layoutItem.isContactOriginField} key={layoutComponent}
+                            </div>
+                          </div>
+                        </template>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </lightning-record-view-form>
+            </lightning-accordion-section>
+          </template>
+          <template if:false="{sectionName.useHeading}">
+            <lightning-record-view-form
+              key="{sectionName.id}"
+              record-id="{recordId}"
+              object-api-name="Contact"
+            >
+              <div class="slds-grid slds-wrap detail-page-padding">
+                <template
+                  for:each="{sectionName.layoutRows}"
+                  for:item="layoutRow"
+                >
+                  <div key="{layoutRow}" class="slds-col slds-size_1-of-1">
+                    <div key="{layoutItem}" class="slds-grid slds-wrap">
+                      <template
+                        for:each="{layoutRow.layoutItems}"
+                        for:item="layoutItem"
+                      >
+                        <div
+                          key="{layoutItem}"
+                          class="slds-col slds-size_1-of-2"
+                          if:true="{layoutItem.label}"
+                        >
+                          <div
+                            key="{layoutItem}"
+                            class="slds-grid slds-wrap slds-p-top_x-small"
+                          >
+                            <span
+                              class="sld s-col slds-size_11-of-12 slds-border_bottom"
+                            >
+                              <template if:true="{layoutItem.isNameField}">
+                                <div
+                                  key="{layoutItem}"
+                                  class="slds-grid slds-wrap slds-p-top_xxx-small"
+                                >
+                                  <!--Kalyani - comapct view added - starts-->
+                                  <template
+                                    if:false="{layoutItem.isCompactView}"
+                                  >
+                                    <label
+                                      key="{layoutItem}"
+                                      class="slds-form-element__label"
+                                      for="form-element-01"
+                                      >{layoutItem.label}</label
+                                    >
+                                    <br key="{layoutItem}" />
+                                    <lightning-formatted-name
+                                      class="slds-col slds-size_11-of-12"
+                                      first-name="{contactRecordData.FirstName.value}"
+                                      middle-name="{contactRecordData.MiddleName.value}"
+                                      last-name="{contactRecordData.LastName.value}"
+                                      suffix="{contactRecordData.Suffix.value}"
+                                      salutation="{contactRecordData.Salutation.value}"
+                                    ></lightning-formatted-name>
+                                  </template>
+                                  <template
+                                    if:true="{layoutItem.isCompactView}"
+                                  >
+                                    <br key="{layoutItem}" />
+                                    <label
+                                      key="{layoutItem}"
+                                      class="slds-form-element__label slds-size_4-of-12"
+                                      for="form-element-01"
+                                      >{layoutItem.label}</label
+                                    >
+                                    <lightning-formatted-name
+                                      class="slds-col slds-size_4-of-12"
+                                      first-name="{contactRecordData.FirstName.value}"
+                                      middle-name="{contactRecordData.MiddleName.value}"
+                                      last-name="{contactRecordData.LastName.value}"
+                                      suffix="{contactRecordData.Suffix.value}"
+                                      salutation="{contactRecordData.Salutation.value}"
+                                    ></lightning-formatted-name>
+                                  </template>
+                                  <!--Kalyani - comapct view added - ends-->
+                                </div>
+                              </template>
+                              <template
+                                for:each="{layoutItem.layoutComponents}"
+                                for:item="layoutComponent"
+                                for:index="index"
+                                if:false="{layoutItem.isNameField}"
+                              >
+                                <!--123Label layout component api name -- {layoutComponent.label}<br key={layoutComponent.label} />	
+																123Label layout item api name -- {layoutItem.label}	-->
+                                <lightning-output-field
+                                  class="slds-m-bottom_none"
+                                  key="{layoutCompoennt}"
+                                  field-name="{layoutComponent.apiName}"
+                                ></lightning-output-field>
+                              </template>
+                            </span>
+                            <a
+                              key="{layoutComponent}"
+                              if:true="{layoutItem.editableForUpdate}"
+                              class="slds-col slds-size_1-of-12 slds-p-top_large"
+                            >
+                              <lightning-icon
+                                class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
+                                onclick="{editButton}"
+                                icon-name="action:edit"
+                                size="x-small"
+                              ></lightning-icon>
+                            </a>
+                            <!--Kalyani added - starts-->
+                            <template if:true="{layoutItem.isContactOwner}">
+                              <a
+                                key="{layoutComponent}"
+                                if:false="{layoutItem.editableForUpdate}"
+                                class="slds-col slds-size_1-of-12 slds-p-top_large"
+                              >
+                                <lightning-icon
+                                  class="slds-button slds-button_icon customButton slds-p-top_none slds-p-left_none"
+                                  onclick="{editButton}"
+                                  icon-name="action:change_owner"
+                                  size="x-small"
+                                ></lightning-icon>
+                              </a>
+                            </template>
+                            <!--Kalyani added - ends-->
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </lightning-record-view-form>
+          </template>
+        </template>
+      </lightning-accordion>
+    </template>
+    <template if:true="{isEditMode}">
+      <div class="slds-card slds-is-relative">
+        <lightning-record-edit-form
+          record-id="{recordId}"
+          object-api-name="Contact"
+          onsubmit="{handleSubmit}"
+          onsuccess="{handleSuccess}"
+          onerror="{handleError}"
+        >
+          <lightning-accordion
+            allow-multiple-sections-open
+            active-section-name="{activeSections}"
+          >
+            <template for:each="{layoutSections}" for:item="sectionName">
+              <template if:true="{sectionName.useHeading}">
+                <lightning-accordion-section
+                  class="accordion-section-title accordion-border"
+                  name="{sectionName.id}"
+                  label="{sectionName.heading}"
+                  key="{section}"
+                >
+                  <div class="slds-grid slds-wrap">
+                    <template
+                      for:each="{sectionName.layoutRows}"
+                      for:item="layoutRow"
+                    >
+                      <div key="{layoutRow}" class="slds-col slds-size_1-of-1">
+                        <div key="{layoutItem}" class="slds-grid slds-wrap">
+                          <template
+                            for:each="{layoutRow.layoutItems}"
+                            for:item="layoutItem"
+                          >
+                            <div
+                              key="{layoutItem}"
+                              class="slds-col slds-size_1-of-2"
+                              if:true="{layoutItem.label}"
+                            >
+                              <div
+                                key="{layoutItem}"
+                                class="slds-grid slds-wrap slds-p-top_x-small"
+                              >
+                                <span class="sld s-col slds-size_11-of-12">
+                                  <template
+                                    if:true="{layoutItem.isSystemInformationSection}"
+                                  >
+                                    <div
+                                      key="{layoutItem}"
+                                      class="slds-grid slds-wrap slds-col slds-size_1-of-1 slds-p-top_x-small"
+                                    >
+                                      <template
+                                        if:true="{layoutItem.isCreatedBy}"
+                                      >
+                                        <label
+                                          class="slds-form-element__label slds-col slds-size_1-of-1"
+                                          for="form-element-01"
+                                          >{layoutItem.label}</label
+                                        >
+                                        <span>
+                                          <span
+                                            class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"
+                                          ></span>
+                                          <span class="system-info-section">
+                                            {contactRecordData.CreatedBy.displayValue}</span
+                                          >,
+                                          <lightning-formatted-text
+                                            value="{contactRecordData.CreatedDate.displayValue}"
+                                          ></lightning-formatted-text>
+                                        </span>
+                                      </template>
+                                      <template
+                                        if:true="{layoutItem.isLastModifiedBy}"
+                                      >
+                                        <label
+                                          class="slds-form-element__label slds-col slds-size_1-of-1"
+                                          for="form-element-01"
+                                          >{layoutItem.label}</label
+                                        >
+                                        <span>
+                                          <span
+                                            class="record-avatar-container slds-avatar slds-avatar_x-small slds-avatar--circle icon slds-m-right_xx-small slds-avatar_profile-image-small"
+                                          ></span>
+                                          <span class="system-info-section">
+                                            {contactRecordData.LastModifiedBy.displayValue}</span
+                                          >,
+                                          <lightning-formatted-text
+                                            value="{contactRecordData.LastModifiedDate.displayValue}"
+                                          ></lightning-formatted-text>
+                                        </span>
+                                      </template>
+                                      <template
+                                        if:true="{layoutItem.isRecordType}"
+                                      >
+                                        <label
+                                          class="slds-form-element__label slds-col slds-size_1-of-1"
+                                          for="form-element-01"
+                                          >{layoutItem.label}</label
+                                        >
+                                        <lightning-formatted-text
+                                          value="{contactRecordData.RecordType.displayValue}"
+                                        ></lightning-formatted-text>
+                                      </template>
+                                      <template
+                                        for:each="{layoutItem.layoutComponents}"
+                                        for:item="layoutComponent"
+                                        for:index="index"
+                                      >
+                                        <template
+                                          if:true="{layoutItem.isOtherSystemInfoData}"
+                                        >
+                                          <lightning-input-field
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
+                                            name="{layoutComponent.apiName}"
+                                            onchange="{handleFieldChange}"
+                                          ></lightning-input-field>
+                                        </template>
+                                      </template>
+                                    </div>
+                                  </template>
+                                  <template
+                                    if:false="{layoutItem.isSystemInformationSection}"
+                                  >
+                                    <template
+                                      for:each="{layoutItem.layoutComponents}"
+                                      for:item="layoutComponent"
+                                      for:index="index"
+                                      if:false="{layoutItem.isMailingAddressField}"
+                                    >
+                                      <template
+                                        if:true="{layoutItem.editableForUpdate}"
+                                      >
+                                        <template
+                                          if:true="{layoutItem.required}"
+                                        >
+                                          <!--123Label layout component api name -- {layoutComponent.label}<br key={layoutComponent.label} />	
+																					123Label layout item api name -- {layoutItem.label}	-->
+                                          <lightning-input-field
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
+                                            name="{layoutComponent.apiName}"
+                                            required
+                                            onchange="{handleFieldChange}"
+                                          ></lightning-input-field>
+                                        </template>
+                                        <template
+                                          if:false="{layoutItem.required}"
+                                        >
+                                          <!--123Label layout component api name -- {layoutComponent.label}	<br key={layoutComponent.label} />
+																					123Label layout item api name -- {layoutItem.label}	-->
+                                          <lightning-input-field
+                                            key="{layoutComponent}"
+                                            field-name="{layoutComponent.apiName}"
+                                            name="{layoutComponent.apiName}"
+                                            onchange="{handleFieldChange}"
+                                          ></lightning-input-field>
+                                        </template>
+                                        <template
+                                          if:true="{layoutItem.isControllingField}"
+                                        >
+                                          <span
+                                            key="{span}"
+                                            class="slds-m-top_xxx-small formula-field"
+                                            >This field is dependent on
+                                            {layoutItem.controllingFields}</span
+                                          >
+                                        </template>
+                                      </template>
+                                      <template
+                                        if:false="{layoutItem.editableForUpdate}"
+                                      >
+                                        <lightning-output-field
+                                          key="{layoutComponent}"
+                                          field-name="{layoutComponent.apiName}"
+                                        ></lightning-output-field>
+                                        <template
+                                          if:true="{layoutComponent.isFormulaField}"
+                                        >
+                                          <span
+                                            key="{layoutComponent}"
+                                            class="slds-m-top_xxx-small formula-field"
+                                            >This field is calculated upon
+                                            save</span
+                                          >
+                                        </template>
+                                      </template>
+                                    </template>
+                                    <template
+                                      key="{layoutItem}"
+                                      if:true="{layoutItem.isMailingAddressField}"
+                                    >
+                                      <lightning-input-address
+                                        address-label="Mailing Address"
+                                        street-label="Mailing Street"
+                                        city-label="Mailing City"
+                                        country-label="Mailing Country"
+                                        province-label="Mailing State/Province"
+                                        postal-code-label="Mailing Zip/Postal Code"
+                                        street="{contactRecordData.MailingStreet.value}"
+                                        city="{contactRecordData.MailingCity.value}"
+                                        country="{contactRecordData.MailingCountryCode.value}"
+                                        province="{contactRecordData.MailingStateCode.value}"
+                                        postal-code="{contactRecordData.MailingPostalCode.value}"
+                                        field-level-help="Select Mailing Address"
+                                        country-options="{mailingCountries}"
+                                        province-options="{mailingStates}"
+                                        onchange="{addressChanged}"
+                                        show-address-lookup
+                                      ></lightning-input-address>
+                                    </template>
+                                  </template>
+                                </span>
+                              </div>
+                            </div>
+                          </template>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </lightning-accordion-section>
+              </template>
+              <template if:false="{sectionName.useHeading}">
+                <div
+                  key="{sectionName.layoutRows}"
+                  class="slds-grid slds-wrap detail-page-padding"
+                >
+                  <template
+                    for:each="{sectionName.layoutRows}"
+                    for:item="layoutRow"
+                  >
+                    <div key="{layoutRow}" class="slds-col slds-size_1-of-1">
+                      <div key="{layoutItem}" class="slds-grid slds-wrap">
+                        <template
+                          for:each="{layoutRow.layoutItems}"
+                          for:item="layoutItem"
+                        >
+                          <div
+                            key="{layoutItem}"
+                            class="slds-col slds-size_1-of-2"
+                            if:true="{layoutItem.label}"
+                          >
+                            <div
+                              key="{layoutItem}"
+                              class="slds-grid slds-wrap slds-p-top_x-small"
+                            >
+                              <span class="sld s-col slds-size_11-of-12">
+                                <template
+                                  for:each="{layoutItem.layoutComponents}"
+                                  for:item="layoutComponent"
+                                >
+                                  <template
+                                    if:true="{layoutItem.editableForUpdate}"
+                                  >
+                                    <template
+                                      if:false="{layoutItem.isNameField}"
+                                    >
+                                      <template if:true="{layoutItem.required}">
+                                        <lightning-input-field
+                                          key="{layoutComponent}"
+                                          field-name="{layoutComponent.apiName}"
+                                          name="{layoutComponent.apiName}"
+                                          required
+                                          onchange="{handleFieldChange}"
+                                        ></lightning-input-field>
+                                      </template>
+                                      <template
+                                        if:false="{layoutItem.required}"
+                                      >
+                                        <!-- Added on 25 Aug 2021 Hide Contact Origin Field on New/Edit Page Layout -->
+                                        <!-- <lightning-input-field if:false={layoutItem.isContactOriginField} key={layoutComponent}
 																				field-name={layoutComponent.apiName}
 																				name={layoutComponent.apiName} onchange={handleFieldChange}></lightning-input-field>-->
-																				<!--Kalyani added condition -  if:false={layoutItem.isContactOwner}-->
-																			<lightning-input-field  if:false={layoutItem.isContactOwner} key={layoutComponent}
-																				field-name={layoutComponent.apiName}
-																				name={layoutComponent.apiName} onchange={handleFieldChange}></lightning-input-field> 
-																		</template>
-																	</template>
-																	<template if:true={layoutItem.isNameField}>																		
-																		<lightning-input-field key={layoutComponent}
-																				field-name={layoutComponent.apiName}
-																				name={layoutComponent.apiName} onchange={handleFieldChange}></lightning-input-field>
-																	</template>
-                                                                </template>																	
-																<template if:false={layoutItem.editableForUpdate}>																	
-																	<lightning-output-field key={layoutComponent}
-																		field-name={layoutComponent.apiName}></lightning-output-field>
-																		<template if:true={layoutComponent.isFormulaField}>
-																			<span key={layoutComponent} class="slds-m-top_xxx-small formula-field">This field is calculated upon save</span>
-																		</template>
-																</template>	
-																<!--Kalyani added - starts-->															
-																<template if:true={layoutItem.isContactOwner}>																	
-																	<template if:false={layoutItem.editableForUpdate}>																		
-																		<!--<lightning-input-field key={layoutComponent}
-																			field-name={layoutComponent.apiName}></lightning-input-field>-->																
-																	</template>
-																</template>
-																<!--Kalyani added - ends-->	
-															</template>
-														</span>
-													</div>
-												</div>
-											</template>
-										</div>
-									</div>
-								</template>
-							</div>
-						</template>
-					</template>
-				</lightning-accordion>
-				<div>
-				<div class="slds-align_absolute-center slds-m-bottom_small">
-					<!-- Error Popup Section-->
-					<div class="custom-popover-section">
-						<div class="custom-popover">
-							<section if:true={isErrorPopup} class={popoverHeaderStyle} role="dialog">
-								<button type="button" onclick={handleVisibilityOfErrorPopup} class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse" title="Close dialog">
-									<svg class="slds-button__icon">
-										<use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
-									</svg>
-								</button>
-								<header class="slds-popover__header">
-									<div class="slds-media slds-media_center slds-has-flexi-truncate ">
-										<div class="slds-media__figure">
-											<span if:true={checkVisibilityOfErrorIcon} class="slds-icon_container slds-icon-utility-error">
-												<svg class="slds-icon slds-icon_x-small">
-													<use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#error"></use>
-												</svg>
-											</span>
-											<span class="slds-icon_container slds-icon-utility-warning">
-												<svg if:false={checkVisibilityOfErrorIcon} class="slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
-													<use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#warning"></use>
-												</svg>
-											</span>
-										</div>
-										<div class="slds-media__body">
-											<h2 class="slds-truncate slds-text-heading_medium">
-												<span if:true={checkVisibilityOfErrorIcon}>We hit a snag.</span>
-												<span if:false={checkVisibilityOfErrorIcon}>Review warning</span>
-											</h2>
-										</div>
-									</div>
-								</header>
-								<div class="slds-popover__body">
-									<template if:true={checkVisibilityOfErrorIcon}>
-										<b>Review the errors on this page.</b>
-										<ul class="slds-list_dotted">
-											<template for:each={errorMessages} for:item="err">
-												<li key={err}>
-											{err}
-										</li>
-											</template>
-										</ul>
-									</template>
-									<template if:false={checkVisibilityOfErrorIcon}>
-                                        This record looks like an existing record. Make sure to check
-                                        any potential duplicate records before saving.
-                                        
-                                                <p onclick={handleViewDuplicatesModal} class="view-duplicates">
-                                            View
-                                            Duplicates</p>
-									</template>
-								</div>
-								<footer if:false={checkVisibilityOfErrorIcon} class="slds-popover__footer">
-									<div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end">
-										<button onclick={handleContinueToSave} class="slds-button slds-button_neutral">Continue to Save</button>
-									</div>
-								</footer>
-							</section>
-						</div>
-						<lightning-icon if:true={checkVisibilityOfErrorIcon} onclick={handleVisibilityOfErrorPopup}
-							icon-name="utility:error" alternative-text="Error!" variant="error" class="custom-icon"></lightning-icon>
-								<lightning-icon if:true={checkVisibilityOfWarningIcon} onclick={handleVisibilityOfErrorPopup}
-							icon-name="utility:warning" alternative-text="Error!" variant="warning" class="custom-icon"></lightning-icon>
-					</div>
-					<!-- Error Popup Section:End-->
-					<!--HIDDEN BUTTON : START-->
-					<!-- slds-docked-form-footer stickyFooter bottomfooter -->
-					<footer class="">
-						<lightning-button variant="brand" type="submit" name="ContinueToSave" label="Continue To Save"
-							class="continue-save-button slds-hide"></lightning-button>
-							<lightning-button variant="neutral" type="submit" name="SaveAndNew"
-								label="Save & New" class="slds-m-right_small save-and-new-button slds-hide">
-							</lightning-button>
-						<lightning-button variant="brand" type="submit" name="Save" label="Save" class="save-button slds-hide">
-						</lightning-button>
-						<!--HIDDEN BUTTON : END-->
-						<lightning-button variant="neutral" name="Cancel" label="Cancel" onclick={cancelEdit}
-							class="slds-var-m-horizontal_xx-small"></lightning-button>
-						<lightning-button variant="neutral" name="SaveAndNew"
-							label="Save & New" if:true={isEditModalWindow} onclick={callSaveAndNewButton}
-							class="slds-m-horizontal_xx-small">
-						</lightning-button>
-						<lightning-button variant="brand" name="Save" onclick={validateFields} label="Save" class="slds-m-horizontal_xx-small"></lightning-button>
-					</footer>
-				</div>
-			</div>
-			</lightning-record-edit-form>
-		</div>
-		</template>
-		<!-- START: DQ System Notification Popup -->
-		<template if:true={showModal_Invalid}>
-			<div class="dq-system-notification-popup">
-				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
-			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
-					<div class="slds-modal__container modal-container-data-Invalid">
-						<div class="slds-modal__content slds-var-p-around_medium modal-border" id="DQ-modal">
-							<span class="slds-align_absolute-center text-size" if:false={isInvalidListEmpty}>
-								<b>The following data you entered is invalid, would you like to correct it?</b>
-							</span>
-							<br/>
-							<div class="slds-align_absolute-center">
-								<ul class="slds-list_dotted dotted-color">
-									<template for:each={invalidDataLists} for:item="invalidDataItem">
-										<li key={invalidDataItem}>
-											<span class="dp-text-color" style="color: #000000 !important">{invalidDataItem}
-												<br/>
-											</span>
-										</li>
-									</template>
-								</ul>
-							</div>
-							<template if:true={phoneModalType_Invalid}>
-								<span class="slds-align_absolute-center text-size">
-									<b>The following number you entered may be an incorrect type, would you like to correct it?  (Please ensure country code or  mailing country is present)</b>
-								</span>
-								<br/>
-								<div class="slds-align_absolute-center">
-									<ul class="slds-list_dotted dotted-color">
-										<template for:each={phoneNumberTypeDataLists} for:item="phoneNumberTypeDataItem">
-											<li key={phoneNumberTypeDataItem}>
-												<span class="dp-text-color" style="color: #000000 !important">{phoneNumberTypeDataItem}
-													<br/>
-												</span>
-											</li>
-										</template>
-									</ul>
-								</div>
-							</template>
-							<div class="slds-align_absolute-center slds-var-m-around_small">
-								<button class="slds-button slds-button_brand button-color" title="No" onclick={handleNo}>No</button>
-								<button class="slds-button slds-button_brand button-color" title="Yes" onclick={handleYes}>Yes</button>
-							</div>
-						</div>
-					</div>
-				</section>
-				<div class="slds-backdrop slds-backdrop_open"></div>
-			</div>
-		</template>
-		<!-- START: DQ System Notification Popup -->
-		<!-- START: View Duplicates Modal -->
-		<div if:true={isViewDuplicatesModal} class="view-duplicates-modal">
-			<section role="dialog" class="slds-modal slds-modal_large slds-fade-in-open">
-				<div class="slds-modal__container">
-					<header class="slds-modal__header">
-						<span class="slds-modal__close">
-							<lightning-icon onclick={handleViewDuplicatesModal} icon-name="utility:close" variant="inverse" alternative-text="close"></lightning-icon>
-						</span>
-						<h2 class="slds-text-heading_medium slds-hyphenate">View Duplicates</h2>
-					</header>
-					<div class="slds-modal__content slds-p-around_medium">
-						<p>The record you're about to create looks like a duplicate. Open an existing record instead?</p>
-						<template if:true={checkVisibilityOfWarningIcon}>
-							<div class="main-container">
-								<lightning-tabset>
-									<template if:true={warningMessages.data} for:each={warningMessages.data} for:item="obj">
-										<lightning-tab key={obj.apiName} label={obj.objectLabelPlural}>
-											<lightning-layout multiple-rows>
-												<template for:each={obj.matchRecordIds} for:item="rec">
-													<lightning-layout-item key={rec} size="6" padding="around-small">
-														<div class="dup-custom-box">
-															<lightning-record-view-form record-id={rec}
-														object-api-name={obj.apiName} density="compact">
-																<article class="slds-tile slds-media">
-																	<div class="slds-media__figure contact-icon">
-																		<span class="slds-icon_container" title="description of icon when needed">
-																			<svg class="slds-icon slds-icon-standard-groups" aria-hidden="true">
-																				<use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#contact"></use>
-																			</svg>
-																		</span>
-																	</div>
-																	<div class="slds-media__body">
-																		<h3 class="slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Name"></lightning-output-field>
-																		</h3>
-																		<div class="slds-tile__detail">
-																			<label class="custom_dup__label">{obj.objectLabel}</label>
-																		</div>
-																	</div>
-																</article>
-																<div class="slds-m-top_small">
-																	<dl class="slds-list_horizontal slds-wrap">
-																		<!--Name-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Name:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Name"></lightning-output-field>
-																		</dd>
-																		<!--Account Name-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Account Name:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="AccountId"></lightning-output-field>
-																		</dd>
-																		<!--Title-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Title:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Title"></lightning-output-field>
-																		</dd>
-																		<!--Job Function-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Job Function:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Job_Function__c"></lightning-output-field>
-																		</dd>
-																		<!--Email-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Email:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Email"></lightning-output-field>
-																		</dd>
-																		<!--Phone-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Phone:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Phone"></lightning-output-field>
-																		</dd>
-																		<!--Active-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Active:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Active__c"></lightning-output-field>
-																		</dd>
-																		<!--Record Owner-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Record Owner:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Record_Owner__c"></lightning-output-field>
-																		</dd>
-																		<!--Contact Record Type-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Contact Record Type:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="RecordTypeId"></lightning-output-field>
-																		</dd>
-																		<!--Secondary Email-->
-																		<dt
-																	class="slds-item_label slds-text-color_weak slds-truncate">
-																	Secondary Email:</dt>
-																		<dd class="slds-item_detail slds-truncate">
-																			<lightning-output-field variant='label-hidden'
-																		field-name="Secondary_Email__c"></lightning-output-field>
-																		</dd>
-																	</dl>
-																</div>
-															</lightning-record-view-form>
-														</div>
-														<div class="dup-custom-box open-this-contact">
-															<a data-id={rec} onclick={handleViewRecordDatail}>Open This
-														Contact</a>
-														</div>
-													</lightning-layout-item>
-												</template>
-											</lightning-layout>
-										</lightning-tab>
-									</template>
-								</lightning-tabset>
-							</div>
-						</template>
-					</div>
-				</div>
-			</section>
-			<div class="slds-backdrop slds-backdrop_open"></div>
-		</div>
-		<!-- END: View Duplicates Modal -->
-	</div>
+                                        <!--Kalyani added condition -  if:false={layoutItem.isContactOwner}-->
+                                        <lightning-input-field
+                                          if:false="{layoutItem.isContactOwner}"
+                                          key="{layoutComponent}"
+                                          field-name="{layoutComponent.apiName}"
+                                          name="{layoutComponent.apiName}"
+                                          onchange="{handleFieldChange}"
+                                        ></lightning-input-field>
+                                      </template>
+                                    </template>
+                                    <template
+                                      if:true="{layoutItem.isNameField}"
+                                    >
+                                      <lightning-input-field
+                                        key="{layoutComponent}"
+                                        field-name="{layoutComponent.apiName}"
+                                        name="{layoutComponent.apiName}"
+                                        onchange="{handleFieldChange}"
+                                      ></lightning-input-field>
+                                    </template>
+                                  </template>
+                                  <template
+                                    if:false="{layoutItem.editableForUpdate}"
+                                  >
+                                    <lightning-output-field
+                                      key="{layoutComponent}"
+                                      field-name="{layoutComponent.apiName}"
+                                    ></lightning-output-field>
+                                    <template
+                                      if:true="{layoutComponent.isFormulaField}"
+                                    >
+                                      <span
+                                        key="{layoutComponent}"
+                                        class="slds-m-top_xxx-small formula-field"
+                                        >This field is calculated upon
+                                        save</span
+                                      >
+                                    </template>
+                                  </template>
+                                  <!--Kalyani added - starts-->
+                                  <template
+                                    if:true="{layoutItem.isContactOwner}"
+                                  >
+                                    <template
+                                      if:false="{layoutItem.editableForUpdate}"
+                                    >
+                                      <!--<lightning-input-field key={layoutComponent}
+																			field-name={layoutComponent.apiName}></lightning-input-field>-->
+                                    </template>
+                                  </template>
+                                  <!--Kalyani added - ends-->
+                                </template>
+                              </span>
+                            </div>
+                          </div>
+                        </template>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </template>
+            </template>
+          </lightning-accordion>
+          <div>
+            <div class="slds-align_absolute-center slds-m-bottom_small">
+              <!-- Error Popup Section-->
+              <div class="custom-popover-section">
+                <div class="custom-popover">
+                  <section
+                    if:true="{isErrorPopup}"
+                    class="{popoverHeaderStyle}"
+                    role="dialog"
+                  >
+                    <button
+                      type="button"
+                      onclick="{handleVisibilityOfErrorPopup}"
+                      class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse"
+                      title="Close dialog"
+                    >
+                      <svg class="slds-button__icon">
+                        <use
+                          xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"
+                        ></use>
+                      </svg>
+                    </button>
+                    <header class="slds-popover__header">
+                      <div
+                        class="slds-media slds-media_center slds-has-flexi-truncate"
+                      >
+                        <div class="slds-media__figure">
+                          <span
+                            if:true="{checkVisibilityOfErrorIcon}"
+                            class="slds-icon_container slds-icon-utility-error"
+                          >
+                            <svg class="slds-icon slds-icon_x-small">
+                              <use
+                                xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#error"
+                              ></use>
+                            </svg>
+                          </span>
+                          <span
+                            class="slds-icon_container slds-icon-utility-warning"
+                          >
+                            <svg
+                              if:false="{checkVisibilityOfErrorIcon}"
+                              class="slds-icon slds-icon_x-small slds-icon-text-default"
+                              aria-hidden="true"
+                            >
+                              <use
+                                xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#warning"
+                              ></use>
+                            </svg>
+                          </span>
+                        </div>
+                        <div class="slds-media__body">
+                          <h2 class="slds-truncate slds-text-heading_medium">
+                            <span if:true="{checkVisibilityOfErrorIcon}"
+                              >We hit a snag.</span
+                            >
+                            <span if:false="{checkVisibilityOfErrorIcon}"
+                              >Review warning</span
+                            >
+                          </h2>
+                        </div>
+                      </div>
+                    </header>
+                    <div class="slds-popover__body">
+                      <template if:true="{checkVisibilityOfErrorIcon}">
+                        <b>Review the errors on this page.</b>
+                        <ul class="slds-list_dotted">
+                          <template for:each="{errorMessages}" for:item="err">
+                            <li key="{err}">{err}</li>
+                          </template>
+                        </ul>
+                      </template>
+                      <template if:false="{checkVisibilityOfErrorIcon}">
+                        This record looks like an existing record. Make sure to
+                        check any potential duplicate records before saving.
+
+                        <p
+                          onclick="{handleViewDuplicatesModal}"
+                          class="view-duplicates"
+                        >
+                          View Duplicates
+                        </p>
+                      </template>
+                    </div>
+                    <footer
+                      if:false="{checkVisibilityOfErrorIcon}"
+                      class="slds-popover__footer"
+                    >
+                      <div
+                        class="slds-grid slds-grid_vertical-align-center slds-grid_align-end"
+                      >
+                        <button
+                          onclick="{handleContinueToSave}"
+                          class="slds-button slds-button_neutral"
+                        >
+                          Continue to Save
+                        </button>
+                      </div>
+                    </footer>
+                  </section>
+                </div>
+                <lightning-icon
+                  if:true="{checkVisibilityOfErrorIcon}"
+                  onclick="{handleVisibilityOfErrorPopup}"
+                  icon-name="utility:error"
+                  alternative-text="Error!"
+                  variant="error"
+                  class="custom-icon"
+                ></lightning-icon>
+                <lightning-icon
+                  if:true="{checkVisibilityOfWarningIcon}"
+                  onclick="{handleVisibilityOfErrorPopup}"
+                  icon-name="utility:warning"
+                  alternative-text="Error!"
+                  variant="warning"
+                  class="custom-icon"
+                ></lightning-icon>
+              </div>
+              <!-- Error Popup Section:End-->
+              <!--HIDDEN BUTTON : START-->
+              <!-- slds-docked-form-footer stickyFooter bottomfooter -->
+              <footer class="">
+                <lightning-button
+                  variant="brand"
+                  type="submit"
+                  name="ContinueToSave"
+                  label="Continue To Save"
+                  class="continue-save-button slds-hide"
+                ></lightning-button>
+                <lightning-button
+                  variant="neutral"
+                  type="submit"
+                  name="SaveAndNew"
+                  label="Save & New"
+                  class="slds-m-right_small save-and-new-button slds-hide"
+                >
+                </lightning-button>
+                <lightning-button
+                  variant="brand"
+                  type="submit"
+                  name="Save"
+                  label="Save"
+                  class="save-button slds-hide"
+                >
+                </lightning-button>
+                <!--HIDDEN BUTTON : END-->
+                <lightning-button
+                  variant="neutral"
+                  name="Cancel"
+                  label="Cancel"
+                  onclick="{cancelEdit}"
+                  class="slds-var-m-horizontal_xx-small"
+                ></lightning-button>
+                <lightning-button
+                  variant="neutral"
+                  name="SaveAndNew"
+                  label="Save & New"
+                  if:true="{isEditModalWindow}"
+                  onclick="{callSaveAndNewButton}"
+                  class="slds-m-horizontal_xx-small"
+                >
+                </lightning-button>
+                <lightning-button
+                  variant="brand"
+                  name="Save"
+                  onclick="{validateFields}"
+                  label="Save"
+                  class="slds-m-horizontal_xx-small"
+                ></lightning-button>
+              </footer>
+            </div>
+          </div>
+        </lightning-record-edit-form>
+      </div>
+    </template>
+    <!-- START: DQ System Notification Popup -->
+    <template if:true="{showModal_Invalid}">
+      <div class="dq-system-notification-popup">
+        <section
+          role="dialog"
+          tabindex="-1"
+          aria-labelledby="modal-heading-01"
+          aria-modal="true"
+          aria-describedby="modal-content-id-1"
+          class="slds-modal slds-fade-in-open"
+        >
+          <div class="slds-modal__container modal-container-data-Invalid">
+            <div
+              class="slds-modal__content slds-var-p-around_medium modal-border"
+              id="DQ-modal"
+            >
+              <span
+                class="slds-align_absolute-center text-size"
+                if:false="{isInvalidListEmpty}"
+              >
+                <b
+                  >The following data you entered is invalid, would you like to
+                  correct it?</b
+                >
+              </span>
+              <br />
+              <div class="slds-align_absolute-center">
+                <ul class="slds-list_dotted dotted-color">
+                  <template
+                    for:each="{invalidDataLists}"
+                    for:item="invalidDataItem"
+                  >
+                    <li key="{invalidDataItem}">
+                      <span
+                        class="dp-text-color"
+                        style="color: #000000 !important"
+                        >{invalidDataItem}
+                        <br />
+                      </span>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+              <template if:true="{phoneModalType_Invalid}">
+                <span class="slds-align_absolute-center text-size">
+                  <b
+                    >The following number you entered may be an incorrect type,
+                    would you like to correct it? (Please ensure country code or
+                    mailing country is present)</b
+                  >
+                </span>
+                <br />
+                <div class="slds-align_absolute-center">
+                  <ul class="slds-list_dotted dotted-color">
+                    <template
+                      for:each="{phoneNumberTypeDataLists}"
+                      for:item="phoneNumberTypeDataItem"
+                    >
+                      <li key="{phoneNumberTypeDataItem}">
+                        <span
+                          class="dp-text-color"
+                          style="color: #000000 !important"
+                          >{phoneNumberTypeDataItem}
+                          <br />
+                        </span>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+              <div class="slds-align_absolute-center slds-var-m-around_small">
+                <button
+                  class="slds-button slds-button_brand button-color"
+                  title="No"
+                  onclick="{handleNo}"
+                >
+                  No
+                </button>
+                <button
+                  class="slds-button slds-button_brand button-color"
+                  title="Yes"
+                  onclick="{handleYes}"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </div>
+    </template>
+    <!-- START: DQ System Notification Popup -->
+    <!-- START: View Duplicates Modal -->
+    <div if:true="{isViewDuplicatesModal}" class="view-duplicates-modal">
+      <section
+        role="dialog"
+        class="slds-modal slds-modal_large slds-fade-in-open"
+      >
+        <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <span class="slds-modal__close">
+              <lightning-icon
+                onclick="{handleViewDuplicatesModal}"
+                icon-name="utility:close"
+                variant="inverse"
+                alternative-text="close"
+              ></lightning-icon>
+            </span>
+            <h2 class="slds-text-heading_medium slds-hyphenate">
+              View Duplicates
+            </h2>
+          </header>
+          <div class="slds-modal__content slds-p-around_medium">
+            <p>
+              The record you're about to create looks like a duplicate. Open an
+              existing record instead?
+            </p>
+            <template if:true="{checkVisibilityOfWarningIcon}">
+              <div class="main-container">
+                <lightning-tabset>
+                  <template
+                    if:true="{warningMessages.data}"
+                    for:each="{warningMessages.data}"
+                    for:item="obj"
+                  >
+                    <lightning-tab
+                      key="{obj.apiName}"
+                      label="{obj.objectLabelPlural}"
+                    >
+                      <lightning-layout multiple-rows>
+                        <template
+                          for:each="{obj.matchRecordIds}"
+                          for:item="rec"
+                        >
+                          <lightning-layout-item
+                            key="{rec}"
+                            size="6"
+                            padding="around-small"
+                          >
+                            <div class="dup-custom-box">
+                              <lightning-record-view-form
+                                record-id="{rec}"
+                                object-api-name="{obj.apiName}"
+                                density="compact"
+                              >
+                                <article class="slds-tile slds-media">
+                                  <div class="slds-media__figure contact-icon">
+                                    <span
+                                      class="slds-icon_container"
+                                      title="description of icon when needed"
+                                    >
+                                      <svg
+                                        class="slds-icon slds-icon-standard-groups"
+                                        aria-hidden="true"
+                                      >
+                                        <use
+                                          xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#contact"
+                                        ></use>
+                                      </svg>
+                                    </span>
+                                  </div>
+                                  <div class="slds-media__body">
+                                    <h3 class="slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Name"
+                                      ></lightning-output-field>
+                                    </h3>
+                                    <div class="slds-tile__detail">
+                                      <label class="custom_dup__label"
+                                        >{obj.objectLabel}</label
+                                      >
+                                    </div>
+                                  </div>
+                                </article>
+                                <div class="slds-m-top_small">
+                                  <dl class="slds-list_horizontal slds-wrap">
+                                    <!--Name-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Name:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Name"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Account Name-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Account Name:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="AccountId"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Title-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Title:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Title"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Job Function-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Job Function:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Job_Function__c"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Email-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Email:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Email"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Phone-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Phone:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Phone"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Active-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Active:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Active__c"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Record Owner-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Record Owner:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Record_Owner__c"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Contact Record Type-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Contact Record Type:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="RecordTypeId"
+                                      ></lightning-output-field>
+                                    </dd>
+                                    <!--Secondary Email-->
+                                    <dt
+                                      class="slds-item_label slds-text-color_weak slds-truncate"
+                                    >
+                                      Secondary Email:
+                                    </dt>
+                                    <dd class="slds-item_detail slds-truncate">
+                                      <lightning-output-field
+                                        variant="label-hidden"
+                                        field-name="Secondary_Email__c"
+                                      ></lightning-output-field>
+                                    </dd>
+                                  </dl>
+                                </div>
+                              </lightning-record-view-form>
+                            </div>
+                            <div class="dup-custom-box open-this-contact">
+                              <a
+                                data-id="{rec}"
+                                onclick="{handleViewRecordDatail}"
+                                >Open This Contact</a
+                              >
+                            </div>
+                          </lightning-layout-item>
+                        </template>
+                      </lightning-layout>
+                    </lightning-tab>
+                  </template>
+                </lightning-tabset>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    <!-- END: View Duplicates Modal -->
+  </div>
 </template>

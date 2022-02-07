@@ -5,15 +5,15 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require('shelljs');
-const chalk = require('chalk');
+const shell = require("shelljs");
+const chalk = require("chalk");
 
-shell.set('-e');
-shell.set('+v');
+shell.set("-e");
+shell.set("+v");
 
 const origExec = shell.exec;
 
-process.env.FORCE_COLOR = '1';
+process.env.FORCE_COLOR = "1";
 
 shell.exec = function (command, ...args) {
   const options = Object.assign(
@@ -23,7 +23,7 @@ shell.exec = function (command, ...args) {
     args[0]
   );
   if (options.passthrough) {
-    command = `${command} ${process.argv.slice(2).join(' ')}`;
+    command = `${command} ${process.argv.slice(2).join(" ")}`;
   }
   // eslint-disable-next-line no-console
   console.error(chalk.blue(command));
