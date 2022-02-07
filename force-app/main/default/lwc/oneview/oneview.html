@@ -1,0 +1,281 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="slds-brand-band slds-brand-band_large"></div>
+    <lightning-layout
+        vertical-align="stretch"
+        multiple-rows="true"
+    >
+        <template if:true={isWaitingForData}>
+            <lightning-spinner
+                alternative-text="Loading"
+            ></lightning-spinner>
+        </template>
+        <template if:false={isRecordAvailable}>
+            <div data-aura-rendered-by="4:1004;a">
+                <figure data-aura-rendered-by="5:1004;a">
+                    <div data-aura-rendered-by="12:1004;a">
+                        <h2>{errorMessage}</h2>
+                    </div>
+                </figure>
+            </div>
+        </template>
+
+        <!--End of Data Load/any Errors-->
+        <div class="container">
+            <template if:true={isRecordAvailable}>
+                <!--Layout Start-->
+
+                <!--Page Header-->
+                <lightning-layout-item>
+                    <lightning-tile class="slds-page-header">
+                        <lightning-icon
+                            class="slds-media slds-media__figure slds-float_left"
+                            label="Data Stream"
+                            aria-labelledby="Data Stream"
+                            icon-name="standard:data_streams"
+                            alternative-text="Data Stream"
+                            title="Data Stream"
+                        >
+                        </lightning-icon>
+                        <!--Refresh Button-->
+                        <lightning-layout-item
+                            padding="around-small"
+                        >
+                            <lightning-button-icon
+                                icon-name="utility:loop"
+                                variant="border-filled"
+                                alternative-text="Refresh"
+                                slot="actions"
+                                onclick={connectedCallback}
+                                class="slds-float_right"
+                                label="refresh"
+                            >
+                            </lightning-button-icon>
+                        </lightning-layout-item>
+                        <span
+                            class="slds-assistive-text slds-align_absolute-center"
+                        >
+                            {CONSTANT.FULL_NAME_LABEL}
+                        </span>
+                        <div class="slds-align_absolute-center">
+                            <h1>
+                                {unifiedProfileDetailWrapper.firstName}
+                                {unifiedProfileDetailWrapper.lastName}
+                            </h1>
+                        </div>
+                        <p
+                            class="slds-page-header__name-meta slds-align_absolute-center"
+                        >
+                            {CONSTANT.GLOBAL_PARTY_ID_LABEL}:
+                            {unifiedProfileDetailWrapper.UPId}
+                        </p>
+                    </lightning-tile>
+                </lightning-layout-item>
+
+                <!--Email Contact Point-->
+                <lightning-layout-item
+                    class="slds-has-bottom-magnet"
+                    style="width: 100%"
+                    padding="around-medium"
+                >
+                    <lightning-tile class="container">
+                        <div class="labels">
+                            <h3>{CONSTANT.EMAIL_LABEL}:</h3>
+                        </div>
+                        <template
+                            for:each={unifiedProfileDetailWrapper.EmailContactPoints}
+                            for:item="emailContactPoint"
+                            for:index="index"
+                        >
+                            <dl class="dl_group" key={address}>
+                                <dt
+                                    class="dd_label"
+                                    title="Email Data Source"
+                                >
+                                    {emailContactPoint.dataSourceName}
+                                </dt>
+                                <dd
+                                    class="slds-dl_inline_horizontal__detail"
+                                    title="Email Value"
+                                >
+                                    {emailContactPoint.contactPointValue}
+                                </dd>
+                                <slot
+                                    class="dd_action slds-hint-parent"
+                                    key={emailContactPoint.FullName}
+                                >
+                                    <lightning-input
+                                        type="radio"
+                                        data-name="radio-deselect"
+                                        name="EmailRadioButton"
+                                        data-value={index}
+                                        onchange={selectEmailRecordIndex}
+                                    ></lightning-input>
+                                </slot>
+                            </dl>
+                        </template>
+                    </lightning-tile>
+                </lightning-layout-item>
+
+                <!--Phone Contact Point-->
+                <lightning-layout-item
+                    style="width: 100%"
+                    padding="around-medium"
+                    class="slds-has-bottom-magnet"
+                >
+                    <lightning-tile class="container">
+                        <div
+                            class="labels slds-align_absolute-center"
+                        >
+                            <h3>{CONSTANT.PHONE_LABEL}:</h3>
+                        </div>
+                        <template
+                            for:each={unifiedProfileDetailWrapper.PhoneContactPoints}
+                            for:item="phoneContactPoint"
+                            for:index="index"
+                        >
+                            <dl class="dl_group" key={address}>
+                                <dt
+                                    class="dd_label"
+                                    title="Phone Data Source"
+                                >
+                                    {phoneContactPoint.dataSourceName}
+                                </dt>
+                                <dd
+                                    class="slds-dl_inline_horizontal__detail"
+                                    title="Phone Value"
+                                >
+                                    {phoneContactPoint.contactPointValue}
+                                </dd>
+                                <slot
+                                    class="dd_action slds-hint-parent"
+                                    key={phoneContactPoint.FullName}
+                                >
+                                    <lightning-input
+                                        type="radio"
+                                        data-name="radio-deselect"
+                                        name="PhoneRadioButton"
+                                        data-value={index}
+                                        onchange={selectPhoneRecordIndex}
+                                    ></lightning-input>
+                                </slot>
+                            </dl>
+                        </template>
+                    </lightning-tile>
+                </lightning-layout-item>
+
+                <!--Mobile Phone Section-->
+                <lightning-layout-item
+                    style="width: 100%"
+                    padding="around-medium"
+                    class="slds-has-bottom-magnet"
+                >
+                    <lightning-tile class="container">
+                        <div class="labels">
+                            <h3>{CONSTANT.MOBILE_LABEL}:</h3>
+                        </div>
+                        <template
+                            for:each={unifiedProfileDetailWrapper.MobileContactPoints}
+                            for:item="mobileContactPoint"
+                            for:index="index"
+                        >
+                            <dl class="dl_group" key={address}>
+                                <dt
+                                    class="dd_label"
+                                    title="Mobile Data Source"
+                                >
+                                    {mobileContactPoint.dataSourceName}
+                                </dt>
+                                <dd
+                                    class="slds-dl_inline_horizontal__detail"
+                                    title="Mobile Value"
+                                >
+                                    {mobileContactPoint.contactPointValue}
+                                </dd>
+                                <slot
+                                    class="dd_action slds-hint-parent"
+                                    key={mobileContactPoint.FullName}
+                                >
+                                    <lightning-input
+                                        data-name="radio-deselect"
+                                        name="MobileRadioButton"
+                                        data-value={index}
+                                        onchange={selectMobileRecordIndex}
+                                    >
+                                    </lightning-input>
+                                </slot>
+                            </dl>
+                        </template>
+                    </lightning-tile>
+                </lightning-layout-item>
+                <lightning-layout-item
+                    style="width: 100%"
+                    padding="around-medium"
+                    class="slds-has-bottom-magnet"
+                >
+                    <lightning-tile class="container">
+                        <div class="labels">
+                            <h3>{CONSTANT.MAILING_LABEL}:</h3>
+                        </div>
+                        <template
+                            for:each={unifiedProfileDetailWrapper.AddressContactPoints}
+                            for:item="addressContactPoint"
+                            for:index="index"
+                        >
+                            <dl class="dl_group" key={address}>
+                                <dt
+                                    class="dd_label"
+                                    title="Address Data Source"
+                                >
+                                    {addressContactPoint.dataSourceName}
+                                </dt>
+                                <dd
+                                    class="slds-dl_inline_horizontal__detail"
+                                    title="Address Value"
+                                >
+                                    {addressContactPoint.addressLine1}
+                                    {addressContactPoint.cityName},
+                                    {addressContactPoint.stateProvinceCode}
+                                    -
+                                    {addressContactPoint.postalCode}
+                                    {addressContactPoint.countryName}
+                                </dd>
+                                <slot
+                                    class="dd_action slds-hint-parent"
+                                    key={addressContactPoint.FullName}
+                                >
+                                    <lightning-input
+                                        type="radio"
+                                        data-name="radio-deselect"
+                                        name="addressRadioButton"
+                                        data-value={index}
+                                        onchange={selectAddressRecordIndex}
+                                    >
+                                    </lightning-input>
+                                </slot>
+                            </dl>
+                        </template>
+                    </lightning-tile>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <lightning-button
+                                label="Reset"
+                                variant="Neutral"
+                                onclick={resetRadioButton}
+                            ></lightning-button>
+                            <lightning-button
+                                label="Adopt"
+                                variant="Brand"
+                                onclick={adoptContactDetails}
+                                disabled={isAdoptButtonDisabled}
+                                class="slds-var-m-horizontal_x-small"
+                            ></lightning-button>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </template>
+        </div>
+    </lightning-layout>
+</template>

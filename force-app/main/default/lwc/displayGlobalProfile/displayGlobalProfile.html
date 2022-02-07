@@ -1,0 +1,309 @@
+<!--
+  @description       : 
+  @author            : BDirhiemer
+  @group             : 
+  @last modified on  : 06-02-2021
+  @last modified by  : Arjita Marelay
+  Modifications Log 
+  Ver   Date         Author       Modification
+  1.0   06-01-2021   BDirhiemer   Initial Version
+  2.0   08-25-2021   BDirheimer   Removed NPI
+-->
+<template>
+  <lightning-card title="Global Profile" icon-name="standard:data_streams">
+    <lightning-button-icon
+      icon-name="utility:loop"
+      variant="border-filled"
+      alternative-text="Refresh"
+      slot="actions"
+      onclick={connectedCallback}
+    ></lightning-button-icon>
+    <template if:true={isWaitingForData}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    <template if:false={isWaitingForData}>
+      <template if:false={isRecordAvailable}>
+        <div
+          class="slds-var-p-top_medium slds-var-p-bottom_large slds-align_absolute-center"
+          data-aura-rendered-by="4:1004;a"
+        >
+          <figure data-aura-rendered-by="5:1004;a">
+            <div
+              class="col-grid slds-grid_vertical slds-align_absolute-center"
+              data-aura-rendered-by="12:1004;a"
+            >
+              <h2
+                class="slds-text-heading_medium slds-var-p-top_medium slds-text-align_center"
+              >
+                {errorMessage}
+              </h2>
+            </div>
+          </figure>
+        </div>
+      </template>
+      <template if:true={isRecordAvailable}>
+        <div class="slds-var-m-around_medium">
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-4 slds-p-vertical_x-small">
+              <span>{CONSTANT.GLOBAL_PARTY_ID_LABEL}:</span>
+            </div>
+            <div class="slds-col slds-size_3-of-4 slds-p-vertical_x-small">
+              <span>{globalProfileDetailWrapper.globalPartyId}</span>
+            </div>
+            <div class="slds-col slds-size_1-of-4 slds-p-vertical_x-small">
+              <span>{CONSTANT.FULL_NAME_LABEL}:</span>
+            </div>
+            <div class="slds-col slds-size_3-of-4 slds-p-vertical_x-small">
+              <span
+                >{globalProfileDetailWrapper.firstName}
+                {globalProfileDetailWrapper.lastName}</span
+              >
+            </div>
+            <div class="slds-col slds-size_1-of-4 slds-p-vertical_x-small">
+              <span>{CONSTANT.EMAIL_LABEL}:</span>
+            </div>
+            <div
+              class="slds-col slds-size_3-of-4 slds-p-vertical_x-small slds-grid slds-wrap"
+            >
+              <table
+                class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small slds-p-vertical_small"
+              >
+                <tbody>
+                  <template
+                    for:each={globalProfileDetailWrapper.EmailContactPoints}
+                    for:item="emailContactPoint"
+                    for:index="index"
+                  >
+                    <tr
+                      class="slds-hint-parent"
+                      key={emailContactPoint.FullName}
+                    >
+                      <td class="slds-size_1-of-7">
+                        <lightning-input
+                          type="radio"
+                          data-name="radio-deselect"
+                          name="EmailRadioButton"
+                          data-value={index}
+                          onchange={selectEmailRecordIndex}
+                        ></lightning-input>
+                        <!--input type="radio" name ="EmailRadioButton" data-value ={index} onchange ={selectEmailRecordIndex} ondeselect={handleDeselct}/-->
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            {emailContactPoint.contactPointValue}
+                            <br />
+                          </span>
+                        </div>
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            {emailContactPoint.dataSourceName}
+                            <br />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+            <div class="slds-col slds-size_1-of-4 slds-p-vertical_x-small">
+              <span>{CONSTANT.PHONE_LABEL}:</span>
+            </div>
+            <div
+              class="slds-col slds-size_3-of-4 slds-p-vertical_x-small slds-grid slds-wrap"
+            >
+              <table
+                class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small slds-p-vertical_small remove-separate-border"
+              >
+                <tbody>
+                  <template
+                    for:each={globalProfileDetailWrapper.PhoneContactPoints}
+                    for:item="phoneContactPoint"
+                    for:index="index"
+                  >
+                    <tr
+                      class="slds-hint-parent"
+                      key={phoneContactPoint.FullName}
+                    >
+                      <td class="slds-size_1-of-7">
+                        <lightning-input
+                          type="radio"
+                          data-name="radio-deselect"
+                          name="PhoneRadioButton"
+                          data-value={index}
+                          onchange={selectPhoneRecordIndex}
+                        ></lightning-input>
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            {phoneContactPoint.contactPointValue}
+                            <br />
+                          </span>
+                        </div>
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            {phoneContactPoint.dataSourceName}
+                            <br />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+            <div class="slds-col slds-size_1-of-4 slds-p-vertical_x-small">
+              <span>{CONSTANT.MOBILE_LABEL}:</span>
+            </div>
+            <div
+              class="slds-col slds-size_3-of-4 slds-p-vertical_x-small slds-grid slds-wrap"
+            >
+              <table
+                class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small slds-p-vertical_small remove-separate-border"
+              >
+                <tbody>
+                  <template
+                    for:each={globalProfileDetailWrapper.MobileContactPoints}
+                    for:item="mobileContactPoint"
+                    for:index="index"
+                  >
+                    <tr
+                      class="slds-hint-parent"
+                      key={mobileContactPoint.FullName}
+                    >
+                      <td class="slds-size_1-of-7">
+                        <lightning-input
+                          type="radio"
+                          data-name="radio-deselect"
+                          name="MobileRadioButton"
+                          data-value={index}
+                          onchange={selectMobileRecordIndex}
+                        ></lightning-input>
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            {mobileContactPoint.contactPointValue}
+                            <br />
+                          </span>
+                        </div>
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            {mobileContactPoint.dataSourceName}
+                            <br />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+            <div class="slds-col slds-size_1-of-4 slds-p-vertical_x-small">
+              <span>{CONSTANT.MAILING_LABEL}:</span>
+            </div>
+            <div
+              class="slds-col slds-size_3-of-4 slds-p-vertical_x-small slds-grid slds-wrap"
+            >
+              <table
+                class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small slds-p-vertical_small remove-separate-border"
+              >
+                <tbody>
+                  <template
+                    for:each={globalProfileDetailWrapper.AddressContactPoints}
+                    for:item="addressContactPoint"
+                    for:index="index"
+                  >
+                    <tr
+                      class="slds-hint-parent"
+                      key={addressContactPoint.FullName}
+                    >
+                      <td class="slds-size_1-of-7">
+                        <lightning-input
+                          type="radio"
+                          data-name="radio-deselect"
+                          name="addressRadioButton"
+                          data-value={index}
+                          onchange={selectAddressRecordIndex}
+                        ></lightning-input>
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            <div>{addressContactPoint.addressLine1}</div>
+                            <div>
+                              {addressContactPoint.cityName},
+                              {addressContactPoint.stateProvinceCode} -
+                              {addressContactPoint.postalCode}
+                            </div>
+                            <div>{addressContactPoint.countryName}</div>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="slds-size_3-of-7">
+                        <div
+                          style="white-space: pre-wrap"
+                          class="slds-truncate"
+                        >
+                          <span key={address}>
+                            {addressContactPoint.dataSourceName}
+                            <br />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="slds-clearfix">
+            <div class="slds-float_right">
+              <lightning-button
+                label="Reset"
+                variant="Neutral"
+                onclick={resetRadioButton}
+              ></lightning-button>
+              <lightning-button
+                label="Adopt"
+                variant="Brand"
+                onclick={adoptContactDetails}
+                disabled={isAdoptButtonDisabled}
+                class="slds-m-horizontal_x-small"
+              ></lightning-button>
+            </div>
+          </div>
+        </div>
+      </template>
+    </template>
+  </lightning-card>
+</template>

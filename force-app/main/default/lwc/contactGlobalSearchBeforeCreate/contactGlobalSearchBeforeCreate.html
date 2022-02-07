@@ -1,0 +1,34 @@
+<template>
+  <!--<lightning-card>  Add commented code, when global search is turned on. -->
+  <!--Use template if:true to display/hide popup based on isModalOpen value-->
+  <!--<template if:true={bShowModal}>                           
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container modal-container">                                
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Global Search for Contact</h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                    <div  style="max-height:500px;max-width:1000px">                             
+                            <div class="slds-scrollable_y" style="max-height:500px;max-width:1000px">                                        
+                                <c-global-search  onclosecontactglobalsearchmodal={closeModal} is-search-from-contact=true></c-global-search>                                
+                            </div>                                                                      
+                    </div>   
+                </div>           
+            </div>            
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>                          
+        </template>  -->
+  <c-global-search
+    onclosecontactglobalsearchmodal={closeModal}
+    is-search-from-contact="true"
+  ></c-global-search>
+  <!-- later comment this - global search tag-->
+  <!--</lightning-card> -->
+</template>

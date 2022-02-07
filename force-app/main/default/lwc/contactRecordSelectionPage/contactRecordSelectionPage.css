@@ -1,0 +1,30 @@
+/*.modal-container{
+    width: 100%;
+    max-width: 1000px;
+    min-width: 480px;
+}*/
+.modal-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 65%;
+    max-width: 1000px;
+    min-width: 480px;
+}
+.change-record-type-left-column {
+    margin-left: 20%;
+}
+.record-type {
+    margin-left: 1% !important;
+}
+.change-record-type-right-column {
+    margin-left: 40%;
+}
+.record-type-name {
+    margin-left: 45% !important;
+}
+.record-type-modal {
+    margin-left: 25% !important;
+    font-size: 14px !important;
+}

@@ -1,0 +1,25 @@
+/*.dq-system-notification-popup .slds-backdrop_open{
+    z-index: 9010 !important;
+}*/
+.dotted-color {
+  color: #ff0000;
+}
+.dp-text-color {
+  color: #000000 !important;
+}
+.button-color {
+  --sds-c-button-brand-color-border: #ff0000;
+  --sds-c-button-brand-color-background: #ff0000;
+  --sds-c-button-brand-color-background-hover: #ff0000;
+  --sds-c-button-brand-color-border-hover: #ff0000;
+  --sds-c-button-radius-border: 0.5rem;
+  width: 25%;
+}
+.modal-container-data-Invalid {
+  max-width: 35%;
+  /*--sds-c-modal-color-border: #ff0000; */
+  --sds-c-backdrop-color-background: #ff0000;
+}
+.modal-border {
+  border: 2px solid #ff0000;
+}

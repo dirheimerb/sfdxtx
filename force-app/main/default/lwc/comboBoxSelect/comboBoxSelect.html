@@ -1,0 +1,125 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-03-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <!--
+    <div class="slds-form-element">
+    <label 
+class="slds-form-element__label" 
+for="searchInput">
+    </label>
+    <div 
+class="slds-form-element__control">
+        <div 
+class="slds-searchInput-group">
+            <div 
+class="slds-combobox_object-s
+tcher 
+slds-searchInput-addon_start"
+ class="slds-form-element">
+abel class="slds-form-element__label 
+ds-assistive-text" for="searchInput" 
+="searchInput">Filter Search by:</label>
+iv class="slds-form-element__control">
+<div class="slds-combobox_container">
+  <div class="slds-searchInput 
+slds-dropdown-trigger 
+slds-dropdown-trigger_click" 
+aria-controls="primary-searchInput-id-2
+    <div 
+class="slds-combobox__form-element 
+slds-input-has-icon 
+slds-input-has-icon_right" role="none
+      <button 
+        type="button" 
+        class="
+            slds-input_faux 
+slds-combobox__input 
+slds-combobox__input-value
+            " 
+        aria-labelledby="searchInput-labe
+searchInput-id-2" 
+id="searchInput-id-2-selected-val
+" 
+aria-controls="objectswitcher-lis
+ox-id-01"
+        aria-expanded="false" 
+aria-haspopup="listbox">
+        <span class="slds-truncate" 
+id="searchInput-value-id-3">
+{searchParam}</span>
+      </button>
+      <span class="slds-icon_container 
+slds-icon-utility-down 
+slds-input__icon 
+slds-input__icon_right">
+          <lightning-icon class="slds-ico
+slds-icon_xx-small" icon-name=
+      </span>
+        </div>
+    </div>
+</div> 
+<div onkeyup={handleKeyUp}>
+    <div class="slds-combobox-group">
+<lightning-combobox
+    class="
+        slds-combobox_addon-start
+        slds-combobox_object-switcher
+        slds-listbox_inline
+        "
+    name="searchInput"
+    value={value}
+    onchange={handleChange}
+    options={searchOptions}
+    
+></lightning-combobox>
+ <lightning-input
+    class="
+        slds-combobox-addon_end
+        slds-listbox_inline
+        "
+    type="search" 
+    placeholder="Please enter email or phone number"
+    message-when-value-missing={handleCombo}> 
+</lightning-input>
+</div>
+</div>
+<lightning-button
+    variant="brand"
+    onclick={handleSubmit}
+    type="Submit"
+    label="Submit"
+    class="slds-button">
+</lightning-button>
+-->
+    <div class="slds-box">
+        <div class="slds-combobox-group">
+        
+            <lightning-combobox
+                class="slds-listbox_inline"
+                name="searchInput"
+                value={value}
+                onchange={handleChange}
+                options={searchOptions}
+            ></lightning-combobox>
+                <lightning-input
+                    class="slds-listbox_inline slds-listbox__option-text_entity slds-size_2-of-3"
+                    type="search"
+                    placeholder="Please enter email or phone number"
+                  >
+                  </lightning-input>
+               </div>
+            </div>
+                 <!-- <lightning-button
+                    variant="brand"
+                    onclick={handleSubmit}
+                    type="Submit"
+                    label="Submit"
+                    class="slds-button slds-float_right">           
+                  </lightning-button>
+                -->
+</template>

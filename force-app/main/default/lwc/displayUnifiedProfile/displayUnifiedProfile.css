@@ -1,0 +1,89 @@
+/**
+ * Created by bdirh on 12/27/2021.
+ */
+
+
+ .layout {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: calc(100% - 20px);
+  background-color: #fafaf9;
+  text-align: center;
+  font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+.layout-header {
+  border: 2px outset #c9c9c9;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: calc(100% - 20px);
+  background-color: lightgray;
+  text-align: center;
+  font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+h1 {
+  font-weight: bold;
+  color: rgb(16, 80, 136);
+  font-size: 16px;
+}
+
+.labels {
+  font-weight: bold;
+  text-align: center;
+}
+
+input[type='radio'] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  width: calc(100% - 20px);
+  border-radius: 0.25rem;
+  border: 1px outset #ffffff;
+  text-align: center;
+  overflow: auto;
+}
+
+.dl_group {
+  display: flexbox;
+  flex: content;
+  align-items: center;
+  flex-direction: column;
+  column-count: 3;
+  background-color: white;
+  width: 100%;
+  font-family: 'Salesforce Sans', Arial, Helvetica, sans-serif;
+}
+
+.dd_label {
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+  float: inline-start;
+}
+
+.dd_detail {
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dd_action {
+  width: 10%;
+  float: inline-end;
+}
+
+@media (min-width: 30em) {
+  .slds-dl_horizontal,
+  .slds-dl--horizontal {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}

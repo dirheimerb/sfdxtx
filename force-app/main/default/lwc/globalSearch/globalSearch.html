@@ -1,0 +1,237 @@
+<template>    
+    <!-- Modal/Popup Box LWC body starts here -->
+    <!--<div class="slds-var-p-around_medium" id="modal-content-id-1">-->
+    <!--<template if:true={isSearchFromContact}>
+            <lightning-input type="text" value={searchKey} onchange={getSearchValue}
+            placeholder="First search if your contact already exists using Email or Phone" class="search-border" onkeypress={enterKeyCheck}></lightning-input>
+        </template>                
+        <template if:true={isSearchFromLead}>
+            <lightning-input type="text" value={searchKey} onchange={getSearchValue}
+            placeholder="First search if your lead already exists using Email or Phone" class="search-border" onkeypress={enterKeyCheck}></lightning-input>
+        </template>
+        <br />
+
+        <lightning-button variant="brand" label="Search" title="Search Global Profile Data" onclick={searchGlobalProfileData} disabled={isSearchButton}></lightning-button>
+
+        <template if:true={displayGlobalProfileTable}>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-var-m-top_small">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <template if:true={isSearchFromContact}>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Name"></div>
+                                    </th>
+                                </template>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Name">Name</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Source ID's">Source Record</div>
+                                </th> 
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Source Names">Source Names</div>
+                                </th>   
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Phone">All Phones</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Email">All Emails</div>
+                                </th>    
+                                <th class="" scope="col">
+                                    <div  class="slds-truncate" title="Address">All Addresses</div>
+                                </th> 
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Global Record">Pending<br/>Global Merge</div>
+                                </th>                                                                                                                                                                                      
+                            </tr>
+                        </thead>
+                        <tbody>                            
+                            <template for:each={globalProfileCurrentPage} for:item="globalProfile" for:index="index">                                                                
+                                <tr class="slds-hint-parent" key={globalProfile.globalPartyId}>                                    
+                                    <template if:true={isSearchFromContact}>
+                                        <td style="padding-left: 0px; padding-right: 0px;width: 12%">
+                                            <div style="white-space: pre-wrap;" class="slds-truncate">                                                                                            
+                                                <template if:true={globalProfile.canCreateContact}>  <lightning-button data-globalprofileindex={index} label="Adopt New" onclick={navigateContactCreation} show-new-contact-card="showAutofillContactCardData"></lightning-button>
+                                                </template>                                            
+                                            </div>                                    
+                                        </td>
+                                    </template>
+                                    <td>
+                                        <div style="white-space: pre-wrap;" class="slds-truncate">                                                                                                                                               
+                                            <span>{globalProfile.firstName} {globalProfile.lastName}</span>                                                                                            
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="white-space: pre-wrap;" class="slds-truncate">
+                                            <template for:each={globalProfile.dataSourcePoints} for:item="dataSourcePoint">
+                                                <template if:true={dataSourcePoint.isSalesforceRecord}>  
+                                                    <span key={dataSourcePoint.dataSourcerecordId}><a onclick={navigateToRecord} title="Hello"                                                            
+                                                        data-datasourceindex={index}
+                                                        data-recordid={dataSourcePoint.dataSourcerecordId}
+                                                        target="_blank">{dataSourcePoint.recordLabel}</a><br/></span>
+                                                </template>
+                                                <template if:false={dataSourcePoint.isSalesforceRecord}>  
+                                                    <span key={dataSourcePoint.dataSourcerecordId}>{dataSourcePoint.dataSourcerecordId}<br /></span>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="white-space: pre-wrap;" class="slds-truncate">
+                                            <template for:each={globalProfile.dataSources} for:item="dataSource">
+                                                <span key={dataSource}>{dataSource} <br /></span>
+                                            </template>
+                                        </div>
+                                    </td>   
+                                    <td>
+                                        <div style="white-space: pre-wrap;" class="slds-truncate">
+                                            <template for:each={globalProfile.phoneNumbers} for:item="phoneNumber">
+                                                <span key={phoneNumber}><template if:true={phoneNumber.isContactType}>Phone </template><template if:false={phoneNumber.isContactType}>Mobile </template>
+                                                    {phoneNumber.telephoneNumber}&nbsp;
+                                                    <template if:true={phoneNumber.isContactType}>
+                                                        <template if:true={phoneNumber.extensionNumber}>
+                                                            ext. {phoneNumber.extensionNumber}
+                                                        </template>
+                                                    </template>                                                        
+                                                    <br /></span>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="white-space: pre-wrap;" class="slds-truncate">
+                                            <template for:each={globalProfile.contactPointEmails} for:item="email">
+                                                <span key={email}>{email.emailAddressName} <br /></span>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <td style="max-width: 10%" class="wrapword">
+                                        <div  class="slds-truncate">
+                                            <template for:each={globalProfile.fullAddress} for:item="fullAddress">
+                                                <span class="wrapword"
+                                                    key={fullAddress.concatenatedAddress}>{fullAddress.concatenatedAddress}
+                                                    <br /></span>
+                                            </template>
+                                        </div>
+                                    </td> 
+                                    <td>
+                                        <template if:true={globalProfile.isGlobalRecord}>
+                                            <div style="white-space: pre-wrap;" class="slds-truncate">
+                                                <lightning-input class="slds-var-p-left_xx-large" type="checkbox" data-id="checkbox"  unchecked disabled></lightning-input>                                                                                            
+                                            </div>
+                                        </template>
+                                        <template if:false={globalProfile.isGlobalRecord}>
+                                            <div style="white-space: pre-wrap;" class="slds-truncate">
+                                                <lightning-input class="slds-var-p-left_xx-large" type="checkbox" data-id="checkbox"  checked disabled></lightning-input>                                                                                            
+                                            </div>
+                                        </template>
+                                    </td>                                                                                                                                                                                                                                                 
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>                    
+            </div>            
+        </template> -->
+
+    <!--<div class="slds-var-m-around_large">
+            <div if:true={showSpinner} class="slds-is-relative">
+                <lightning-spinner alternative-text="Loading..." variant="brand">
+                </lightning-spinner>
+            </div>
+        </div>-->
+
+    <!--<div class="slds-var-m-around_medium">
+            <template if:true={displayGlobalProfileTable}>
+                <p class="slds-var-m-vertical_medium content">                    
+                    Displaying Page {page} of {totalPage}.
+                </p>
+                <lightning-layout>
+                    <lightning-layout-item>
+                        <lightning-button name="globalSearch-PreviousButton" class="global-search-prev-btn"
+                            disabled={isFirstPage} label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+                        </lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="grow"></lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-button name="globalSearch-NextButton" class="global-search-next-btn"  disabled={isLastPage} label="Next"
+                            icon-name="utility:chevronright" icon-position="right"  onclick={nextHandler}>
+                        </lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </div> -->
+
+    <!--No result found -->
+    <!--<template if:true={isResult}>
+            <div class="slds-var-p-top_medium slds-var-p-bottom_large slds-align_absolute-center">
+                <figure>                   
+                    <div class="col-grid slds-grid_vertical slds-align_absolute-center">
+                        <h2 class="slds-text-heading_medium slds-var-p-top_medium slds-text-align_center">No results for {searchKey} in C360 Global Profiles. <br/>                               
+                        </h2>
+                    </div>
+                </figure>
+            </div>
+        </template>-->
+
+    <!--Session time out -->
+    <!--<template if:true={isTimeOut}>
+            <div class="slds-var-p-top_medium slds-var-p-bottom_large slds-align_absolute-center">
+                <figure>                   
+                    <div class="col-grid slds-grid_vertical slds-align_absolute-center">
+                        <h2 class="slds-text-heading_medium slds-text-align_center">Session has timeout for {searchKey}.<br/>                                
+                        </h2>
+                    </div>
+                </figure>
+            </div>
+        </template> -->
+
+    <!--<template if:true={isSearchFromContact}>
+            <div class="slds-align_absolute-center slds-var-m-around_small">   
+                <lightning-button variant="Neautral" label="Cancel" title="Cancel" onclick={closeModal} class="slds-var-m-left_x-small"></lightning-button>
+
+                <lightning-button variant="brand" label="Next" title="Next" onclick={navigateNewContactCreation} class="slds-var-m-left_x-small"></lightning-button>                        
+            </div>
+        </template>
+        <template if:true={isSearchFromLead}>
+            <div class="slds-align_absolute-center slds-var-m-around_small">   
+                <lightning-button variant="Neautral" label="Cancel" title="Cancel" onclick={closeModal} class="slds-var-m-left_x-small"></lightning-button>
+
+                <lightning-button variant="brand" label="Next" title="Next" onclick={navigateToLeadCreation} class="slds-var-m-left_x-small"></lightning-button>                        
+            </div>
+        </template>-->
+    <!--Contact Record type slection page - starts-->
+    <template if:true={showRecordTypeModal}>
+        <c-contact-record-selection-page
+            onrecordtypemodalnext={handleRecordTypeNext}
+            oncloserecordtypemodal={closeRecordTypeModal}
+            contact-data={contactData}
+            show-record-type-modal="true"
+        ></c-contact-record-selection-page>
+    </template>
+    <!--Contact Record type slection page - ends-->
+
+    <!--Lead Record type slection page - starts-->
+    <!--<template if:true={showLeadRecordTypeModal}>
+            <c-lead-record-selection-page show-record-type-modal=true onrecordtypemodalnext={handleRecordTypeNext} oncloserecordtypemodal={closeRecordTypeModal}></c-lead-record-selection-page>                    
+        </template>-->
+    <!--Lead Record type slection page - ends-->
+
+    <!--Contact creation page - starts-->
+    <template if:true={showContactCreateModal}>
+        <c-contact-create-form
+            record-type-id={contactData.selectedRecordTypeId}
+            show-contact-create-modal="true"
+            contact-data={contactData}
+            has-multiple-record-type-access={hasMultipleRecordTypeAccess}
+            onclosecontactcreatemodal={closeContactCreateModal}
+            onmanualrendered={handleManualRendered}
+        ></c-contact-create-form>
+        <!-- Added on 2 Feb 2022 : onmanualrendered={handleManualRendered} - SFSC - 7070-->
+    </template>
+    <!--Contact creation page - ends-->
+
+    <!--</div>-->
+    <!-- Modal/Popup Box LWC footer starts here -->
+</template>
