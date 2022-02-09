@@ -8,6 +8,9 @@
  //import getUnifiedProfile from '@salesforce/apex/CDP_DisplayUnifiedProfile.displayUnifiedProfile';
  import adoptContactDetails from '@salesforce/apex/CDP_DisplayUnifiedProfile.adoptContactDetails';
  import { getObjectInfo } from 'lightning/uiObjectInfoApi';
+ import getCDPLead from '@salesforce/apex/CDPRestLWCController.getCDPLead';
+ import getAllContactFields from '@salesforce/apex/CDPRestLWCController.getAllContactFields';
+import validateObjects from '@salesforce/apex/CDPRestSearchFields.validateObjects';
 // import CONTACT_OBJECT from '@schema/salesforce/Contact';
 // import LEAD_OBJECT from '@schema/salesforce/Lead';
 
@@ -34,6 +37,7 @@
     @api objectApiName;
     @api CONTACT_FIELD;
     @api LEAD_FIELD;
+    searchKey = '';
     contactData;
     contactEmail;
     contactPhone;
@@ -44,6 +48,8 @@
     contactMailingStreet;
     contactSecondary_Email__c;
     contactMobilePhone;
+
+    
 
   // To fetch data from the Contact object for comparison.
   /*@wire(getRecord, { recordId: '$recordId', fields: FIELDS})
@@ -81,17 +87,30 @@
           }
 
         }
-      }
-      */
+      }  */
+
+      parmObject = {
+          responseObject: this.searchKey
+      };
+      
 /**
  * Decorator factory to wire a property or method to a wire adapter data source
  * @param getType — imperative accessor for the data source
  * @param config — configuration object for the accessor => Bound to an object to access later
  */
-   
-    @wire(getObjectInfo, { objectApiName: '$objectApiName',  })
-    objectInfo;
       
+    @wire(validateObjects, { searchObject: '$parmObject' })
+    respObject;      
+    }
+
+    @wire()
+
+        hangleChange(event) {
+            this.parmObject = {
+                ...this.parmObject,
+                searchObject: (this.searchKey = event.target.value)
+            }
+        }
 
      /**
        * (method) Function.bind(this: Function, thisArg: any, ...argArray: any[]): any
@@ -119,6 +138,8 @@
      isError = false;
  
      errorMessage = '';
+
+     @wire(validateObjects, { responseObject}
      
      @api objectApiName;
      CONSTANT = {

@@ -1,0 +1,1118 @@
+metadata:
+  - fields:
+      - name: CreatedDate__c
+        displayName: CreatedDate
+        type: DATE_TIME
+      - name: SourceRecordId__c
+        displayName: Individual Id
+        type: STRING
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: InternalOrganizationId
+        type: STRING
+      - name: UnifiedRecordId__c
+        displayName: Unified Individual Id
+        type: STRING
+    indexes:
+      - fields:
+          - name: SourceRecordId__c
+            type: STRING
+    category: Profile
+    name: IndividualIdentityLink__dlm
+    displayName: Unified Link Individual
+    relationships:
+      - fromEntity: ssot__Individual__dlm
+        toEntity: IndividualIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: IndividualIdentityLink__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute:    
+        cardinality: NTOONE
+    primaryKeys:
+      - name: SourceRecordId__c
+        displayName: Individual Id
+        indexOrder: '1'
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        indexOrder: '2'
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        indexOrder: '3'
+  - fields: []
+    indexes: []
+    category: Profile
+    name: ssot__Account__dlm
+    displayName: Account
+    relationships: []
+    primaryKeys: []
+  - fields:
+      - name: Contact_Point_MobilePhone_Id__c
+        displayName: Contact Point MobilePhone Id
+        type: STRING
+      - name: CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: DataSource__c
+        displayName: Data Source
+        type: STRING
+      - name: DataSourceObject__c
+        displayName: Data Source Object
+        type: STRING
+      - name: External_Source_Id__c
+        displayName: External Source Id
+        type: STRING
+      - name: InternalOrganization__c
+        displayName: Internal Organization
+        type: STRING
+      - name: LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: MobilePhone__c
+        displayName: Mobile Phone
+        type: STRING
+      - name: Party__c
+        displayName: Party
+        type: STRING
+    indexes: []
+    category: Profile
+    name: ssot_ContactPointMobilePhone__dlm
+    displayName: Contact Point Mobile Phone
+    relationships:
+      - fromEntity: ssot_ContactPointMobilePhone__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: Contact_Point_MobilePhone_Id__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: Contact_Point_MobilePhone_Id__c
+        displayName: Contact Point MobilePhone Id
+        indexOrder: '1'
+  - fields:
+      - name: Contact_Point_SecondaryEmail_Id__c
+        displayName: Contact Point SecondaryEmail Id
+        type: STRING
+      - name: CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: DataSource__c
+        displayName: Data Source
+        type: STRING
+      - name: DataSourceObject__c
+        displayName: Data Source Object
+        type: STRING
+      - name: External_Source_Id__c
+        displayName: External Source Id
+        type: STRING
+      - name: LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: Party__c
+        displayName: Party
+        type: STRING
+      - name: Secondary_Email__c
+        displayName: Secondary Email
+        type: STRING
+    indexes: []
+    category: Profile
+    name: ssot_ContactPointSecondaryEmail__dlm
+    displayName: Contact Point Secondary Email
+    relationships:
+      - fromEntity: ssot_ContactPointSecondaryEmail__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: Contact_Point_SecondaryEmail_Id__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: Contact_Point_SecondaryEmail_Id__c
+        displayName: Contact Point SecondaryEmail Id
+        indexOrder: '1'
+  - fields: []
+    indexes: []
+    category: Profile
+    name: ssot__EmailEngagement__dlm
+    displayName: Email Engagement
+    relationships: []
+    primaryKeys: []
+  - fields:
+      - name: Physician_Registration_No__c
+        displayName: Physician_Registration_No
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__PersonName__c
+        displayName: Person Name
+        type: STRING
+      - name: ssot__Salutation__c
+        displayName: Salutation
+        type: STRING
+      - name: Full_Address__c
+        displayName: Full Address
+        type: STRING
+      - name: Lead_Status__c
+        displayName: Lead Status
+        type: STRING
+      - name: isConverted__c
+        displayName: isConverted
+        type: STRING
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__NameSuffix__c
+        displayName: Name Suffix
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Individual Id
+        type: STRING
+      - name: ssot__PreferredName__c
+        displayName: Preferred Name
+        type: STRING
+      - name: Prefix__c
+        displayName: Prefix
+        type: STRING
+      - name: Active__c
+        displayName: Active
+        type: STRING
+      - name: City__c
+        displayName: City
+        type: STRING
+      - name: ssot__FirstName__c
+        displayName: First Name
+        type: STRING
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: MobilePhone__c
+        displayName: Mobile Phone
+        type: STRING
+      - name: Email__c
+        displayName: Email
+        type: STRING
+      - name: Secondary_Email_c__c
+        displayName: Secondary_Email__c
+        type: STRING
+      - name: Country__c
+        displayName: Country
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: Street__c
+        displayName: Street
+        type: STRING
+      - name: Record_Type__c
+        displayName: Record Type
+        type: STRING
+      - name: Other_Street__c
+        displayName: Other Street
+        type: STRING
+      - name: ssot__LastName__c
+        displayName: Last Name
+        type: STRING
+      - name: State__c
+        displayName: State
+        type: STRING
+      - name: Phone__c
+        displayName: Phone
+        type: STRING
+      - name: Postal_Code__c
+        displayName: Postal Code
+        type: STRING
+      - name: AccountId__c
+        displayName: AccountId
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: Internal Organization
+        type: STRING
+      - name: ssot__ExternalRecordId__c
+        displayName: External Record Id
+        type: STRING
+    indexes: []
+    category: Profile
+    name: ssot__Individual__dlm
+    displayName: Individual
+    relationships:
+      - fromEntity: ssot__Individual__dlm
+        toEntity: IndividualIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ssot__ContactPointEmail__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: ssot__ContactPointAddress__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: ssot__ContactPointPhone__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: ssot__PartyIdentification__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: ssot_ContactPointSecondaryEmail__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: Contact_Point_SecondaryEmail_Id__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: ssot_ContactPointMobilePhone__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: Contact_Point_MobilePhone_Id__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Individual Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__IsConverted__c
+        displayName: Is Converted
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__LeadSourceId__c
+        displayName: Lead Source
+        type: STRING
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__MobileContactPhoneId__c
+        displayName: Mobile Contact Phone
+        type: STRING
+      - name: ssot__StateProvinceName__c
+        displayName: State Province Name
+        type: STRING
+      - name: ssot__StateProvinceId__c
+        displayName: State Province
+        type: STRING
+      - name: ssot__CountryName__c
+        displayName: Country Name
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Lead Id
+        type: STRING
+      - name: ssot__LeadStatusId__c
+        displayName: Lead Status
+        type: STRING
+      - name: ssot__StreetName__c
+        displayName: Street Name
+        type: STRING
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__CountryId__c
+        displayName: Country
+        type: STRING
+      - name: ssot__ConvertedDate__c
+        displayName: Converted Date
+        type: DATE_TIME
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__City__c
+        displayName: City
+        type: STRING
+      - name: ssot__PostalCodeId__c
+        displayName: Postal Code
+        type: STRING
+      - name: ssot__ExternalRecordId__c
+        displayName: External Record Id
+        type: STRING
+    indexes: []
+    category: Profile
+    name: ssot__Lead__dlm
+    displayName: Lead
+    relationships:
+      - fromEntity: ssot__Lead__dlm
+        toEntity: ssot__ContactPointPhone__dlm
+        fromEntityAttribute: ssot__MobileContactPhoneId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Lead Id
+        indexOrder: '1'
+  - fields: []
+    indexes: []
+    category: Profile
+    name: ssot__Opportunity__dlm
+    displayName: Opportunity
+    relationships: []
+    primaryKeys: []
+  - fields: []
+    indexes: []
+    category: Profile
+    name: ssot__PartyConsent__dlm
+    displayName: Party Consent
+    relationships: []
+    primaryKeys: []
+  - fields:
+      - name: AccountId__c
+        displayName: AccountId
+        type: STRING
+      - name: Active__c
+        displayName: Active
+        type: STRING
+      - name: City__c
+        displayName: City
+        type: STRING
+      - name: Country__c
+        displayName: Country
+        type: STRING
+      - name: Email__c
+        displayName: Email
+        type: STRING
+      - name: Full_Address__c
+        displayName: Full Address
+        type: STRING
+      - name: isConverted__c
+        displayName: isConverted
+        type: STRING
+      - name: Lead_Status__c
+        displayName: Lead Status
+        type: STRING
+      - name: MobilePhone__c
+        displayName: Mobile Phone
+        type: STRING
+      - name: Other_Street__c
+        displayName: Other Street
+        type: STRING
+      - name: Phone__c
+        displayName: Phone
+        type: STRING
+      - name: Physician_Registration_No__c
+        displayName: Physician_Registration_No
+        type: STRING
+      - name: Postal_Code__c
+        displayName: Postal Code
+        type: STRING
+      - name: Prefix__c
+        displayName: Prefix
+        type: STRING
+      - name: Record_Type__c
+        displayName: Record Type
+        type: STRING
+      - name: Secondary_Email_c__c
+        displayName: Secondary_Email__c
+        type: STRING
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__ExternalRecordId__c
+        displayName: External Record Id
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__FirstName__c
+        displayName: First Name
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Unified Individual Id
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: Internal Organization
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__LastName__c
+        displayName: Last Name
+        type: STRING
+      - name: ssot__NameSuffix__c
+        displayName: Name Suffix
+        type: STRING
+      - name: ssot__PersonName__c
+        displayName: Person Name
+        type: STRING
+      - name: ssot__PreferredName__c
+        displayName: Preferred Name
+        type: STRING
+      - name: ssot__Salutation__c
+        displayName: Salutation
+        type: STRING
+      - name: State__c
+        displayName: State
+        type: STRING
+      - name: Street__c
+        displayName: Street
+        type: STRING
+    indexes:
+      - fields:
+          - name: ssot__FirstName__c
+            type: STRING
+      - fields:
+          - name: ssot__LastName__c
+            type: STRING
+      - fields:
+          - name: ssot__FirstName__c
+            type: STRING
+          - name: ssot__LastName__c
+            type: STRING
+    category: Profile
+    name: UnifiedIndividual__dlm
+    displayName: Unified Individual
+    relationships:
+      - fromEntity: UnifiedContactPointEmail__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: IndividualIdentityLink__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: UnifiedContactPointPhone__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: UnifiedContactPointAddress__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: UnifiedPartyIdentification__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Unified Individual Id
+        indexOrder: '1'
+  - fields:
+      - name: CreatedDate__c
+        displayName: CreatedDate
+        type: DATE_TIME
+      - name: SourceRecordId__c
+        displayName: Contact Point Address Id
+        type: STRING
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: InternalOrganizationId
+        type: STRING
+      - name: UnifiedRecordId__c
+        displayName: Unified Contact Point Address Id
+        type: STRING
+    indexes: []
+    category: Related
+    name: ContactPointAddressIdentityLink__dlm
+    displayName: Unified Link Contact Point Address
+    relationships:
+      - fromEntity: ssot__ContactPointAddress__dlm
+        toEntity: ContactPointAddressIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ContactPointAddressIdentityLink__dlm
+        toEntity: UnifiedContactPointAddress__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: SourceRecordId__c
+        displayName: Contact Point Address Id
+        indexOrder: '1'
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        indexOrder: '2'
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        indexOrder: '3'
+  - fields:
+      - name: CreatedDate__c
+        displayName: CreatedDate
+        type: DATE_TIME
+      - name: SourceRecordId__c
+        displayName: Contact Point Email Id
+        type: STRING
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: InternalOrganizationId
+        type: STRING
+      - name: UnifiedRecordId__c
+        displayName: Unified Contact Point Email Id
+        type: STRING
+    indexes: []
+    category: Related
+    name: ContactPointEmailIdentityLink__dlm
+    displayName: Unified Link Contact Point Email
+    relationships:
+      - fromEntity: ssot__ContactPointEmail__dlm
+        toEntity: ContactPointEmailIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ContactPointEmailIdentityLink__dlm
+        toEntity: UnifiedContactPointEmail__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: SourceRecordId__c
+        displayName: Contact Point Email Id
+        indexOrder: '1'
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        indexOrder: '2'
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        indexOrder: '3'
+  - fields:
+      - name: CreatedDate__c
+        displayName: CreatedDate
+        type: DATE_TIME
+      - name: SourceRecordId__c
+        displayName: Contact Point Phone Id
+        type: STRING
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: InternalOrganizationId
+        type: STRING
+      - name: UnifiedRecordId__c
+        displayName: Unified Contact Point Phone Id
+        type: STRING
+    indexes: []
+    category: Related
+    name: ContactPointPhoneIdentityLink__dlm
+    displayName: Unified Link Contact Point Phone
+    relationships:
+      - fromEntity: ssot__ContactPointPhone__dlm
+        toEntity: ContactPointPhoneIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ContactPointPhoneIdentityLink__dlm
+        toEntity: UnifiedContactPointPhone__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: SourceRecordId__c
+        displayName: Contact Point Phone Id
+        indexOrder: '1'
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        indexOrder: '2'
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        indexOrder: '3'
+  - fields:
+      - name: CreatedDate__c
+        displayName: CreatedDate
+        type: DATE_TIME
+      - name: SourceRecordId__c
+        displayName: Party Identification Id
+        type: STRING
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: InternalOrganizationId
+        type: STRING
+      - name: UnifiedRecordId__c
+        displayName: Unified Party Identification Id
+        type: STRING
+    indexes: []
+    category: Related
+    name: PartyIdentificationIdentityLink__dlm
+    displayName: Unified Link Party Identification
+    relationships:
+      - fromEntity: ssot__PartyIdentification__dlm
+        toEntity: PartyIdentificationIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: PartyIdentificationIdentityLink__dlm
+        toEntity: UnifiedPartyIdentification__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: SourceRecordId__c
+        displayName: Party Identification Id
+        indexOrder: '1'
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        indexOrder: '2'
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        indexOrder: '3'
+  - fields: []
+    indexes: []
+    category: Related
+    name: ssot__AccountContact__dlm
+    displayName: Account Contact
+    relationships: []
+    primaryKeys: []
+  - fields:
+      - name: ssot__AddressId__c
+        displayName: Address
+        type: STRING
+      - name: ssot__AddressLine1__c
+        displayName: Address Line 1
+        type: STRING
+      - name: ssot__AddressLine2__c
+        displayName: Address Line 2
+        type: STRING
+      - name: ssot__CityId__c
+        displayName: City
+        type: STRING
+      - name: ssot__CountryId__c
+        displayName: Country
+        type: STRING
+      - name: ssot__CountryName__c
+        displayName: Country Name
+        type: STRING
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Contact Point Address Id
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+      - name: ssot__PostalCodeId__c
+        displayName: Postal Code
+        type: STRING
+      - name: ssot__StateProvinceId__c
+        displayName: State Province
+        type: STRING
+      - name: ssot__StateProvinceName__c
+        displayName: State Province Name
+        type: STRING
+    indexes: []
+    category: Related
+    name: ssot__ContactPointAddress__dlm
+    displayName: Contact Point Address
+    relationships:
+      - fromEntity: ssot__ContactPointAddress__dlm
+        toEntity: ContactPointAddressIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ssot__ContactPointAddress__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Contact Point Address Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__EmailAddress__c
+        displayName: Email Address
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Contact Point Email Id
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: Internal Organization
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+    indexes: []
+    category: Related
+    name: ssot__ContactPointEmail__dlm
+    displayName: Contact Point Email
+    relationships:
+      - fromEntity: ssot__ContactPointEmail__dlm
+        toEntity: ContactPointEmailIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ssot__ContactPointEmail__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Contact Point Email Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__ExtensionNumber__c
+        displayName: Extension Number
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__FormattedE164PhoneNumber__c
+        displayName: Formatted E164 Phone Number
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Contact Point Phone Id
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: Internal Organization
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+      - name: ssot__TelephoneNumber__c
+        displayName: Telephone Number
+        type: STRING
+    indexes: []
+    category: Related
+    name: ssot__ContactPointPhone__dlm
+    displayName: Contact Point Phone
+    relationships:
+      - fromEntity: ssot__ContactPointPhone__dlm
+        toEntity: ContactPointPhoneIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ssot__Lead__dlm
+        toEntity: ssot__ContactPointPhone__dlm
+        fromEntityAttribute: ssot__MobileContactPhoneId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: ssot__ContactPointPhone__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Contact Point Phone Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__DataSourceId__c
+        displayName: Data Source
+        type: STRING
+      - name: ssot__DataSourceObjectId__c
+        displayName: Data Source Object
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Party Identification Id
+        type: STRING
+      - name: ssot__IdentificationNumber__c
+        displayName: Identification Number
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__Name__c
+        displayName: Identification Name
+        type: STRING
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+      - name: ssot__PartyIdentificationTypeId__c
+        displayName: Party Identification Type
+        type: STRING
+    indexes: []
+    category: Related
+    name: ssot__PartyIdentification__dlm
+    displayName: Party Identification
+    relationships:
+      - fromEntity: ssot__PartyIdentification__dlm
+        toEntity: PartyIdentificationIdentityLink__dlm
+        fromEntityAttribute: ssot__Id__c
+        toEntityAttribute: SourceRecordId__c
+        cardinality: ONETOONE
+      - fromEntity: ssot__PartyIdentification__dlm
+        toEntity: ssot__Individual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Party Identification Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__AddressId__c
+        displayName: Address
+        type: STRING
+      - name: ssot__AddressLine1__c
+        displayName: Address Line 1
+        type: STRING
+      - name: ssot__AddressLine2__c
+        displayName: Address Line 2
+        type: STRING
+      - name: ssot__CityId__c
+        displayName: City
+        type: STRING
+      - name: ssot__CountryId__c
+        displayName: Country
+        type: STRING
+      - name: ssot__CountryName__c
+        displayName: Country Name
+        type: STRING
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Unified Contact Point Address Id
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+      - name: ssot__PostalCodeId__c
+        displayName: Postal Code
+        type: STRING
+      - name: ssot__StateProvinceId__c
+        displayName: State Province
+        type: STRING
+      - name: ssot__StateProvinceName__c
+        displayName: State Province Name
+        type: STRING
+    indexes:
+      - fields:
+          - name: ssot__CountryName__c
+            type: STRING
+      - fields:
+          - name: ssot__AddressLine1__c
+            type: STRING
+    category: Related
+    name: UnifiedContactPointAddress__dlm
+    displayName: Unified Contact Point Address
+    relationships:
+      - fromEntity: ContactPointAddressIdentityLink__dlm
+        toEntity: UnifiedContactPointAddress__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: UnifiedContactPointAddress__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Unified Contact Point Address Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__EmailAddress__c
+        displayName: Email Address
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Unified Contact Point Email Id
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: Internal Organization
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+    indexes:
+      - fields:
+          - name: ssot__EmailAddress__c
+            type: STRING
+    category: Related
+    name: UnifiedContactPointEmail__dlm
+    displayName: Unified Contact Point Email
+    relationships:
+      - fromEntity: ContactPointEmailIdentityLink__dlm
+        toEntity: UnifiedContactPointEmail__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: UnifiedContactPointEmail__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Unified Contact Point Email Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__ExtensionNumber__c
+        displayName: Extension Number
+        type: STRING
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__FormattedE164PhoneNumber__c
+        displayName: Formatted E164 Phone Number
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Unified Contact Point Phone Id
+        type: STRING
+      - name: ssot__InternalOrganizationId__c
+        displayName: Internal Organization
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+      - name: ssot__TelephoneNumber__c
+        displayName: Telephone Number
+        type: STRING
+    indexes:
+      - fields:
+          - name: ssot__TelephoneNumber__c
+            type: STRING
+    category: Related
+    name: UnifiedContactPointPhone__dlm
+    displayName: Unified Contact Point Phone
+    relationships:
+      - fromEntity: ContactPointPhoneIdentityLink__dlm
+        toEntity: UnifiedContactPointPhone__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: UnifiedContactPointPhone__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Unified Contact Point Phone Id
+        indexOrder: '1'
+  - fields:
+      - name: ssot__CreatedDate__c
+        displayName: Created Date
+        type: DATE_TIME
+      - name: ssot__ExternalSourceId__c
+        displayName: External Source Id
+        type: STRING
+      - name: ssot__Id__c
+        displayName: Unified Party Identification Id
+        type: STRING
+      - name: ssot__IdentificationNumber__c
+        displayName: Identification Number
+        type: STRING
+      - name: ssot__LastModifiedDate__c
+        displayName: Last Modified Date
+        type: DATE_TIME
+      - name: ssot__Name__c
+        displayName: Identification Name
+        type: STRING
+      - name: ssot__PartyId__c
+        displayName: Party
+        type: STRING
+      - name: ssot__PartyIdentificationTypeId__c
+        displayName: Party Identification Type
+        type: STRING
+    indexes:
+      - fields:
+          - name: ssot__IdentificationNumber__c
+            type: STRING
+    category: Related
+    name: UnifiedPartyIdentification__dlm
+    displayName: Unified Party Identification
+    relationships:
+      - fromEntity: PartyIdentificationIdentityLink__dlm
+        toEntity: UnifiedPartyIdentification__dlm
+        fromEntityAttribute: UnifiedRecordId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+      - fromEntity: UnifiedPartyIdentification__dlm
+        toEntity: UnifiedIndividual__dlm
+        fromEntityAttribute: ssot__PartyId__c
+        toEntityAttribute: ssot__Id__c
+        cardinality: NTOONE
+    primaryKeys:
+      - name: ssot__Id__c
+        displayName: Unified Party Identification Id
+        indexOrder: '1'
