@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : BDirheimer
  * @group             : 
- * @last modified on  : 02-07-2022
+ * @last modified on  : 02-08-2022
  * @last modified by  : BDirheimer
 **/
 public with sharing class CDPRestViewController {
@@ -14,7 +14,6 @@ public with sharing class CDPRestViewController {
                 Email, 
                 Phone,
                 MobilePhone,
-
-        ]
+]
     
 }

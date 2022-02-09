@@ -2,7 +2,7 @@
  * @description       :
  * @author            : BDirheimer
  * @group             :
- * @last modified on  : 02-06-2022
+ * @last modified on  : 02-07-2022
  * @last modified by  : BDirheimer
  **/
 
@@ -43,6 +43,20 @@ public with sharing class CDPRestSearchModel {
     public String ssot__DataSourceObjectId__c;
     public String ssot__DataSourceId__c;
   }
+
+  @AuraEnabled(Cacheable=true) public String Id {get;set;}
+  @AuraEnabled(Cacheable=true) public String firstName {get;set;}
+  @AuraEnabled(Cacheable=true) public String lastName {get;set;}
+  @AuraEnabled(Cacheable=true) public String email {get;set;}
+  @AuraEnabled(Cacheable=true) public String secondaryEmail {get;set;}
+  @AuraEnabled(Cacheable=true) public String phone {get;set;}
+  @AuraEnabled(Cacheable=true) public String mobilePhone {get;set;}
+  @AuraEnabled(Cacheable=true) public String street {get;set;}
+  @AuraEnabled(Cacheable=true) public String otherStreet {get; set;}
+  @AuraEnabled(Cacheable=true) public String city {get;set;}
+  @AuraEnabled(Cacheable=true) public String state {get;set;}
+  @AuraEnabled(Cacheable=true) public String postalCode {get;set;}
+  @AuraEnabled(Cacheable=true) public String country {get;set;}
 
   /**
    * @description parsing the provided json string into a list of objects

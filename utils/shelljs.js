@@ -1,7 +1,7 @@
 
 
 const shell = require("shelljs");
-const chalk = require("chalk");
+import chalk from "chalk";
 
 shell.set("-e");
 shell.set("+v");

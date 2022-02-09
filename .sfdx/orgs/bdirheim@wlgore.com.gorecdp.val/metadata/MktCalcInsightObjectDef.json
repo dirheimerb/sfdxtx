@@ -1,0 +1,31 @@
+{
+  "status": 0,
+  "result": [
+    {
+      "createdById": "0055f000007VDkUAAW",
+      "createdByName": "Bradley Dirheimer",
+      "createdDate": "2022-02-06T09:28:24.000Z",
+      "fileName": "mktCalcInsightObjectDefs/PhoneandEmail.mktCalcInsightObjectDef",
+      "fullName": "PhoneandEmail",
+      "id": "0m05f0000008OYsAAM",
+      "lastModifiedById": "0055f000007VDkUAAW",
+      "lastModifiedByName": "Bradley Dirheimer",
+      "lastModifiedDate": "2022-02-06T09:28:24.000Z",
+      "manageableState": "unmanaged",
+      "type": "MktCalcInsightObjectDef"
+    },
+    {
+      "createdById": "0055f000008kaidAAA",
+      "createdByName": "Shivaji Bhosale",
+      "createdDate": "2022-02-07T14:13:57.000Z",
+      "fileName": "mktCalcInsightObjectDefs/UnifiedIndividualCountById.mktCalcInsightObjectDef",
+      "fullName": "UnifiedIndividualCountById",
+      "id": "0m05f0000008OYxAAM",
+      "lastModifiedById": "0055f000008kaidAAA",
+      "lastModifiedByName": "Shivaji Bhosale",
+      "lastModifiedDate": "2022-02-07T14:13:57.000Z",
+      "manageableState": "unmanaged",
+      "type": "MktCalcInsightObjectDef"
+    }
+  ]
+}

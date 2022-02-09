@@ -1,0 +1,57 @@
+{
+  "status": 0,
+  "result": [
+    {
+      "createdById": "0055f000007VDkUAAW",
+      "createdByName": "Bradley Dirheimer",
+      "createdDate": "2022-01-25T14:08:07.000Z",
+      "fileName": "dataStreamDefinitions/SalesCloud_Lead_ENT.dataStreamDefinition",
+      "fullName": "SalesCloud_Lead_ENT",
+      "id": "1sd5f000000CbNLAA0",
+      "lastModifiedById": "0055f000007VDkUAAW",
+      "lastModifiedByName": "Bradley Dirheimer",
+      "lastModifiedDate": "2022-01-31T21:46:32.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataStreamDefinition"
+    },
+    {
+      "createdById": "0055f000007VEUoAAO",
+      "createdByName": "Abhi Chirumamilla",
+      "createdDate": "2022-01-19T21:58:39.000Z",
+      "fileName": "dataStreamDefinitions/SalesCloud_Contact_ENT.dataStreamDefinition",
+      "fullName": "SalesCloud_Contact_ENT",
+      "id": "1sd5f000000CbMhAAK",
+      "lastModifiedById": "0055f000007VDkUAAW",
+      "lastModifiedByName": "Bradley Dirheimer",
+      "lastModifiedDate": "2022-01-31T21:42:57.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataStreamDefinition"
+    },
+    {
+      "createdById": "0055f000007VDkUAAW",
+      "createdByName": "Bradley Dirheimer",
+      "createdDate": "2022-01-19T21:38:27.000Z",
+      "fileName": "dataStreamDefinitions/Sales_Cloud_ENT.dataStreamDefinition",
+      "fullName": "Sales_Cloud_ENT",
+      "id": "1sd5f000000CbMcAAK",
+      "lastModifiedById": "0055f000007VDkUAAW",
+      "lastModifiedByName": "Bradley Dirheimer",
+      "lastModifiedDate": "2022-01-19T21:38:27.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataStreamDefinition"
+    },
+    {
+      "createdById": "0055f000007VDkUAAW",
+      "createdByName": "Bradley Dirheimer",
+      "createdDate": "2022-02-02T01:33:17.000Z",
+      "fileName": "dataStreamDefinitions/Marketing_Cloud_ENT_Contact.dataStreamDefinition",
+      "fullName": "Marketing_Cloud_ENT_Contact",
+      "id": "1sd5f000000CbOnAAK",
+      "lastModifiedById": "0055f000007VDkVAAW",
+      "lastModifiedByName": "Phil Perry",
+      "lastModifiedDate": "2022-02-03T19:58:17.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataStreamDefinition"
+    }
+  ]
+}
