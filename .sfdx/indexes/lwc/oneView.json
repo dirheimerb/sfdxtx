@@ -1,0 +1,362 @@
+{
+    "decorators": [
+        {
+            "type": "api",
+            "targets": [
+                {
+                    "type": "property",
+                    "name": "recordId",
+                    "value": {
+                        "type": "unresolved"
+                    }
+                },
+                {
+                    "type": "property",
+                    "name": "objectApiName",
+                    "value": {
+                        "type": "unresolved"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "wire",
+            "targets": [
+                {
+                    "name": "contactData",
+                    "adapter": {
+                        "name": "getRecord",
+                        "reference": "lightning/uiRecordApi"
+                    },
+                    "type": "property",
+                    "static": {
+                        "objectApiName": {
+                            "value": "@salesforce/schema/Contact",
+                            "type": "module"
+                        }
+                    },
+                    "params": {}
+                }
+            ]
+        },
+        {
+            "type": "track",
+            "targets": [
+                {
+                    "name": "emailContactPointsList",
+                    "type": "property"
+                }
+            ]
+        }
+    ],
+    "declarationLoc": {
+        "start": {
+            "line": 22,
+            "column": 0
+        },
+        "end": {
+            "line": 217,
+            "column": 1
+        }
+    },
+    "classMembers": [
+        {
+            "type": "property",
+            "name": "unifiedProfileDetailWrapper",
+            "loc": {
+                "start": {
+                    "line": 23,
+                    "column": 2
+                },
+                "end": {
+                    "line": 23,
+                    "column": 30
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isRecordAvailable",
+            "loc": {
+                "start": {
+                    "line": 24,
+                    "column": 2
+                },
+                "end": {
+                    "line": 24,
+                    "column": 28
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isWaitingForData",
+            "loc": {
+                "start": {
+                    "line": 25,
+                    "column": 2
+                },
+                "end": {
+                    "line": 25,
+                    "column": 27
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isAdoptButtonDisabled",
+            "loc": {
+                "start": {
+                    "line": 26,
+                    "column": 2
+                },
+                "end": {
+                    "line": 26,
+                    "column": 31
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isError",
+            "loc": {
+                "start": {
+                    "line": 27,
+                    "column": 2
+                },
+                "end": {
+                    "line": 27,
+                    "column": 18
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "fields",
+            "loc": {
+                "start": {
+                    "line": 28,
+                    "column": 2
+                },
+                "end": {
+                    "line": 34,
+                    "column": 4
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "errorMessage",
+            "loc": {
+                "start": {
+                    "line": 35,
+                    "column": 2
+                },
+                "end": {
+                    "line": 35,
+                    "column": 20
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "recordId",
+            "loc": {
+                "start": {
+                    "line": 36,
+                    "column": 2
+                },
+                "end": {
+                    "line": 36,
+                    "column": 16
+                }
+            },
+            "decorator": "api",
+            "value": {
+                "type": "unresolved"
+            }
+        },
+        {
+            "type": "property",
+            "name": "objectApiName",
+            "loc": {
+                "start": {
+                    "line": 37,
+                    "column": 2
+                },
+                "end": {
+                    "line": 37,
+                    "column": 21
+                }
+            },
+            "decorator": "api",
+            "value": {
+                "type": "unresolved"
+            }
+        },
+        {
+            "type": "property",
+            "name": "CONSTANT",
+            "loc": {
+                "start": {
+                    "line": 38,
+                    "column": 2
+                },
+                "end": {
+                    "line": 53,
+                    "column": 4
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "contactData",
+            "loc": {
+                "start": {
+                    "line": 55,
+                    "column": 2
+                },
+                "end": {
+                    "line": 56,
+                    "column": 14
+                }
+            },
+            "decorator": "wire"
+        },
+        {
+            "type": "property",
+            "name": "emailContactPointsList",
+            "loc": {
+                "start": {
+                    "line": 58,
+                    "column": 2
+                },
+                "end": {
+                    "line": 58,
+                    "column": 37
+                }
+            },
+            "decorator": "track"
+        },
+        {
+            "type": "method",
+            "name": "connectedCallback",
+            "loc": {
+                "start": {
+                    "line": 60,
+                    "column": 2
+                },
+                "end": {
+                    "line": 85,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "selectAddressRecordIndex",
+            "loc": {
+                "start": {
+                    "line": 87,
+                    "column": 2
+                },
+                "end": {
+                    "line": 90,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "selectPhoneRecordIndex",
+            "loc": {
+                "start": {
+                    "line": 91,
+                    "column": 2
+                },
+                "end": {
+                    "line": 94,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "selectMobileRecordIndex",
+            "loc": {
+                "start": {
+                    "line": 95,
+                    "column": 2
+                },
+                "end": {
+                    "line": 98,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "selectEmailRecordIndex",
+            "loc": {
+                "start": {
+                    "line": 99,
+                    "column": 2
+                },
+                "end": {
+                    "line": 102,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "resetRadioButton",
+            "loc": {
+                "start": {
+                    "line": 103,
+                    "column": 2
+                },
+                "end": {
+                    "line": 116,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "doesPartyIdentificationExist",
+            "loc": {
+                "start": {
+                    "line": 118,
+                    "column": 2
+                },
+                "end": {
+                    "line": 123,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "adoptContactDetails",
+            "loc": {
+                "start": {
+                    "line": 125,
+                    "column": 2
+                },
+                "end": {
+                    "line": 216,
+                    "column": 3
+                }
+            }
+        }
+    ],
+    "exports": [
+        {
+            "type": "ExportDefaultDeclaration"
+        },
+        {
+        "updatedAt": "2022-02-07T10:15:11.674Z"
+        }
+    ]
+}

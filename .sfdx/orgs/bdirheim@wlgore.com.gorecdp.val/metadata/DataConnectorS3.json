@@ -1,0 +1,16 @@
+{
+  "status": 0,
+  "result": {
+    "createdById": "0055f000007VDkUAAW",
+    "createdByName": "Bradley Dirheimer",
+    "createdDate": "2022-02-02T01:33:16.000Z",
+    "fileName": "s3DataConnectors/Contact.s3DataConnector",
+    "fullName": "Contact",
+    "id": "2Vs5f000000CapTCAS",
+    "lastModifiedById": "0055f000007VDkVAAW",
+    "lastModifiedByName": "Phil Perry",
+    "lastModifiedDate": "2022-02-03T19:58:17.000Z",
+    "manageableState": "unmanaged",
+    "type": "DataConnectorS3"
+  }
+}

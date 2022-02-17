@@ -1,12 +1,19 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "target": "es2019",
-      "lib": ["es2019"],
-      "sourceMap": true,
-      "declaration": true,
-      "moduleResolution": "node",
-      "alwaysStrict": true,
-      "noUnusedLocals": true
-    }
+  "extends": "@salesforce/dev-config/tsconfig-strict",
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": "es2017",
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": false,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "include": "./force-app/**/*.ts",
+    "module": "commonjs",
+    "esModuleInterop": true
+  }
 }

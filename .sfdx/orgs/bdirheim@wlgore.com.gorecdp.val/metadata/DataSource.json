@@ -1,0 +1,57 @@
+{
+  "status": 0,
+  "result": [
+    {
+      "createdById": "0055f000007VDkUAAW",
+      "createdByName": "Bradley Dirheimer",
+      "createdDate": "2022-01-19T21:38:24.000Z",
+      "fileName": "mktDataSources/Salesforce_00D790000004ewz.dataSource",
+      "fullName": "Salesforce_00D790000004ewz",
+      "id": "3iP5f0000008OdrEAE",
+      "lastModifiedById": "0055f000008AFCTAA4",
+      "lastModifiedByName": "Automated Process",
+      "lastModifiedDate": "2022-01-19T21:38:28.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataSource"
+    },
+    {
+      "createdById": "0055f000008AFCTAA4",
+      "createdByName": "Automated Process",
+      "createdDate": "2022-01-19T21:18:29.000Z",
+      "fileName": "mktDataSources/SFDC_00D5f000008BBhF.dataSource",
+      "fullName": "SFDC_00D5f000008BBhF",
+      "id": "3iP5f0000008OdmEAE",
+      "lastModifiedById": "0055f000008AFCTAA4",
+      "lastModifiedByName": "Automated Process",
+      "lastModifiedDate": "2022-01-19T21:18:29.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataSource"
+    },
+    {
+      "createdById": "0055f000007VEUoAAO",
+      "createdByName": "Abhi Chirumamilla",
+      "createdDate": "2022-01-19T21:58:36.000Z",
+      "fileName": "mktDataSources/Salesforce_00D590000004caZ.dataSource",
+      "fullName": "Salesforce_00D590000004caZ",
+      "id": "3iP5f0000008OdwEAE",
+      "lastModifiedById": "0055f000007VDkUAAW",
+      "lastModifiedByName": "Bradley Dirheimer",
+      "lastModifiedDate": "2022-02-01T00:37:09.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataSource"
+    },
+    {
+      "createdById": "0055f000007VDkUAAW",
+      "createdByName": "Bradley Dirheimer",
+      "createdDate": "2022-01-25T13:59:54.000Z",
+      "fileName": "mktDataSources/SFMC_ENT.dataSource",
+      "fullName": "SFMC_ENT",
+      "id": "3iP5f0000008OeBEAU",
+      "lastModifiedById": "0055f000008AFCTAA4",
+      "lastModifiedByName": "Automated Process",
+      "lastModifiedDate": "2022-01-25T13:59:59.000Z",
+      "manageableState": "unmanaged",
+      "type": "DataSource"
+    }
+  ]
+}

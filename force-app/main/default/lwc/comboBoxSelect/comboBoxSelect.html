@@ -96,25 +96,24 @@ slds-icon_xx-small" icon-name=
     class="slds-button">
 </lightning-button>
 -->
-    <div class="slds-box">
-        <div class="slds-combobox-group">
-        
-            <lightning-combobox
-                class="slds-listbox_inline"
-                name="searchInput"
-                value={value}
-                onchange={handleChange}
-                options={searchOptions}
-            ></lightning-combobox>
-                <lightning-input
-                    class="slds-listbox_inline slds-listbox__option-text_entity slds-size_2-of-3"
-                    type="search"
-                    placeholder="Please enter email or phone number"
-                  >
-                  </lightning-input>
-               </div>
-            </div>
-                 <!-- <lightning-button
+  <div class="slds-box">
+    <div class="slds-combobox-group">
+      <lightning-combobox
+        class="slds-listbox_inline"
+        name="searchInput"
+        value="{value}"
+        onchange="{handleChange}"
+        options="{searchOptions}"
+      ></lightning-combobox>
+      <lightning-input
+        class="slds-listbox_inline slds-listbox__option-text_entity slds-size_2-of-3"
+        type="search"
+        placeholder="Please enter email or phone number"
+      >
+      </lightning-input>
+    </div>
+  </div>
+  <!-- <lightning-button
                     variant="brand"
                     onclick={handleSubmit}
                     type="Submit"

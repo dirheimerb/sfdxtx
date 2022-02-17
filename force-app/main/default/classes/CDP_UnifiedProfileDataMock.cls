@@ -1,6 +1,6 @@
 @isTest
-global class CDP_UnifiedProfileDataMock implements HTTPCalloutMock{
-// Creating a test response
+global class CDP_UnifiedProfileDataMock implements HTTPCalloutMock {
+  // Creating a test response
   global HTTPResponse respond(HTTPRequest request) {
     HTTPResponse response = new HTTPResponse();
     // Setting the response body

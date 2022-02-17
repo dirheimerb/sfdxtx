@@ -6,20 +6,20 @@
   @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 -->
 <template>
-    <lightning-card title="My Contact Record" icon-name="standard:contact">
-        <template if:true={contact.data}>
-            <div class="slds-m-around_medium">
-    <lightning-record-form
-        record-id={recordId}
-        object-api-name={objectApiName}
-        density="auto"
-        columns="2"
-        mode="view"
-        layout-type={layoutType}
-    >
-</lightning-record-form>
-<lightning-messages></lightning-messages>
-</div>
-</template>
-    </lightning-card>
+  <lightning-card title="My Contact Record" icon-name="standard:contact">
+    <template if:true="{contact.data}">
+      <div class="slds-m-around_medium">
+        <lightning-record-form
+          record-id="{recordId}"
+          object-api-name="{objectApiName}"
+          density="auto"
+          columns="2"
+          mode="view"
+          layout-type="{layoutType}"
+        >
+        </lightning-record-form>
+        <lightning-messages></lightning-messages>
+      </div>
+    </template>
+  </lightning-card>
 </template>

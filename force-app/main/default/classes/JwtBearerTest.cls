@@ -1,6 +1,5 @@
 public class JwtBearerTest {
-    
-    /*private static final string CONTACTID_PREFIX = '003';
+  /*private static final string CONTACTID_PREFIX = '003';
     private static final string LEADID_PREFIX = '00Q';
     private static String SALES_CLOUD_NAME = 'Sales Cloud';
     private static final string LEAD_OBJECT_NAME = 'Lead';
@@ -846,21 +845,24 @@ private static void sortPartyIdentifications(
             }
         }
     }*/
-    public static void getMetadataResponse() {
-        HttpRequest req = new HttpRequest();
-        req.setMethod('GET');
-        req.setHeader('Connection', 'keep-alive');
-        req.setHeader('Content-Type','application/json');
-        //req.setEndpoint('callout:CDPQuery/api/v1/metadata/');  
-        //req.setEndpoint('callout:CDP_Authentication/api/v1/metadata/');
-        req.setEndpoint('callout:CDPQuery');
-        req.setHeader('Accept', '*/*');
-        req.setHeader('{!$Credential.AuthorizationMethod}', '{!$Credential.AuthorizationHeaderValue}');
-        //req.setBody('UserName:{!HTMLENCODE($Credential.Username)}');
-        //req.setBody('Password:{!HTMLENCODE($Credential.Password)}');
-        //system.debug('*** request '+ req.getBody());
-        Http http = new Http();
-        HTTPResponse res = http.send(req);
-        system.debug('*** response '+ res.getBody());
-    }
+  public static void getMetadataResponse() {
+    HttpRequest req = new HttpRequest();
+    req.setMethod('GET');
+    req.setHeader('Connection', 'keep-alive');
+    req.setHeader('Content-Type', 'application/json');
+    //req.setEndpoint('callout:CDPQuery/api/v1/metadata/');
+    //req.setEndpoint('callout:CDP_Authentication/api/v1/metadata/');
+    req.setEndpoint('callout:CDPQuery');
+    req.setHeader('Accept', '*/*');
+    req.setHeader(
+      '{!$Credential.AuthorizationMethod}',
+      '{!$Credential.AuthorizationHeaderValue}'
+    );
+    //req.setBody('UserName:{!HTMLENCODE($Credential.Username)}');
+    //req.setBody('Password:{!HTMLENCODE($Credential.Password)}');
+    //system.debug('*** request '+ req.getBody());
+    Http http = new Http();
+    HTTPResponse res = http.send(req);
+    system.debug('*** response ' + res.getBody());
+  }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStreamDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <areHeadersIncludedInFile>false</areHeadersIncludedInFile>
+    <bulkIngest>true</bulkIngest>
+    <creationType>Custom</creationType>
+    <dataConnector>AmazonS3_Contact</dataConnector>
+    <dataConnectorType>AmazonS3</dataConnectorType>
+    <dataPlatformDataSetItemName>S3</dataPlatformDataSetItemName>
+    <dataSource>SFMC_ENT</dataSource>
+    <isLimitedToNewFiles>true</isLimitedToNewFiles>
+    <isMissingFileFailure>false</isMissingFileFailure>
+    <masterLabel>Contact</masterLabel>
+    <mktDataLakeObject>Contact__dll</mktDataLakeObject>
+    <mktDataTranObject>Contact</mktDataTranObject>
+</DataStreamDefinition>

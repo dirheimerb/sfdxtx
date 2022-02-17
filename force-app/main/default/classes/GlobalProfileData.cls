@@ -369,7 +369,7 @@ public with sharing class GlobalProfileData {
           dataSourceObjectName = dataSourceLineage.sourceObjectName;
           dataSourceObjectNames.add(dataSourceObjectName);
 
-          dataSourcePoint.dataSourcerecordId = dataSourceRecordId;//SFSC-4996 AC1
+          dataSourcePoint.dataSourcerecordId = dataSourceRecordId; //SFSC-4996 AC1
           hasNonSalesCloudContactData = true;
           dataSourcePoint.isSalesforceRecord = false;
           dataSourcePoints.add(dataSourcePoint);
@@ -632,8 +632,8 @@ public with sharing class GlobalProfileData {
         dataSourcePoint.isSalesforceRecord
       );
       dataSourcePoint.recordLabel = recordLabel;
-    } else{ 
-       // SFSC-4996: removed lead and contact separate condition as now create new button should be visible in both cases
+    } else {
+      // SFSC-4996: removed lead and contact separate condition as now create new button should be visible in both cases
       dataSourcePoint.isSalesforceRecord = false;
       dataSourcePoint.dataSourcerecordId = userAccess.RecordId;
     }

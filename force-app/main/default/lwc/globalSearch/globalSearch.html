@@ -1,7 +1,7 @@
-<template>    
-    <!-- Modal/Popup Box LWC body starts here -->
-    <!--<div class="slds-var-p-around_medium" id="modal-content-id-1">-->
-    <!--<template if:true={isSearchFromContact}>
+<template>
+  <!-- Modal/Popup Box LWC body starts here -->
+  <!--<div class="slds-var-p-around_medium" id="modal-content-id-1">-->
+  <!--<template if:true={isSearchFromContact}>
             <lightning-input type="text" value={searchKey} onchange={getSearchValue}
             placeholder="First search if your contact already exists using Email or Phone" class="search-border" onkeypress={enterKeyCheck}></lightning-input>
         </template>                
@@ -135,14 +135,14 @@
             </div>            
         </template> -->
 
-    <!--<div class="slds-var-m-around_large">
+  <!--<div class="slds-var-m-around_large">
             <div if:true={showSpinner} class="slds-is-relative">
                 <lightning-spinner alternative-text="Loading..." variant="brand">
                 </lightning-spinner>
             </div>
         </div>-->
 
-    <!--<div class="slds-var-m-around_medium">
+  <!--<div class="slds-var-m-around_medium">
             <template if:true={displayGlobalProfileTable}>
                 <p class="slds-var-m-vertical_medium content">                    
                     Displaying Page {page} of {totalPage}.
@@ -163,8 +163,8 @@
             </template>
         </div> -->
 
-    <!--No result found -->
-    <!--<template if:true={isResult}>
+  <!--No result found -->
+  <!--<template if:true={isResult}>
             <div class="slds-var-p-top_medium slds-var-p-bottom_large slds-align_absolute-center">
                 <figure>                   
                     <div class="col-grid slds-grid_vertical slds-align_absolute-center">
@@ -175,8 +175,8 @@
             </div>
         </template>-->
 
-    <!--Session time out -->
-    <!--<template if:true={isTimeOut}>
+  <!--Session time out -->
+  <!--<template if:true={isTimeOut}>
             <div class="slds-var-p-top_medium slds-var-p-bottom_large slds-align_absolute-center">
                 <figure>                   
                     <div class="col-grid slds-grid_vertical slds-align_absolute-center">
@@ -187,7 +187,7 @@
             </div>
         </template> -->
 
-    <!--<template if:true={isSearchFromContact}>
+  <!--<template if:true={isSearchFromContact}>
             <div class="slds-align_absolute-center slds-var-m-around_small">   
                 <lightning-button variant="Neautral" label="Cancel" title="Cancel" onclick={closeModal} class="slds-var-m-left_x-small"></lightning-button>
 
@@ -201,37 +201,37 @@
                 <lightning-button variant="brand" label="Next" title="Next" onclick={navigateToLeadCreation} class="slds-var-m-left_x-small"></lightning-button>                        
             </div>
         </template>-->
-    <!--Contact Record type slection page - starts-->
-    <template if:true={showRecordTypeModal}>
-        <c-contact-record-selection-page
-            onrecordtypemodalnext={handleRecordTypeNext}
-            oncloserecordtypemodal={closeRecordTypeModal}
-            contact-data={contactData}
-            show-record-type-modal="true"
-        ></c-contact-record-selection-page>
-    </template>
-    <!--Contact Record type slection page - ends-->
+  <!--Contact Record type slection page - starts-->
+  <template if:true="{showRecordTypeModal}">
+    <c-contact-record-selection-page
+      onrecordtypemodalnext="{handleRecordTypeNext}"
+      oncloserecordtypemodal="{closeRecordTypeModal}"
+      contact-data="{contactData}"
+      show-record-type-modal="true"
+    ></c-contact-record-selection-page>
+  </template>
+  <!--Contact Record type slection page - ends-->
 
-    <!--Lead Record type slection page - starts-->
-    <!--<template if:true={showLeadRecordTypeModal}>
+  <!--Lead Record type slection page - starts-->
+  <!--<template if:true={showLeadRecordTypeModal}>
             <c-lead-record-selection-page show-record-type-modal=true onrecordtypemodalnext={handleRecordTypeNext} oncloserecordtypemodal={closeRecordTypeModal}></c-lead-record-selection-page>                    
         </template>-->
-    <!--Lead Record type slection page - ends-->
+  <!--Lead Record type slection page - ends-->
 
-    <!--Contact creation page - starts-->
-    <template if:true={showContactCreateModal}>
-        <c-contact-create-form
-            record-type-id={contactData.selectedRecordTypeId}
-            show-contact-create-modal="true"
-            contact-data={contactData}
-            has-multiple-record-type-access={hasMultipleRecordTypeAccess}
-            onclosecontactcreatemodal={closeContactCreateModal}
-            onmanualrendered={handleManualRendered}
-        ></c-contact-create-form>
-        <!-- Added on 2 Feb 2022 : onmanualrendered={handleManualRendered} - SFSC - 7070-->
-    </template>
-    <!--Contact creation page - ends-->
+  <!--Contact creation page - starts-->
+  <template if:true="{showContactCreateModal}">
+    <c-contact-create-form
+      record-type-id="{contactData.selectedRecordTypeId}"
+      show-contact-create-modal="true"
+      contact-data="{contactData}"
+      has-multiple-record-type-access="{hasMultipleRecordTypeAccess}"
+      onclosecontactcreatemodal="{closeContactCreateModal}"
+      onmanualrendered="{handleManualRendered}"
+    ></c-contact-create-form>
+    <!-- Added on 2 Feb 2022 : onmanualrendered={handleManualRendered} - SFSC - 7070-->
+  </template>
+  <!--Contact creation page - ends-->
 
-    <!--</div>-->
-    <!-- Modal/Popup Box LWC footer starts here -->
+  <!--</div>-->
+  <!-- Modal/Popup Box LWC footer starts here -->
 </template>

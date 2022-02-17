@@ -1,99 +1,106 @@
+<!--
+  @description       : 
+  @author            : BDirheimer
+  @group             : 
+  @last modified on  : 02-07-2022
+  @last modified by  : BDirheimer
+-->
 <template>
-    <!--DQ Notification modal popup - Starts-->
-    <template if:true={showModal_Invalid}>
-        <!-- Modal/Popup Box LWC starts here -->
-        <div class="dq-system-notification-popup">
-            <section
-                role="dialog"
-                tabindex="-1"
-                aria-labelledby="modal-heading-01"
-                aria-modal="true"
-                aria-describedby="modal-content-id-1"
-                class="slds-modal slds-fade-in-open"
-            >
-                <div class="slds-modal__container modal-container-data-Invalid">
-                    <!-- Modal/Popup Box LWC body starts here -->
-                    <div
-                        class="slds-modal__content slds-var-p-around_medium modal-border"
-                        id="DQ-modal"
-                    >
-                        <span
-                            class="slds-align_absolute-center text-size"
-                            if:false={isInvalidListEmpty}
-                            ><b
-                                >The following data you entered is invalid,
-                                would you like to correct it?
-                            </b></span
-                        ><br />
-                        <div class="slds-align_absolute-center">
-                            <ul class="slds-list_dotted dotted-color">
-                                <template
-                                    for:each={invalidDataLists}
-                                    for:item="invalidDataItem"
-                                >
-                                    <!--{<span key={invalidDataItem}>{invalidDataItem}</span>}-->
-                                    <li key={invalidDataItem}>
-                                        <span
-                                            class="dp-text-color"
-                                            style="color: #000000 !important"
-                                            >{invalidDataItem}<br
-                                        /></span>
-                                    </li>
-                                    <!--<ul class="slds-align_absolute-center" key={invalidDataItem}>test123</ul>-->
-                                </template>
-                            </ul>
-                        </div>
-                        <template if:true={phoneModalType_Invalid}>
-                            <span class="slds-align_absolute-center text-size"
-                                ><b
-                                    >The following number you entered may be an
-                                    incorrect type, would you like to correct
-                                    it? (Please ensure country code or mailing
-                                    country is present)</b
-                                ></span
-                            ><br />
-                            <div class="slds-align_absolute-center">
-                                <ul class="slds-list_dotted dotted-color">
-                                    <template
-                                        for:each={phoneNumberTypeDataLists}
-                                        for:item="phoneNumberTypeDataItem"
-                                    >
-                                        <li key={phoneNumberTypeDataItem}>
-                                            <span
-                                                class="dp-text-color"
-                                                style="
-                                                    color: #000000 !important;
-                                                "
-                                                >{phoneNumberTypeDataItem}<br
-                                            /></span>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </template>
-                        <div
-                            class="slds-align_absolute-center slds-var-m-around_small"
-                        >
-                            <button
-                                class="slds-button slds-button_brand button-color"
-                                title="No"
-                                onclick={handleNo}
-                            >
-                                No
-                            </button>
-                            <button
-                                class="slds-button slds-button_brand button-color"
-                                title="Yes"
-                                onclick={handleYes}
-                            >
-                                Yes
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Modal/Popup Box LWC body ends here -->
-                </div>
-            </section>
-            <div class="slds-backdrop slds-backdrop_open"></div>
-        </div> </template>
-    <!--DQ Notification modal popup - Starts-->
+  <!--DQ Notification modal popup - Starts-->
+  <template if:true={showModal_Invalid}>
+      <!-- Modal/Popup Box LWC starts here -->
+      <div class="dq-system-notification-popup">
+          <section
+              role="dialog"
+              tabindex="-1"
+              aria-labelledby="modal-heading-01"
+              aria-modal="true"
+              aria-describedby="modal-content-id-1"
+              class="slds-modal slds-fade-in-open"
+          >
+              <div class="slds-modal__container modal-container-data-Invalid">
+                  <!-- Modal/Popup Box LWC body starts here -->
+                  <div
+                      class="slds-modal__content slds-var-p-around_medium modal-border"
+                      id="DQ-modal"
+                  >
+                      <span
+                          class="slds-align_absolute-center text-size"
+                          if:false={isInvalidListEmpty}
+                          ><b
+                              >The following data you entered is invalid,
+                              would you like to correct it?
+                          </b></span
+                      ><br />
+                      <div class="slds-align_absolute-center">
+                          <ul class="slds-list_dotted dotted-color">
+                              <template
+                                  for:each={invalidDataLists}
+                                  for:item="invalidDataItem"
+                              >
+                                  <!--{<span key={invalidDataItem}>{invalidDataItem}</span>}-->
+                                  <li key={invalidDataItem}>
+                                      <span
+                                          class="dp-text-color"
+                                          style="color: #000000 !important"
+                                          >{invalidDataItem}<br
+                                      /></span>
+                                  </li>
+                                  <!--<ul class="slds-align_absolute-center" key={invalidDataItem}>test123</ul>-->
+                              </template>
+                          </ul>
+                      </div>
+                      <template if:true={phoneModalType_Invalid}>
+                          <span class="slds-align_absolute-center text-size"
+                              ><b
+                                  >The following number you entered may be an
+                                  incorrect type, would you like to correct
+                                  it? (Please ensure country code or mailing
+                                  country is present)</b
+                              ></span
+                          ><br />
+                          <div class="slds-align_absolute-center">
+                              <ul class="slds-list_dotted dotted-color">
+                                  <template
+                                      for:each={phoneNumberTypeDataLists}
+                                      for:item="phoneNumberTypeDataItem"
+                                  >
+                                      <li key={phoneNumberTypeDataItem}>
+                                          <span
+                                              class="dp-text-color"
+                                              style="
+                                                  color: #000000 !important;
+                                              "
+                                              >{phoneNumberTypeDataItem}<br
+                                          /></span>
+                                      </li>
+                                  </template>
+                              </ul>
+                          </div>
+                      </template>
+                      <div
+                          class="slds-align_absolute-center slds-var-m-around_small"
+                      >
+                          <button
+                              class="slds-button slds-button_brand button-color"
+                              title="No"
+                              onclick={handleNo}
+                          >
+                              No
+                          </button>
+                          <button
+                              class="slds-button slds-button_brand button-color"
+                              title="Yes"
+                              onclick={handleYes}
+                          >
+                              Yes
+                          </button>
+                      </div>
+                  </div>
+                  <!-- Modal/Popup Box LWC body ends here -->
+              </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+      </div> </template>
+  <!--DQ Notification modal popup - Starts-->
 </template>

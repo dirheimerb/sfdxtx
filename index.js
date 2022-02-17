@@ -1,5 +1,5 @@
-const path = require('path');
-const tsconfig = require(path.join(__dirname, 'tsconfig'));
+import path from ("path");
+import tsconfig from (path.join(__dirname, "tsconfig"));
 
 module.exports = {
   tsconfig,

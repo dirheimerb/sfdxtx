@@ -1,0 +1,671 @@
+{
+    "decorators": [
+        {
+            "type": "api",
+            "targets": [
+                {
+                    "type": "property",
+                    "name": "contactDetailData",
+                    "value": {
+                        "type": "object",
+                        "value": {}
+                    }
+                },
+                {
+                    "type": "property",
+                    "name": "recordId",
+                    "value": {
+                        "type": "unresolved"
+                    }
+                },
+                {
+                    "type": "property",
+                    "name": "dqFieldToValidates",
+                    "value": {
+                        "type": "array",
+                        "value": []
+                    }
+                },
+                {
+                    "type": "method",
+                    "name": "validateDQServices"
+                }
+            ]
+        },
+        {
+            "type": "track",
+            "targets": [
+                {
+                    "name": "phoneModalType_Invalid",
+                    "type": "property"
+                },
+                {
+                    "name": "showModal_Invalid",
+                    "type": "property"
+                },
+                {
+                    "name": "invalidDataLists",
+                    "type": "property"
+                },
+                {
+                    "name": "phoneNumberTypeDataLists",
+                    "type": "property"
+                }
+            ]
+        }
+    ],
+    "declarationLoc": {
+        "start": {
+            "line": 27,
+            "column": 0
+        },
+        "end": {
+            "line": 555,
+            "column": 1
+        }
+    },
+    "classMembers": [
+        {
+            "type": "property",
+            "name": "contactDetailData",
+            "loc": {
+                "start": {
+                    "line": 28,
+                    "column": 2
+                },
+                "end": {
+                    "line": 28,
+                    "column": 30
+                }
+            },
+            "decorator": "api",
+            "value": {
+                "type": "object",
+                "value": {}
+            }
+        },
+        {
+            "type": "property",
+            "name": "recordId",
+            "loc": {
+                "start": {
+                    "line": 29,
+                    "column": 2
+                },
+                "end": {
+                    "line": 29,
+                    "column": 16
+                }
+            },
+            "decorator": "api",
+            "value": {
+                "type": "unresolved"
+            }
+        },
+        {
+            "type": "property",
+            "name": "contactData",
+            "loc": {
+                "start": {
+                    "line": 30,
+                    "column": 2
+                },
+                "end": {
+                    "line": 30,
+                    "column": 19
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "existingContactData",
+            "loc": {
+                "start": {
+                    "line": 31,
+                    "column": 2
+                },
+                "end": {
+                    "line": 31,
+                    "column": 27
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isMobileValidationCallbackReceived",
+            "loc": {
+                "start": {
+                    "line": 32,
+                    "column": 2
+                },
+                "end": {
+                    "line": 32,
+                    "column": 45
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isPhoneValidationCallbackReceived",
+            "loc": {
+                "start": {
+                    "line": 33,
+                    "column": 2
+                },
+                "end": {
+                    "line": 33,
+                    "column": 44
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isEmailValidationCallbackReceived",
+            "loc": {
+                "start": {
+                    "line": 34,
+                    "column": 2
+                },
+                "end": {
+                    "line": 34,
+                    "column": 44
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isSecondaryEmailValidationCallbackReceived",
+            "loc": {
+                "start": {
+                    "line": 35,
+                    "column": 2
+                },
+                "end": {
+                    "line": 35,
+                    "column": 53
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "isAddressValidationCallbackReceived",
+            "loc": {
+                "start": {
+                    "line": 36,
+                    "column": 2
+                },
+                "end": {
+                    "line": 36,
+                    "column": 46
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "emailResponss",
+            "loc": {
+                "start": {
+                    "line": 37,
+                    "column": 2
+                },
+                "end": {
+                    "line": 37,
+                    "column": 21
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "phoneResponss",
+            "loc": {
+                "start": {
+                    "line": 38,
+                    "column": 2
+                },
+                "end": {
+                    "line": 38,
+                    "column": 21
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "emailCheck",
+            "loc": {
+                "start": {
+                    "line": 39,
+                    "column": 2
+                },
+                "end": {
+                    "line": 39,
+                    "column": 18
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "phoneModalType_Invalid",
+            "loc": {
+                "start": {
+                    "line": 40,
+                    "column": 2
+                },
+                "end": {
+                    "line": 40,
+                    "column": 40
+                }
+            },
+            "decorator": "track"
+        },
+        {
+            "type": "property",
+            "name": "showModal_Invalid",
+            "loc": {
+                "start": {
+                    "line": 41,
+                    "column": 2
+                },
+                "end": {
+                    "line": 41,
+                    "column": 35
+                }
+            },
+            "decorator": "track"
+        },
+        {
+            "type": "property",
+            "name": "invalidDataLists",
+            "loc": {
+                "start": {
+                    "line": 42,
+                    "column": 2
+                },
+                "end": {
+                    "line": 42,
+                    "column": 31
+                }
+            },
+            "decorator": "track"
+        },
+        {
+            "type": "property",
+            "name": "phoneNumberTypeDataLists",
+            "loc": {
+                "start": {
+                    "line": 43,
+                    "column": 2
+                },
+                "end": {
+                    "line": 43,
+                    "column": 39
+                }
+            },
+            "decorator": "track"
+        },
+        {
+            "type": "property",
+            "name": "showSuccessMsgEmail",
+            "loc": {
+                "start": {
+                    "line": 44,
+                    "column": 2
+                },
+                "end": {
+                    "line": 44,
+                    "column": 32
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "showSuccessMsgSecondaryEmail",
+            "loc": {
+                "start": {
+                    "line": 45,
+                    "column": 2
+                },
+                "end": {
+                    "line": 45,
+                    "column": 50
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "showSuccessMsgPhone",
+            "loc": {
+                "start": {
+                    "line": 46,
+                    "column": 2
+                },
+                "end": {
+                    "line": 46,
+                    "column": 32
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "showSuccessMsgAddress",
+            "loc": {
+                "start": {
+                    "line": 47,
+                    "column": 2
+                },
+                "end": {
+                    "line": 47,
+                    "column": 36
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "showSuccessMsgMobilePhone",
+            "loc": {
+                "start": {
+                    "line": 48,
+                    "column": 2
+                },
+                "end": {
+                    "line": 48,
+                    "column": 39
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "selectedAddressSelectionType",
+            "loc": {
+                "start": {
+                    "line": 49,
+                    "column": 2
+                },
+                "end": {
+                    "line": 49,
+                    "column": 36
+                }
+            }
+        },
+        {
+            "type": "property",
+            "name": "dqFieldToValidates",
+            "loc": {
+                "start": {
+                    "line": 50,
+                    "column": 2
+                },
+                "end": {
+                    "line": 50,
+                    "column": 31
+                }
+            },
+            "decorator": "api",
+            "value": {
+                "type": "array",
+                "value": []
+            }
+        },
+        {
+            "type": "property",
+            "name": "LABEL",
+            "loc": {
+                "start": {
+                    "line": 51,
+                    "column": 2
+                },
+                "end": {
+                    "line": 68,
+                    "column": 4
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "validateDQServices",
+            "loc": {
+                "start": {
+                    "line": 69,
+                    "column": 2
+                },
+                "end": {
+                    "line": 246,
+                    "column": 3
+                }
+            },
+            "decorator": "api"
+        },
+        {
+            "type": "method",
+            "name": "DQValidationEmail",
+            "loc": {
+                "start": {
+                    "line": 248,
+                    "column": 2
+                },
+                "end": {
+                    "line": 283,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "DQValidationPhone",
+            "loc": {
+                "start": {
+                    "line": 285,
+                    "column": 2
+                },
+                "end": {
+                    "line": 323,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "DQValidationAddress",
+            "loc": {
+                "start": {
+                    "line": 326,
+                    "column": 2
+                },
+                "end": {
+                    "line": 391,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "DQVerifyPrimaryEmail",
+            "loc": {
+                "start": {
+                    "line": 393,
+                    "column": 2
+                },
+                "end": {
+                    "line": 411,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "DQVerifySecondaryEmail",
+            "loc": {
+                "start": {
+                    "line": 412,
+                    "column": 2
+                },
+                "end": {
+                    "line": 430,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "DQVerifyPhone",
+            "loc": {
+                "start": {
+                    "line": 431,
+                    "column": 2
+                },
+                "end": {
+                    "line": 456,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "DQVerifyMobilePhone",
+            "loc": {
+                "start": {
+                    "line": 458,
+                    "column": 2
+                },
+                "end": {
+                    "line": 482,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "handleNo",
+            "loc": {
+                "start": {
+                    "line": 483,
+                    "column": 2
+                },
+                "end": {
+                    "line": 490,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "handleYes",
+            "loc": {
+                "start": {
+                    "line": 491,
+                    "column": 2
+                },
+                "end": {
+                    "line": 496,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "formatDate",
+            "loc": {
+                "start": {
+                    "line": 498,
+                    "column": 2
+                },
+                "end": {
+                    "line": 508,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "calculateTodaysDate",
+            "loc": {
+                "start": {
+                    "line": 509,
+                    "column": 2
+                },
+                "end": {
+                    "line": 518,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "passDataToParent",
+            "loc": {
+                "start": {
+                    "line": 520,
+                    "column": 2
+                },
+                "end": {
+                    "line": 527,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "closeDQModal",
+            "loc": {
+                "start": {
+                    "line": 529,
+                    "column": 2
+                },
+                "end": {
+                    "line": 536,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "isNotBlank",
+            "loc": {
+                "start": {
+                    "line": 538,
+                    "column": 2
+                },
+                "end": {
+                    "line": 540,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "isEmptyOrNull",
+            "loc": {
+                "start": {
+                    "line": 541,
+                    "column": 2
+                },
+                "end": {
+                    "line": 543,
+                    "column": 3
+                }
+            }
+        },
+        {
+            "type": "method",
+            "name": "resetALL",
+            "loc": {
+                "start": {
+                    "line": 545,
+                    "column": 2
+                },
+                "end": {
+                    "line": 553,
+                    "column": 3
+                }
+            }
+        }
+    ],
+    "exports": [
+        {
+            "type": "ExportDefaultDeclaration"
+        }
+    ],
+    "updatedAt": "2022-02-07T10:15:11.289Z",
+    "_allAttributes": null,
+    "_properties": null,
+    "_methods": null
+}

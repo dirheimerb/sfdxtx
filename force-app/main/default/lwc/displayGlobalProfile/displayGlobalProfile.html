@@ -16,13 +16,13 @@
       variant="border-filled"
       alternative-text="Refresh"
       slot="actions"
-      onclick={connectedCallback}
+      onclick="{connectedCallback}"
     ></lightning-button-icon>
-    <template if:true={isWaitingForData}>
+    <template if:true="{isWaitingForData}">
       <lightning-spinner alternative-text="Loading"></lightning-spinner>
     </template>
-    <template if:false={isWaitingForData}>
-      <template if:false={isRecordAvailable}>
+    <template if:false="{isWaitingForData}">
+      <template if:false="{isRecordAvailable}">
         <div
           class="slds-var-p-top_medium slds-var-p-bottom_large slds-align_absolute-center"
           data-aura-rendered-by="4:1004;a"
@@ -41,7 +41,7 @@
           </figure>
         </div>
       </template>
-      <template if:true={isRecordAvailable}>
+      <template if:true="{isRecordAvailable}">
         <div class="slds-var-m-around_medium">
           <div class="slds-grid slds-wrap">
             <div class="slds-col slds-size_1-of-4 slds-p-vertical_x-small">
@@ -70,21 +70,21 @@
               >
                 <tbody>
                   <template
-                    for:each={globalProfileDetailWrapper.EmailContactPoints}
+                    for:each="{globalProfileDetailWrapper.EmailContactPoints}"
                     for:item="emailContactPoint"
                     for:index="index"
                   >
                     <tr
                       class="slds-hint-parent"
-                      key={emailContactPoint.FullName}
+                      key="{emailContactPoint.FullName}"
                     >
                       <td class="slds-size_1-of-7">
                         <lightning-input
                           type="radio"
                           data-name="radio-deselect"
                           name="EmailRadioButton"
-                          data-value={index}
-                          onchange={selectEmailRecordIndex}
+                          data-value="{index}"
+                          onchange="{selectEmailRecordIndex}"
                         ></lightning-input>
                         <!--input type="radio" name ="EmailRadioButton" data-value ={index} onchange ={selectEmailRecordIndex} ondeselect={handleDeselct}/-->
                       </td>
@@ -93,7 +93,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             {emailContactPoint.contactPointValue}
                             <br />
                           </span>
@@ -104,7 +104,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             {emailContactPoint.dataSourceName}
                             <br />
                           </span>
@@ -126,21 +126,21 @@
               >
                 <tbody>
                   <template
-                    for:each={globalProfileDetailWrapper.PhoneContactPoints}
+                    for:each="{globalProfileDetailWrapper.PhoneContactPoints}"
                     for:item="phoneContactPoint"
                     for:index="index"
                   >
                     <tr
                       class="slds-hint-parent"
-                      key={phoneContactPoint.FullName}
+                      key="{phoneContactPoint.FullName}"
                     >
                       <td class="slds-size_1-of-7">
                         <lightning-input
                           type="radio"
                           data-name="radio-deselect"
                           name="PhoneRadioButton"
-                          data-value={index}
-                          onchange={selectPhoneRecordIndex}
+                          data-value="{index}"
+                          onchange="{selectPhoneRecordIndex}"
                         ></lightning-input>
                       </td>
                       <td class="slds-size_3-of-7">
@@ -148,7 +148,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             {phoneContactPoint.contactPointValue}
                             <br />
                           </span>
@@ -159,7 +159,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             {phoneContactPoint.dataSourceName}
                             <br />
                           </span>
@@ -181,21 +181,21 @@
               >
                 <tbody>
                   <template
-                    for:each={globalProfileDetailWrapper.MobileContactPoints}
+                    for:each="{globalProfileDetailWrapper.MobileContactPoints}"
                     for:item="mobileContactPoint"
                     for:index="index"
                   >
                     <tr
                       class="slds-hint-parent"
-                      key={mobileContactPoint.FullName}
+                      key="{mobileContactPoint.FullName}"
                     >
                       <td class="slds-size_1-of-7">
                         <lightning-input
                           type="radio"
                           data-name="radio-deselect"
                           name="MobileRadioButton"
-                          data-value={index}
-                          onchange={selectMobileRecordIndex}
+                          data-value="{index}"
+                          onchange="{selectMobileRecordIndex}"
                         ></lightning-input>
                       </td>
                       <td class="slds-size_3-of-7">
@@ -203,7 +203,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             {mobileContactPoint.contactPointValue}
                             <br />
                           </span>
@@ -214,7 +214,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             {mobileContactPoint.dataSourceName}
                             <br />
                           </span>
@@ -236,21 +236,21 @@
               >
                 <tbody>
                   <template
-                    for:each={globalProfileDetailWrapper.AddressContactPoints}
+                    for:each="{globalProfileDetailWrapper.AddressContactPoints}"
                     for:item="addressContactPoint"
                     for:index="index"
                   >
                     <tr
                       class="slds-hint-parent"
-                      key={addressContactPoint.FullName}
+                      key="{addressContactPoint.FullName}"
                     >
                       <td class="slds-size_1-of-7">
                         <lightning-input
                           type="radio"
                           data-name="radio-deselect"
                           name="addressRadioButton"
-                          data-value={index}
-                          onchange={selectAddressRecordIndex}
+                          data-value="{index}"
+                          onchange="{selectAddressRecordIndex}"
                         ></lightning-input>
                       </td>
                       <td class="slds-size_3-of-7">
@@ -258,7 +258,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             <div>{addressContactPoint.addressLine1}</div>
                             <div>
                               {addressContactPoint.cityName},
@@ -274,7 +274,7 @@
                           style="white-space: pre-wrap"
                           class="slds-truncate"
                         >
-                          <span key={address}>
+                          <span key="{address}">
                             {addressContactPoint.dataSourceName}
                             <br />
                           </span>
@@ -291,13 +291,13 @@
               <lightning-button
                 label="Reset"
                 variant="Neutral"
-                onclick={resetRadioButton}
+                onclick="{resetRadioButton}"
               ></lightning-button>
               <lightning-button
                 label="Adopt"
                 variant="Brand"
-                onclick={adoptContactDetails}
-                disabled={isAdoptButtonDisabled}
+                onclick="{adoptContactDetails}"
+                disabled="{isAdoptButtonDisabled}"
                 class="slds-m-horizontal_x-small"
               ></lightning-button>
             </div>

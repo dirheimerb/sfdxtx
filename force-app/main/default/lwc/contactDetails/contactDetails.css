@@ -1,145 +1,144 @@
-.compactview-top-padding{
-    padding-top: 0px !important;
+.compactview-top-padding {
+  padding-top: 0px !important;
 }
-.customButton{
-    --sds-c-icon-color-foreground: rgb(176, 173, 171);
-    --sds-c-icon-color-background: white;    
+.customButton {
+  --sds-c-icon-color-foreground: rgb(176, 173, 171);
+  --sds-c-icon-color-background: white;
 }
 .customButton:hover {
-    --sds-c-icon-color-foreground: rgb(112, 110, 107);
+  --sds-c-icon-color-foreground: rgb(112, 110, 107);
 }
 .customButton:focus {
-    --sds-c-icon-shadow: 0 0 3px #0070D2;
-    --sds-c-icon-color-foreground: rgb(1, 68, 134);
-    --sds-c-button-brand-color-border : rgb(1, 68, 134);
+  --sds-c-icon-shadow: 0 0 3px #0070d2;
+  --sds-c-icon-color-foreground: rgb(1, 68, 134);
+  --sds-c-button-brand-color-border: rgb(1, 68, 134);
 }
-.accordion-section-title{    
-    --sds-c-accordion-summary-color-background: #f3f2f2;    
-    --sds-c-accordion-heading--text-color: #000000;
-    --sds-c-accordion-heading--text-color-hover: #000000;
-    }
-.accordion-border{
-    border-radius: 8px;
-    --sds-c-accordion-radius-border: 8px;    
+.accordion-section-title {
+  --sds-c-accordion-summary-color-background: #f3f2f2;
+  --sds-c-accordion-heading--text-color: #000000;
+  --sds-c-accordion-heading--text-color-hover: #000000;
 }
-.custom-title{  
-    display: flex;
-    align-items: center;
-    background: #f3f2f2;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    color: currentColor;
-    font-size: 1rem;
-    padding: .3rem .5rem;
-    border-radius: 4px;
-    margin: 1rem 0px;
+.accordion-border {
+  border-radius: 8px;
+  --sds-c-accordion-radius-border: 8px;
 }
-.system-info-section{
-    font-size: 14px;
-    font-weight: 400;
+.custom-title {
+  display: flex;
+  align-items: center;
+  background: #f3f2f2;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  color: currentColor;
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  margin: 1rem 0px;
 }
-.dq-notification-popup .slds-modal__content{
-    border-radius: 0px !important;
-    border: 2px solid red !important;
+.system-info-section {
+  font-size: 14px;
+  font-weight: 400;
 }
-.dq-notification-popup .dq-action-button{
-    background-color: #ff0000cc !important;
-    border-color: #cc0808;
+.dq-notification-popup .slds-modal__content {
+  border-radius: 0px !important;
+  border: 2px solid red !important;
 }
-.dependencies-button{
-    font-size: 0.625rem;
-    margin-bottom: 0.25rem;
-    line-height: inherit;
-    color: #0a88b9;
-    margin-left: 5px;
-    cursor: pointer;
-    display: -webkit-box !important;
+.dq-notification-popup .dq-action-button {
+  background-color: #ff0000cc !important;
+  border-color: #cc0808;
 }
-.button-color{    
-    --sds-c-button-brand-color-border : #ff0000;
-    --sds-c-button-brand-color-background : #ff0000;
-    --sds-c-button-brand-color-background-hover: #ff0000;
-    --sds-c-button-brand-color-border-hover: #ff0000;
-    --sds-c-button-radius-border : 0.5rem;
-    width:15%
+.dependencies-button {
+  font-size: 0.625rem;
+  margin-bottom: 0.25rem;
+  line-height: inherit;
+  color: #0a88b9;
+  margin-left: 5px;
+  cursor: pointer;
+  display: -webkit-box !important;
+}
+.button-color {
+  --sds-c-button-brand-color-border: #ff0000;
+  --sds-c-button-brand-color-background: #ff0000;
+  --sds-c-button-brand-color-background-hover: #ff0000;
+  --sds-c-button-brand-color-border-hover: #ff0000;
+  --sds-c-button-radius-border: 0.5rem;
+  width: 15%;
 }
 /*li::before {content: "•"; color: #ff0000;width:1em;font-size: 150%;}*/
-.modal-container{
-    max-width: 35%;
-    /*--sds-c-modal-color-border: #ff0000; */
-    --sds-c-backdrop-color-background : #ff0000;    
+.modal-container {
+  max-width: 35%;
+  /*--sds-c-modal-color-border: #ff0000; */
+  --sds-c-backdrop-color-background: #ff0000;
 }
-.modal-border{
-    border:2px solid #ff0000;
+.modal-border {
+  border: 2px solid #ff0000;
 }
-.dotted-color{
-    color: #ff0000;
+.dotted-color {
+  color: #ff0000;
 }
-.dp-text-color{
-    color: #000000 !important;
+.dp-text-color {
+  color: #000000 !important;
 }
 
 /* Added on 28/7/2020 */
 
-
-.custom-popover-section{
-    position: relative !important;
+.custom-popover-section {
+  position: relative !important;
 }
-.custom-popover{
-    position: absolute !important;
-    bottom: 3.2rem !important;
-    left: -0.7rem !important;
+.custom-popover {
+  position: absolute !important;
+  bottom: 3.2rem !important;
+  left: -0.7rem !important;
 }
 /*.popover-custom-width{
     width: auto !important;
     min-width: 20rem;
 }*/
-.slds-popover__body{
-   /*width: max-content !important;*/
-    padding: .5rem .5rem 1rem .5rem !important;
+.slds-popover__body {
+  /*width: max-content !important;*/
+  padding: 0.5rem 0.5rem 1rem 0.5rem !important;
 }
-.custom-icon{
-        cursor: pointer !important;
-}
-
-.view-duplicates{
-    font-size: .800rem;
-    color: #1284de;
-    cursor: pointer;
-}
-.dup-custom-box{
-    border: 1px solid #ccc;
-    padding: 0.7rem;
-    background-color: #fff !important;
-}
-.open-this-contact{
-    border-top: none !important;
-    text-align: center;
+.custom-icon {
+  cursor: pointer !important;
 }
 
-.view-duplicates-modal .contact-icon .slds-icon{
-    width: 2.5rem !important;
-    height: 2.5rem !important;
+.view-duplicates {
+  font-size: 0.8rem;
+  color: #1284de;
+  cursor: pointer;
 }
-.view-duplicates-modal .slds-modal__content{
-    min-height: 75.5vh !important;
+.dup-custom-box {
+  border: 1px solid #ccc;
+  padding: 0.7rem;
+  background-color: #fff !important;
 }
-.custom_dup__label{
-    font-size: 0.7rem;
-    color: #afabab;
-}
-.text-align-center{
-    text-align: center;
-}
-.formula-field{
-    font-style: italic;
-    color: rgb(62, 62, 60);
-    font-size: 0.75 rem;
+.open-this-contact {
+  border-top: none !important;
+  text-align: center;
 }
 
-.bottomfooter{
-    bottom: 40px !important;
-    width: 64vw !important;
-	margin-left: 1.5rem !important;
+.view-duplicates-modal .contact-icon .slds-icon {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+.view-duplicates-modal .slds-modal__content {
+  min-height: 75.5vh !important;
+}
+.custom_dup__label {
+  font-size: 0.7rem;
+  color: #afabab;
+}
+.text-align-center {
+  text-align: center;
+}
+.formula-field {
+  font-style: italic;
+  color: rgb(62, 62, 60);
+  font-size: 0.75 rem;
+}
+
+.bottomfooter {
+  bottom: 40px !important;
+  width: 64vw !important;
+  margin-left: 1.5rem !important;
 }
